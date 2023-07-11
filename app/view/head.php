@@ -6,6 +6,7 @@
     <title>HubHive: Desenvolva suas ideias</title>
     <link rel="stylesheet" href="<?=assets('css/library-style.css')?>">
     <link rel="stylesheet" href="<?=assets('css/style.css')?>">
+    <link rel="stylesheet" href="<?=assets('css/newpost.css')?>">
     <link rel="stylesheet" href="<?=assets('css/animations.css')?>">
     <link rel="shortcut icon" href="<?=assets('imgs/hubhive.ico')?>>">
 

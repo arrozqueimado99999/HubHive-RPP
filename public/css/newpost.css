@@ -1,0 +1,76 @@
+#postAnexo{
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    padding: calc(var(--pad)*3);
+    border-radius: var(--radius);
+    height: 100%;
+    content: none;
+}
+
+.anexo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: var(--white);
+    border-radius: var(--radius);
+    width: 100%;
+}
+
+.drop{
+    height: 100%;
+    border: 2px solid transparent;
+}
+
+#dropArea:hover{
+    border: 2px solid var(--light-purple);
+}
+
+#postAnexo::-webkit-file-upload-button {
+    display: none;
+}
+
+#postAnexo::before {
+    content: 'Selecione ou arraste os arquivos aqui';
+    display: flex;
+    justify-content: center;
+    background: var(--white);
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    transition: var(--temp);
+  }
+
+#legendaPost{
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: var(--pad);
+    width: 100%;
+    border: var(--light-purple);
+    height: fit-content;
+    outline: none;
+    min-height: 44px;
+    font-size: 16px;
+    color: var(--dark-mid);
+    border-bottom: 2px solid var(--white);
+}
+
+#projectToPost{
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: var(--pad);
+    width: 40%;
+    border: var(--light-purple);
+    height: fit-content;
+    outline: none;
+    min-height: 44px;
+    font-size: 16px;
+    color: var(--dark-mid);
+    border-bottom: 2px solid var(--white);
+}

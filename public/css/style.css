@@ -81,7 +81,7 @@ header div{
     align-items: center;
 }
 
-header :last-child{
+header div:last-child{
     gap: calc(var(--gap)/1.5);
 }
 
