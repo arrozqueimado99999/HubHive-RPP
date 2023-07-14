@@ -28,15 +28,13 @@ const inputBanner = document.getElementById('inputbanner');
         bannerComponent.appendChild(banner);
     });
 
-const inputPost = document.getElementById('postAnexo');
+const inputPost = document.getElementById('postanexo');
     inputPost.addEventListener('change', function(event) {
         const filePost = event.target.files[0];
 
         const postanexo = new Image();
         postanexo.src = URL.createObjectURL(filePost);
-
-        //const postan = document.getElementById("imgPost");
-        //postan.style.display = "none"; 
+        console (filePost);
 
         const meuPost = document.getElementById('dropArea');
         meuPost.innerHTML = '';

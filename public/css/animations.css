@@ -43,3 +43,14 @@
         filter: brightness(1);
     }
 }
+
+@keyframes bounce {
+    from{
+        transform: rotate(0deg);
+    }
+
+    to{
+        transform: rotate(10deg);
+    }
+}
+

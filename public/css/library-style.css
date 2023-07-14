@@ -458,8 +458,10 @@
   aspect-ratio: 1/1;
 }
 
-#inputTitulo{
+#inputTitulo, #inputDesc{
   min-height: 46px;
+  border-radius: var(--radius);
+  width: 100%;
 }
 
 #btnAddCateg:hover, #btnAddOrient:hover{

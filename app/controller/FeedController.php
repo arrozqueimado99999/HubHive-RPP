@@ -11,11 +11,14 @@ class FeedController{
 
         $model = new Usuario;
         $projects = new Projeto();
+        $posts = new Posts();
 
         $send = $model->findById($id);
         $allProj = $projects->projectsByUser($_SESSION['id']);
+        $allPosts = $posts->selectAll();
 
         $send['projetosByUser'] = $allProj;
+        $send['allPosts'] = $allPosts;
                 
         render("feed", $send); 
     }
@@ -31,7 +34,14 @@ class FeedController{
 
         $model = new Posts();
         $upload = $model->newPost($projectTo, $legenda);
+        //var_dump($upload);
+        //die();
 
         redirect('feed');
+    }
+
+    function exit(){
+        session_destroy();
+        redirect("login");    
     }
 }
