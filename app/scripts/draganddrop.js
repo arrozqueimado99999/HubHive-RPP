@@ -1,6 +1,6 @@
 // Referência aos elementos HTML
-const dropArea = document.getElementById('dropArea');
-const fileInput = document.getElementById('postAnexo');
+const dropArea = document.getElementById('droparea');
+const fileInput = document.getElementById('postanexo');
 
 // Manipuladores de eventos para a área de arrastar e soltar
 dropArea.addEventListener('dragover', handleDragOver);

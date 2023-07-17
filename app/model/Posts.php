@@ -27,6 +27,29 @@ class Posts extends Model {
         return $dados;
     }
 
+    function selectAllExcept($id){
+        $sql = "SELECT * FROM posts
+        WHERE id <> $id;
+        ";        
+    
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();    
+        $dados = array();
+    
+        if (mysqli_num_rows($result) > 0) {
+            // Loop para percorrer os resultados e armazenar os valores em um array
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+    }
+
     function projectsByPostId($id){
         $sql = "SELECT projetos.*
         FROM projetos
@@ -92,16 +115,16 @@ class Posts extends Model {
                 $caminhoArquivo = $dirPath . "/". $anexo;
                 
                 if (move_uploaded_file($_FILES['postanexo']['tmp_name'], $caminhoArquivo)) {
-                    $sql = "INSERT INTO posts (id, projeto_id, legenda, anexo)
+                    $sql = "INSERT INTO posts (id, legenda, projeto_id, anexo)
                     VALUES (?, ?, ?, ?)";
                     $stmt = $this->conn->prepare($sql);
-                    $stmt->bind_param("iiss", $postId, $projectId, $legenda, $caminhoArquivo);
+                    $stmt->bind_param("isis", $postId, $legenda,$projectId, $caminhoArquivo);
                     $stmt->execute();
 
                     if ($stmt->affected_rows > 0) {
                         redirect('feed');
                     } else {
-                        redirect('biblio');
+                        redirect('biblioteca');
                 }
 
                 }

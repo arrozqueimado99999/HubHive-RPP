@@ -13,6 +13,18 @@ const inputElement = document.getElementById('file');
         meuComponente.appendChild(imagem);
     });
 
+    const post = document.getElementById("postanexo");
+        post.addEventListener('change', function(event) {
+        const filePost = event.target.files[0];
+
+        const postanexo = new Image();
+        postanexo.src = URL.createObjectURL(filePost); 
+
+        const meuPost = document.getElementById("droparea");
+        meuPost.innerHTML = '';
+        meuPost.appendChild(postanexo);
+    });
+
 const inputBanner = document.getElementById('inputbanner');
         inputBanner.addEventListener('change', function(event) {
         const fileBanner = event.target.files[0];  
@@ -26,17 +38,4 @@ const inputBanner = document.getElementById('inputbanner');
         const bannerComponent = document.getElementById('bannerimgchange');
         bannerComponent.innerHTML = ''; 
         bannerComponent.appendChild(banner);
-    });
-
-const inputPost = document.getElementById('postanexo');
-    inputPost.addEventListener('change', function(event) {
-        const filePost = event.target.files[0];
-
-        const postanexo = new Image();
-        postanexo.src = URL.createObjectURL(filePost);
-        console (filePost);
-
-        const meuPost = document.getElementById('dropArea');
-        meuPost.innerHTML = '';
-        meuPost.appendChild(postanexo);
     });

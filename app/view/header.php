@@ -42,21 +42,25 @@
         <section>
             <form id="formNewPost" class="form_newproject" action="<?= route('feed/newPost') ?>" method="POST" enctype="multipart/form-data">
                 <div id="gridnewpost">
-                    <div id="dropArea" class="drop anexo">
-                        <input type="file" name="postanexo" id="postanexo">
-                    </div>
+                    <label id="droparea" for="postanexo" class="drop anexo">
+                    </label>
+                    <input type="file" required name="postanexo" id="postanexo">
 
                     <div id="inputsforPost">
                         <select name="projectToPost" id="projectToPost">
                             <option style="display: none;" selected disabled>Escolha um projeto</option>
                             <?php
-                            foreach ($projetosByUser as $userProj) : ?>
-                                <option value="<?= $userProj['id'] ?>">
-                                    <h3><?= $userProj['titulo']; ?></h3>
-                                </option>
-                            <?php
-                            endforeach;
-                            ?>
+                            if($projetosByUser != ""){
+                                foreach ($projetosByUser as $userProj) : ?>
+                                    <option value="<?= $userProj['id'] ?>">
+                                        <h3><?= $userProj['titulo']; ?></h3>
+                                    </option>
+                                <?php
+                                endforeach;
+                            } else {
+                                print("<option value='' disabled>
+                                    Você não possui projetos ainda
+                                </option>");}?>
                         </select>
                         <input required placeholder="Digite alguma coisa" type="text" name="legendaPost" id="legendaPost">
                         <a onclick="criarLink()" id="linklistBtn" class="btn">

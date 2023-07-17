@@ -18,7 +18,7 @@ class PostController{
             $send['projectByPost'] = $posts->projectsByPostId($post);
         }
 
-        $allPosts = $posts->selectAll();
+        $allPosts = $posts->selectAllExcept($post);
         $send['allPosts'] = $allPosts;
 
         $categ = new Categorias();

@@ -96,7 +96,7 @@ include 'header.php';
                                 <span>Dimensões recomendadas: 400x1080</span>
                             </div>
                         </div>
-                        <input type="file" required name="inputbanner" id="inputbanner">
+                        <input type="file"  name="inputbanner" id="inputbanner">
                     </label>
 
                     <div class="grid_newproject">
@@ -111,7 +111,7 @@ include 'header.php';
                                 foreach ($allCategorias as $categ) : ?>
                                     <option class="card" value="<?= $categ['id']; ?>">
                                         <div class="text">
-                                            <?= $categ['nome']; ?>
+                                            <?= $categ['titulo']; ?>
                                         </div>
                                     </option>
                                 <?php

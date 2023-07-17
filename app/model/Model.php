@@ -14,7 +14,7 @@ class Model{
         $server = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "rpp";
+        $dbname = "hubhive";
 
         global $conn;
         $conn = new mysqli($server, $username, $password, $dbname);

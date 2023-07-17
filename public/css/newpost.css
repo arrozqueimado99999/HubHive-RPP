@@ -1,13 +1,5 @@
 #postanexo{
-    display: flex;
-    flex-direction: column;
-    background: var(--white);
-    padding: calc(var(--pad)*3);
-    border-radius: var(--radius);
-    height: 100%;
-    content: none;
-    cursor: pointer;
-    aspect-ratio: 1/1;
+    display: none;
 }
 
 #inputsforPost{
@@ -42,14 +34,23 @@
     background: var(--light-purple);
 }
 
-#dropArea:hover{
+#droparea:hover{
     border: 2px solid var(--light-purple);
 }
 
-#dropArea img{
+#droparea{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+#droparea img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: var(--radius);
+    border: none;
+    box-shadow: none;
 }
 
 .welcome{
@@ -84,10 +85,6 @@
   .welcome div::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
-
-#postanexo::-webkit-file-upload-button {
-    display: none;
-}
 
 #voltarPag{
     display: flex;
@@ -132,21 +129,6 @@
     display: flex;
     justify-content: flex-end;
 }
-
-/*#postAnexo::before {
-    display: flex;
-    justify-content: center;
-    background: var(--white);
-    border: none;
-    border-radius: 3px;
-    outline: none;
-    white-space: nowrap;
-    user-select: none;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 15px;
-    transition: var(--temp);
-}*/
 
 #legendaPost{
     background: var(--white);
@@ -209,23 +191,9 @@
     transition: var(--temp);
     width: 100%;
     max-height: 100%;
-    display: flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
-}
-
-.infoInv{
-    opacity: 0%;
-    background: linear-gradient(360deg, #0000003f, #00000000);
-    z-index: 100;
-    height: 100%;
-    width: 100%;
-    color: #fff;
-}
-
-.post a + .infoInv{
-    opacity: 1;
-    z-index: 2;
 }
 
 .post a{
@@ -242,8 +210,16 @@
 }
 
 .post:hover{
-    border: 1px solid var(--mid);
     scale: 1.01;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.05);
+}
+
+#postimg{
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: 0;
+    top: 0;
 }
 
 /***************************************************************************************************************/

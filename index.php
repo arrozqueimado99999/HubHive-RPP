@@ -207,8 +207,8 @@ if (count($parts) > 2) {
 call_user_func_array(array($controller, $metodo), $params_to_controller);
 ?>
 
+<script src="app/scripts/uploadimage.js"></script>
 <script src="app/scripts/modals.js"></script>
 <script src="app/scripts/addcomponents.js"></script>
 <script src="app/scripts/scroll.js"></script>
 <script src="app/scripts/draganddrop.js"></script>
-<script src="app/scripts/uploadimage.js"></script>

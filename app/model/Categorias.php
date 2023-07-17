@@ -4,7 +4,7 @@ namespace models;
 
 class Categorias extends Model {
     protected $table = "categorias";
-    protected $fields = ["id","nome"];
+    protected $fields = ["id","titulo"];
 
     function allCateg() {
         $sql = "SELECT * FROM {$this->table}";        
