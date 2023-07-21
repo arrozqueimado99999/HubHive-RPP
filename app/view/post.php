@@ -26,8 +26,6 @@ include 'header.php';
     </div>
 </article>
 
-<hr>
-
 <article class="recomend">
     <h3>Você tambêm pode gostar</h3>
 <div class="postsRecomend">

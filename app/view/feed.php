@@ -9,39 +9,13 @@ include 'header.php';
 
 <nav class="welcome">
     <div id="carddivscroll">
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
-        <a href="#" class="cardForuns">
-            <h2>PROGRAMAÇÃO WEB</h2>
-        </a>
+    <?php
+    foreach ($allCateg as $categ) : ?>
+            <a href="<?= route("pesquisa/?categ={$categ['id']}") ?>" class="cardForuns">
+                <h2><?= $categ['titulo'] ?></h2>
+            </a>
+    <?php
+    endforeach; ?>
     </div>
 </nav>
 

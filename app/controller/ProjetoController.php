@@ -1,12 +1,16 @@
 <?php
 
+use models\Posts;
+use models\Projeto;
 use models\Usuario;
 
 class ProjetoController{
-    function index($id = null){
-        $model = new Usuario;
+    function index($project = null){
+        $projeto = new Projeto;
+        $posts = new Posts;
         $send = [];
-        $send = $model->findById($id);
+        $send = $projeto->findById($project);
+        $send['postsInfo'] = $posts->postsByProjectId($project);
 
         //print_r($send);
                 

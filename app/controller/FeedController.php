@@ -3,6 +3,7 @@
 use models\Usuario;
 use models\Projeto;
 use models\Posts;
+use models\Categorias;
 
 class FeedController{
     function index(){
@@ -12,13 +13,17 @@ class FeedController{
         $model = new Usuario;
         $projects = new Projeto();
         $posts = new Posts();
+        $categ = new Categorias();
 
         $send = $model->findById($id);
         $allProj = $projects->projectsByUser($_SESSION['id']);
         $allPosts = $posts->selectAll();
+        $allCateg = $categ->allCateg();
+        
 
         $send['projetosByUser'] = $allProj;
         $send['allPosts'] = $allPosts;
+        $send['allCateg'] = $allCateg;
                 
         render("feed", $send); 
     }

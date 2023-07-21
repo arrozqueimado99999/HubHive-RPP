@@ -1,20 +1,23 @@
-*{
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    transition: var(--temp);
 }
 
 html {
     scroll-behavior: smooth;
     height: 100vh;
+    min-height: fit-content;
     text-size-adjust: 100%;
   }
 
 :root{
     --black: #212121;
     --dark-mid: #3c3c3c;
-    --white: #efefef;
+    --white: #f5f5f5;
     --mid: #b4b4b4;
     --yellow: #FFBF1F;
     --green: #007639;

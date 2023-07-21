@@ -77,6 +77,33 @@ class Posts extends Model {
 
     }
 
+    function postsByProjectId($id){
+        $sql = "SELECT posts.*
+        FROM posts
+        JOIN projetos ON posts.projeto_id = projetos.id
+        WHERE posts.projeto_id = $id";    
+    
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();    
+        $dados = array();
+    
+        if (mysqli_num_rows($result) > 0) {
+            // Loop para percorrer os resultados e armazenar os valores em um array
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+        //print_r($dados);
+        //die();
+
+    }
+
     function allForPost($postId){
         $sql = "SELECT * FROM {$this->table} WHERE id = $postId";        
     

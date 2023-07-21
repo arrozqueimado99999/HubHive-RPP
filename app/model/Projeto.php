@@ -82,30 +82,29 @@ class Projeto extends Model {
 
     }
 
-    /*function pag(){
-        $regPag = 30; // Número de registros exibidos por página
-        
-        $totalRegistros = 100; // Número total de registros
-        
-        $totalPaginas = ceil($totalRegistros / $registrosPorPagina); // Cálculo do número total de páginas
-        $paginaAtual = isset($_GET['pagina']) ? $_GET['pagina'] : 1; // Página atual obtida por meio de parâmetro GET
-        $registroInicial = ($paginaAtual - 1) * $registrosPorPagina; // Registro inicial para a consulta
-        $registroFinal = $registroInicial + $registrosPorPagina - 1; // Registro final para a consulta
-        
-        // Executar a consulta no banco de dados usando LIMIT para obter apenas os registros da página atual
-        $sql = "SELECT * FROM usuarios LIMIT $registroInicial, $registrosPorPagina";
-        $resultado = mysqli_query($sql);
+    function findById($id){
+        $sql = "SELECT * FROM {$this->table} WHERE id = $id";        
     
-        // Iterar sobre os resultados e exibir os registros
-        while ($row = mysqli_fetch_assoc($resultado)) {
-            // Exibir os dados do registro
-        }
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
     
-        // Exibir os links de páginação
-        for ($pagina = 1; $pagina <= $totalPaginas; $pagina++) {
-            echo "<a href='?pagina=$pagina'>$pagina</a> ";
+        $result = $stmt->get_result();    
+        $dados = array();
+    
+        if (mysqli_num_rows($result) > 0) {
+            // Loop para percorrer os resultados e armazenar os valores em um array
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
         }
-    }*/
+        
+        return $dados;
+        //print_r($dados);
+        //die();
+
+    }
 }
 
 ?>

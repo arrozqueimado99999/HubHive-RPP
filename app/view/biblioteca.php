@@ -143,7 +143,7 @@ include 'header.php';
     <?php
     if ($projetosByUser !== "") {
         foreach ($projetosByUser as $proj) : ?>
-            <a class="card" href="#">
+            <a class="card" href="<?= route("projeto/?project={$proj['id']}")?>">
                 <div>
                     <img src="<?= $proj['banner'] ?>" alt="<?= $proj['id']; ?>">
                 </div>

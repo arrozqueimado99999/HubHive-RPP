@@ -1,6 +1,6 @@
 .profile_nav{
   height: fit-content;
-    min-height: 60%;
+    max-height: 450px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@
 .btn_library{
   width: fit-content;
   cursor: pointer;
-  border-radius: var(--radius);
+  border-radius: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +60,8 @@
 
 .btn_div{
   display: flex;
-  gap: var(--gap);
+  gap: 12px;
+  margin-top: 10px;
 }
 
 #profilefoto{
@@ -69,7 +70,7 @@
     border-radius: 50%;
     margin: 10px;
     object-fit: cover;
-    border: solid 1px var(--mid);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.04);
 }
 
 /*---------------------------------------------------------------------------------------------*/

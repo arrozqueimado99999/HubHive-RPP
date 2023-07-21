@@ -46,22 +46,27 @@
                     </label>
                     <input type="file" required name="postanexo" id="postanexo">
 
-                    <div id="inputsforPost">
-                        <select name="projectToPost" id="projectToPost">
-                            <option style="display: none;" selected disabled>Escolha um projeto</option>
-                            <?php
-                            if($projetosByUser != ""){
-                                foreach ($projetosByUser as $userProj) : ?>
-                                    <option value="<?= $userProj['id'] ?>">
-                                        <h3><?= $userProj['titulo']; ?></h3>
-                                    </option>
-                                <?php
-                                endforeach;
-                            } else {
-                                print("<option value='' disabled>
-                                    Você não possui projetos ainda
-                                </option>");}?>
-                        </select>
+                    <div id="inputsforPost"> 
+                        <div id="projectSelect">
+                        <svg width="34" height="34" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.8 4.8a2.4 2.4 0 0 0-2.4 2.4v9.6a2.4 2.4 0 0 0 2.4 2.4h14.4a2.4 2.4 0 0 0 2.4-2.4V9.6a2.4 2.4 0 0 0-2.4-2.4h-6l-2.4-2.4h-6Zm8.4 6a1.2 1.2 0 0 0-2.4 0V12H9.6a1.2 1.2 0 0 0 0 2.4h1.2v1.2a1.2 1.2 0 0 0 2.4 0v-1.2h1.2a1.2 1.2 0 0 0 0-2.4h-1.2v-1.2Z" clip-rule="evenodd"></path>
+                        </svg>
+                            <select name="projectToPost" id="projectToPost">
+                                    <option style="display: none;" selected disabled>Escolha um projeto</option>
+                                    <?php
+                                    if($projetosByUser != ""){
+                                        foreach ($projetosByUser as $userProj) : ?>
+                                            <option value="<?= $userProj['id'] ?>">
+                                                <h3><?= $userProj['titulo']; ?></h3>
+                                            </option>
+                                        <?php
+                                        endforeach;
+                                    } else {
+                                        print("<option value='' disabled>
+                                            Você não possui projetos ainda
+                                        </option>");}?>
+                                </select>
+                        </div>                   
                         <input required placeholder="Digite alguma coisa" type="text" name="legendaPost" id="legendaPost">
                         <a onclick="criarLink()" id="linklistBtn" class="btn">
                             <svg width="25" height="25" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

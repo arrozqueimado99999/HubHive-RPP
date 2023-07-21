@@ -205,10 +205,12 @@ if (count($parts) > 2) {
 
 //$obj->$metodo();
 call_user_func_array(array($controller, $metodo), $params_to_controller);
-?>
+    $caminho_pasta_js = 'app/scripts/';
 
-<script src="app/scripts/uploadimage.js"></script>
-<script src="app/scripts/modals.js"></script>
-<script src="app/scripts/addcomponents.js"></script>
-<script src="app/scripts/scroll.js"></script>
-<script src="app/scripts/draganddrop.js"></script>
+    // Lista todos os arquivos da pasta com extensão .css
+    $arquivosjs = glob($caminho_pasta_js . '*.js');
+
+    // Loop para inserir os arquivos CSS como tags <link>
+    foreach ($arquivosjs as $arquivojs) {
+        echo '<script src="'.$arquivojs.'"></script>';
+    }?>

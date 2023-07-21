@@ -21,9 +21,6 @@ class PostController{
         $allPosts = $posts->selectAllExcept($post);
         $send['allPosts'] = $allPosts;
 
-        $categ = new Categorias();
-        //$send['allCategorias']= $categ->allCateg();
-
         //var_dump($send[0]);
         //die();
                 
