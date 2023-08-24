@@ -1,0 +1,16 @@
+.noprojectsDiv{
+    width: 100%;
+    height: 100%;
+    padding: 5% 20%;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--gap);
+    color: var(--dark);
+}
+
+.noprojectsDiv img{
+    max-height: 180px;
+}
+

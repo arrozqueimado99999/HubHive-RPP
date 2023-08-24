@@ -8,7 +8,7 @@ use models\Categorias;
 class FeedController{
     function index(){
         $send = [];
-        $id = $_SESSION['id'];
+        $id = $_SESSION['user']['id'];
 
         $model = new Usuario;
         $projects = new Projeto();
@@ -16,7 +16,7 @@ class FeedController{
         $categ = new Categorias();
 
         $send = $model->findById($id);
-        $allProj = $projects->projectsByUser($_SESSION['id']);
+        $allProj = $projects->projectsByUser($id);
         $allPosts = $posts->selectAll();
         $allCateg = $categ->allCateg();
         

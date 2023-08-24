@@ -4,14 +4,16 @@ include 'head.php';
 include 'header.php';
 
 //print_r($_SESSION);
+//print_r($send);
+
 ?>
 
 <div class="profile_nav">
     <img id="profilefoto" src="<?=
-                                $asset = $_SESSION['foto_perfil'];
+                                $asset = $_SESSION['user']['foto_perfil'];
                                 assets($asset) ?>" alt="perfil foto">
-    <h1><?= $_SESSION['nome'] ?></h1>
-    <p>@<?= $_SESSION['usuario'] ?></p>
+    <h1><?= $_SESSION['user']['nome'] ?></h1>
+    <p>@<?= $_SESSION['user']['usuario'] ?></p>
 
     <div class="btn_div">
         <button class="btn_library" onclick="openModal('myModal')">Editar perfil</button>
@@ -96,7 +98,7 @@ include 'header.php';
                                 <span>Dimensões recomendadas: 400x1080</span>
                             </div>
                         </div>
-                        <input type="file"  name="inputbanner" id="inputbanner">
+                        <input type="file" name="inputbanner" id="inputbanner">
                     </label>
 
                     <div class="grid_newproject">
@@ -139,29 +141,26 @@ include 'header.php';
     </div>
 </nav>
 
-<div class="projects">
-    <?php
-    if ($projetosByUser !== "") {
-        foreach ($projetosByUser as $proj) : ?>
-            <a class="card" href="<?= route("projeto/?project={$proj['id']}")?>">
+<?php
+if ($projetosByUser !== "") { ?>
+    <div class="projects"><?php    
+            foreach ($projetosByUser as $proj) : ?>
+            <a class="card" href="<?= route("projeto/?project={$proj['id']}") ?>">
                 <div>
-                    <img src="<?= $proj['banner'] ?>" alt="<?= $proj['id']; ?>">
+                    <img src="<?= $proj['banner'] ?>" alt="<?= $proj['banner']; ?>">
                 </div>
                 <div class="text">
                     <h3><?= $proj['titulo']; ?></h3>
-                    <p><?= $proj['descricao'] ?></p>
+                    <p id="descricao"><?= $proj['descricao'] ?></p>
                 </div>
             </a>
-        <?php
-        endforeach;
-    } else { ?>
-        <div>
-            <h3>Voce não possui projetos ainda</h3>
-        </div>
-    <?php
+            <?php
+        endforeach;?>
+        </div><?php
+    } else {
+        include 'errorsview/noprojects.php';
     } ?>
-</div>
 
-</body>
-
-</html>
+<?php
+include 'foot.php';
+?>

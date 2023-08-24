@@ -13,12 +13,21 @@ function _v($arr,$val){
 	}
 }
 
-function today(){
-    // Formato: Ano-Mês-Dia
-    $timestamp = time(); // Obtém o timestamp atual
+/*function now() {
+    // Obtém o timestamp atual
+    $timestamp = time();
+
+    // Obtém a data no formato 'Ano-Mês-Dia'
     $date = date('Y-m-d', $timestamp);
-    return $date;
-}
+
+    // Obtém a hora no formato 'Hora:Minuto'
+    $horaMinuto = date('H:i', $timestamp);
+
+    // Concatena a data e hora no formato desejado
+    $dataHoraAtual = $date . ' ás ' . $horaMinuto;
+
+    return $dataHoraAtual;
+}*/
 
 
 function dd($arr){

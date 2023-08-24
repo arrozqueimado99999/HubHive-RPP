@@ -77,6 +77,93 @@ class Posts extends Model {
 
     }
 
+    function postsBySecao($secaoid){
+        $sql = "SELECT * FROM posts WHERE secao_id = $secaoid";    
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();    
+        $dados = array();
+    
+        if (mysqli_num_rows($result) > 0) {
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+    }
+
+    function addLike($postid) {
+        // Testa se o usuário já curtiu o post
+        $usuario = $_SESSION['user']['id'];
+        $sql = "SELECT * FROM curtidas WHERE usuario_id = ? AND post_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ii", $usuario, $postid);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+    
+        if (mysqli_num_rows($result) == 0) {
+            // Se o usuário não curtiu ainda, insere a curtida na tabela
+            $sql = "INSERT INTO curtidas (usuario_id, post_id) VALUES (?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ii", $usuario, $postid);
+            $stmt->execute();
+        } else {
+            $sql = "DELETE FROM curtidas WHERE usuario_id = ? AND post_id = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ii", $usuario, $postid);
+            $stmt->execute();
+        }
+    }
+    
+
+    function countLikes($postid) {
+        $sql = "SELECT COUNT(post_id) AS count_curtidas FROM curtidas  WHERE post_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i",$postid);      
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();        
+        return $row['count_curtidas'];
+    }
+    
+    function testSeCurtiu($postid){
+        $sql = "SELECT * FROM curtidas  WHERE post_id = ? AND usuario_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $user = $_SESSION['user']['id'];
+        $stmt->bind_param("ii",$postid, $user);
+        
+        $stmt->execute();
+        $result = $stmt->get_result();    
+
+        if (mysqli_num_rows($result) > 0) {
+            return 1;      
+        } else {
+            return 0;
+        }
+    }
+
+    function testSeSalvou($projeto, $postid){
+        $sql = "SELECT * FROM posts_externos WHERE peojwto_id = ? AND post_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $user = $_SESSION['user']['id'];
+        $stmt->bind_param("ii",$projeto, $postid);
+        
+        $stmt->execute();
+        $result = $stmt->get_result();    
+
+        if (mysqli_num_rows($result) > 0) {
+            return 1;      
+        } else {
+            return 0;
+        }
+    }
+
     function postsByProjectId($id){
         $sql = "SELECT posts.*
         FROM posts
@@ -134,7 +221,7 @@ class Posts extends Model {
             $postId .= $characters[$randomIndex];
         }
 
-        $user = $_SESSION['usuario'];
+        $user = $_SESSION['user']['usuario'];
         $dirPath = 'app/users/' . $user . "/"."projectDocs/" . $projectId ;
 
             if (isset($_FILES['postanexo'])) {
@@ -161,5 +248,15 @@ class Posts extends Model {
         }
 
         
+    }
+
+    function deletePost($postid){
+        $sql = "DELETE FROM curtidas WHERE post_id = $postid"; 
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        $sql = "DELETE FROM {$this->table} WHERE id = $postid"; 
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
     }
 }

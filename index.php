@@ -1,4 +1,8 @@
 <?php
+
+use models\Orientador;
+use models\Usuario;
+
 session_start();
 
 require 'app/model/Model.php';
@@ -9,6 +13,24 @@ while ($file = readdir($handle)) {
 		require $path . $file;
 	}
 }
+
+if (isset($_SESSION['user']['id'])){
+	$id = $_SESSION['user']['id'];
+	$usuario = new Usuario;
+	$orient = new Orientador;
+	$updateUserInfo = $usuario->findById($id);
+	$_SESSION['user'] = $updateUserInfo;
+
+	$orientador = $orient->seOrient($id);
+        if ($orientador){
+            $_SESSION['tipo'] = Usuario::ORIENT_USER;
+        } else {
+            $_SESSION['tipo'] = Usuario::COMUM_USER;
+        }
+} else {
+	echo "";
+}
+
 
 $server_url = "http://" . $_SERVER['SERVER_NAME'] . explode("index.php", $_SERVER['SCRIPT_NAME'])[0];
 
@@ -202,15 +224,26 @@ if (count($parts) > 2) {
 	}
 }
 
+function now() {
+    // Define o fuso horário para Brasília
+    date_default_timezone_set('America/Sao_Paulo');
+
+    // Obtém o timestamp atual
+    $timestamp = time();
+
+    // Obtém a data no formato 'Ano-Mês-Dia'
+    $date = date('d/m/Y', $timestamp);
+
+    // Obtém a hora no formato 'Hora:Minuto'
+    $horaMinuto = date('H:i', $timestamp);
+
+    // Concatena a data e hora no formato desejado
+    $dataHoraAtual = $date . ' ás ' . $horaMinuto;
+
+    return $dataHoraAtual;
+}
+//<script src="'.$arquivojs.'"></script>
 
 //$obj->$metodo();
 call_user_func_array(array($controller, $metodo), $params_to_controller);
-    $caminho_pasta_js = 'app/scripts/';
 
-    // Lista todos os arquivos da pasta com extensão .css
-    $arquivosjs = glob($caminho_pasta_js . '*.js');
-
-    // Loop para inserir os arquivos CSS como tags <link>
-    foreach ($arquivosjs as $arquivojs) {
-        echo '<script src="'.$arquivojs.'"></script>';
-    }?>

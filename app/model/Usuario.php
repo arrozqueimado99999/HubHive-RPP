@@ -5,6 +5,13 @@ namespace models;
 class Usuario extends Model {
     protected $table = "usuarios";
     protected $fields = ["id", "usuario", "nome","email","senha", "foto_perfil"];
+
+    const COMUM_USER = 1;
+    const ORIENT_USER = 5;
+
+    public static $userTypes = [Usuario::COMUM_USER=>"Usuário comum",
+                                Usuario::ORIENT_USER=>"Orientador"];
+                                
     
     public function findLogin($email, $senha){
         $sql = "SELECT * FROM {$this->table} "
@@ -16,27 +23,13 @@ class Usuario extends Model {
 
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-
-        /*print_r($row);
-        die();*/
+        unset ($row['senha']);
 
         if ($row != '') {
         return $row;
     } else {
         return '';
     }
-    }
-
-    function seOrient(){
-        $sql = "SELECT * FROM orientadores "
-                ." WHERE usuarios.id = orientadores.usuario_id"; 
-        
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("ss", $email, $senha);
-                $stmt->execute();
-        
-                $result = $stmt->get_result();
-                $row = $result->fetch_assoc();
     }
 
     function createUser($nome, $usuario, $email, $senha){
@@ -70,11 +63,12 @@ class Usuario extends Model {
                 ." WHERE id = ? ";        
 
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("s", $id);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
 
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
+        unset ($row['senha']);
         return $row;
     }
 }

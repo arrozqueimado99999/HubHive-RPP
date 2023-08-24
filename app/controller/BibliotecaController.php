@@ -9,26 +9,31 @@ use models\Posts;
 class BibliotecaController{
     function index(){
         $send = [];
-        //print_r($_SESSION);
 
         $user = new Usuario();
         $categ = new Categorias();
         $projects = new Projeto();
 
-        $update = $user->findById($_SESSION['id']);
+        //$update = $user->findById($_SESSION['user']['id']);
         $allcateg = $categ->allCateg();
-        $allProj = $projects->projectsByUser($_SESSION['id']);
 
-        $send['projetosByUser'] = $allProj;
-        $send['allCategorias'] = $allcateg;
-        $_SESSION = $update;       
+        if ($_SESSION['tipo'] == Usuario::COMUM_USER){
+            $allProj = $projects->projectsByUser($_SESSION['user']['id']);
+            $send['projetosByUser'] = $allProj;
+        } else {
+            $allProj = $projects->projectsByOrient($_SESSION['user']['id']);
+            $send['projetosByUser'] = $allProj;            
+        }
+
+        $send['allCategorias'] = $allcateg;   
+        //$_SESSION['user'] = $update;
                 
         render("biblioteca", $send); 
     }
 
     function profilePic() {
         $model = new Midia();
-        $upload = $model->profilePic($_SESSION['id']);
+        $upload = $model->profilePic($_SESSION['user']['id']);
 
         redirect('biblioteca');
     }    
@@ -44,10 +49,10 @@ class BibliotecaController{
             $categ = "";
         }
 
+        //var_dump($_FILES['inputbanner']['full_path']);
         $model = new Projeto();
         $upload = $model->createProject($titulo, $descricao, $categ);
-        //var_dump($upload);
-        //var_dump($_POST);
+        //var_dump($_FILES);
         //die();
 
         redirect('biblioteca');

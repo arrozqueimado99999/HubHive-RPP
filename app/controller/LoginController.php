@@ -2,6 +2,7 @@
 
 
 use models\Usuario;
+use models\Orientador;
 
 class LoginController{
     function index(){
@@ -11,6 +12,7 @@ class LoginController{
     function login(){
         $send = [];
         $model = new Usuario;
+        $orient = new Orientador;
     
         if(isset($_POST["email"]) && isset($_POST["senha"])){
             $email = $_POST["email"];
@@ -21,11 +23,17 @@ class LoginController{
         }
         
         $result = $model->findLogin($email, hash('sha256', $senha));
-        $send['data'] = $result;
-        $result = preg_replace('/\s*\[\s*["a-z]+\([0-9]+\)\]\s*/', '', print_r($send['data'], true));
+        $send['user'] = $result;
+        $orientador = $orient->seOrient($send['user']['id']);
+
+        if ($orientador){
+            $send['tipo'] = Usuario::ORIENT_USER;
+        } else {
+            $send['tipo'] = Usuario::COMUM_USER;
+        }
     
         if($result != null){
-            $_SESSION = $send['data'];
+            $_SESSION = $send;
             redirect("feed"); 
         } else {
             redirect("login");
@@ -59,48 +67,4 @@ class LoginController{
             redirect("login?new");
         }
     }
-
-    /*
-    function login(){
-        $user = new Usuario;
-
-        if(isset($_POST["email"]) && isset($_POST["senha"])){
-            $email = $_POST["email"];
-            $senha =  $_POST["senha"];
-
-            if (isset($_SESSION['user'])){
-                #se encontrar salva na sessao
-                $send['data'] = $user->findLogin($email, $senha);
-                render('feed', $send);
-            } else {
-                #caso contrario, manda para o login novamente
-                render("login");
-            }
-
-        }
-    }
-
-    function sucess($email, $senha){
-
-        $email = $_POST["email"];
-        $senha =  $_POST["senha"];
-        $user = $model->findLogin($email, $senha);
-    
-        if ($user != null){
-            #se encontrar salva na sessao
-            $_SESSION['user'] = $user;
-            $send['user'] = $_SESSION['user'];
-            render("feed", $send);
-        } else {
-            #caso contrario, manda para o login novamente
-            $send = ["msg"=>"Login ou senha inválida"];
-            render("login", $send);
-        }
-    }
-
-    function create(){
-
-        $model = new Usuario();
-        $model->save($_POST["nome"], $_POST["email"],  $_POST["senha"]);
-    }   */
 }
