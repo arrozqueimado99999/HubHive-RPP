@@ -77,6 +77,53 @@ ul{
     gap: var(--gap);
 }
 
+.row_start{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 100%;
+    height: fit-content;
+    gap: var(--gap);
+}
+
+#submitFormNewProjeto{
+    background-color: var(--dark);
+    border-radius: var(--btn-radius);
+    border: none;
+    color: var(--light);
+    cursor: pointer;
+    padding: 8px calc(var(--pad)*2);
+    font-size: 14px;
+    display: flex;
+    gap: var(--gap);
+    justify-content: center;
+    align-items: center;
+}
+
+#submitFormNewProjeto:disabled{
+    background-color: var(--mid);
+    border-radius: var(--btn-radius);
+    border: none;
+    color: var(--light);
+    padding: 8px calc(var(--pad)*2);
+    font-size: 14px;
+    display: flex;
+    gap: var(--gap);
+    justify-content: center;
+    align-items: center;
+}
+
+.row_end{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    max-width: 100%;
+    height: fit-content;
+    gap: var(--gap);
+    padding: var(--pad);
+    box-shadow: 0 -0 10px rgba(0, 0, 0, 0.2);
+}
+
 .row_btwn h3{
     display: flex;
     word-break: break-all;
@@ -86,10 +133,10 @@ header{
     z-index: 600;
     position: sticky;
     top: 0;
-    padding: calc(var(--pad)/2) calc(var(--pad)*2);
+    padding: calc(var(--pad)/1.5) calc(var(--pad)*2);
     background: var(--light);
-    height: 48px;
-    max-height: 48px;
+    height: fit-content;
+    max-height: 80px;
     width: 100%;
     display: grid;
     grid-template-columns: 3fr 5fr;

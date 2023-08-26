@@ -1,6 +1,7 @@
 <?php
 
 use models\Categorias;
+use models\Colecao;
 use models\Usuario;
 use models\Projeto;
 use models\Midia;
@@ -14,7 +15,8 @@ class PostController{
         $id = $_SESSION['user']['id'];
 
         $posts = new Posts();
-        $model = new Model;
+        $model = new Model();
+        $cole = new Colecao();
         $acesspost = $model->acessPost($id, $post);
         if ($acesspost == "arroz"){
             $_SESSION['acesso'] = "sim";
@@ -26,16 +28,17 @@ class PostController{
         //die();
         
         if($post != null){
-            $send = $posts->allForPost($post);
-            
+            $send = $posts->allForPost($post);            
             $send['projectByPost'] = $posts->projectsByPostId($post);
         }
 
         $securtiu = $posts->testSeCurtiu($post);
         $allPosts = $posts->selectAllExcept($post);
+        $allCole = $cole->colecoesByUser($id);
         $send['securtiu'] = $securtiu;
         $send['allPosts'] = $allPosts;
         $send['curtidas'] = $count;
+        $send['colecao'] = $allCole;
 
         //var_dump($send[0]);
         //die();
@@ -54,7 +57,13 @@ class PostController{
         $postid = $_GET['post'];
         $posts = new Posts();
         $deletepost = $posts->deletePost($postid);
-        redirect('feed');
+        redirect('home');
+    }
+
+    function saveinColecao($post = null){
+        $colecaoid = $_POST['colecaoid'];
+
+        
     }
 }
 

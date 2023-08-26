@@ -1,9 +1,11 @@
 <?php
 
 use models\Categorias;
+use models\Colecao;
 use models\Usuario;
 use models\Projeto;
 use models\Midia;
+use models\Orientador;
 use models\Posts;
 
 class BibliotecaController{
@@ -13,18 +15,22 @@ class BibliotecaController{
         $user = new Usuario();
         $categ = new Categorias();
         $projects = new Projeto();
+        $cole = new Colecao();
+        $orient = new Orientador();
 
-        //$update = $user->findById($_SESSION['user']['id']);
         $allcateg = $categ->allCateg();
+        $allOrient = $orient->allOrient();
 
-        if ($_SESSION['tipo'] == Usuario::COMUM_USER){
-            $allProj = $projects->projectsByUser($_SESSION['user']['id']);
-            $send['projetosByUser'] = $allProj;
-        } else {
+        if ($_SESSION['tipo'] == Usuario::ORIENT_USER){
             $allProj = $projects->projectsByOrient($_SESSION['user']['id']);
-            $send['projetosByUser'] = $allProj;            
-        }
-
+            $send['projetosByOrient'] = $allProj;            
+        } 
+        
+        $allProj = $projects->projectsByUser($_SESSION['user']['id']);
+        $allCole = $cole->colecoesByUser($_SESSION['user']['id']);
+        $send['projetosByUser'] = $allProj;
+        $send['colecoesByUser'] = $allCole;
+        $send['allOrient'] = $allOrient;
         $send['allCategorias'] = $allcateg;   
         //$_SESSION['user'] = $update;
                 
@@ -39,22 +45,15 @@ class BibliotecaController{
     }    
 
     function newProject(){
-        if(isset($_POST["titulo"]) && isset($_POST["descricao"])){
-            $titulo = $_POST["titulo"];
-            $descricao =  $_POST["descricao"];
-            $categ = $_POST["categ"];
-        }else{
-            $titulo = "";
-            $descricao =  "";
-            $categ = "";
-        }
+        $titulo = isset($_POST["titulo"]) ? $_POST["titulo"] : "";
+        $descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : "";
+        $categ = isset($_POST["categ"]) ? $_POST["categ"] : "";
+        $orient = isset($_POST["orient"]) ? $_POST["orient"] : "";
 
-        //var_dump($_FILES['inputbanner']['full_path']);
-        $model = new Projeto();
-        $upload = $model->createProject($titulo, $descricao, $categ);
-        //var_dump($_FILES);
+        //var_dump($_POST);
         //die();
-
+        $model = new Projeto();
+        $upload = $model->createProject($titulo, $descricao, $categ, $orient);
         redirect('biblioteca');
     }
 }

@@ -6,16 +6,7 @@ class Projeto extends Model {
     protected $table = "projetos";
     protected $fields = ["id","nome","email","senha"];
 
-    function random(){
-        $sql = "SELECT *;
-        FROM {$this->table}
-        ORDER BY RAND()
-        LIMIT 1;";
-
-    }
-
-    function createProject($titulo, $descricao, $categ){ 
-        //gera uma id aleatoria pra o projeto  
+    function createProject($titulo, $descricao, $categ, $orient){ 
         $characters = '0123456789';
         $projectId = '';
     
@@ -29,36 +20,33 @@ class Projeto extends Model {
         $titulo = ucfirst($titulo);
         //__________________________________________________
 
-        $userid = $_SESSION['id'];
-        $user = $_SESSION['usuario'];
+        $userid = $_SESSION['user']['id'];
+        $user = $_SESSION['user']['usuario'];
         $dirPath = 'app/users/' . $user . "/"."projectDocs/" . $projectId ;
         mkdir($dirPath, 0777, true);
 
-            if ($_FILES['inputbanner']['full_path'] !== "") {
-                $arquivo = $_FILES['inputbanner']['name'];
-                $caminhoArquivo = $dirPath . "/". $arquivo;
-                
-                if (move_uploaded_file($_FILES['inputbanner']['tmp_name'], $caminhoArquivo)) {
-                    $sql = "INSERT INTO projetos (id, titulo, descricao, categoria_id, usuario_id, banner, data_postagem)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)";
-                    $stmt = $this->conn->prepare($sql);
-                    $stmt->bind_param("issiiss", $projectId, $titulo, $descricao, $categ,  $userid, $caminhoArquivo, $date);
-                    $stmt->execute();
-                }
-
-            } elseif ($_FILES['inputbanner']['full_path'] == ""){
-            
-            $arquivo = array('fundo1.jpg', 'fundo2.jpg','fundo3.jpg');
-            $rand = array_rand($arquivo);
-            $tt = $arquivo[$rand];
-            $caminhoArquivo = "public/imgs/". $tt;
-
-                $sql = "INSERT INTO projetos (id, titulo, descricao, categoria_id, usuario_id, banner, data_postagem)
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("issiiss", $projectId, $titulo, $descricao, $categ,  $userid, $caminhoArquivo, $date);
-                $stmt->execute();
+        if (!empty($_FILES['inputbanner']['full_path'])) {
+            $arquivo = $_FILES['inputbanner']['name'];
+            $caminhoArquivo = $dirPath . "/" . $arquivo;
+        
+            if (move_uploaded_file($_FILES['inputbanner']['tmp_name'], $caminhoArquivo)) {
+                $banner = $caminhoArquivo;
+            }
+        } else {
+            $arquivosPossiveis = ['fundo1.jpg', 'fundo2.jpg', 'fundo3.jpg'];
+            $banner = 'public/imgs/' . $arquivosPossiveis[array_rand($arquivosPossiveis)];
         }
+
+        if ($orient == ""){
+            $orient = null;
+        }
+        
+        $sql = "INSERT INTO projetos (id, titulo, descricao, categoria_id, usuario_id, banner, data_postagem, orient_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("issiissi", $projectId, $titulo, $descricao, $categ,  $userid, $banner, $date, $orient);
+        $stmt->execute();
+        
     } 
 
     function deleteProject($id){

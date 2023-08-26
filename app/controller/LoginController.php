@@ -34,7 +34,7 @@ class LoginController{
     
         if($result != null){
             $_SESSION = $send;
-            redirect("feed"); 
+            redirect("home"); 
         } else {
             redirect("login");
         }

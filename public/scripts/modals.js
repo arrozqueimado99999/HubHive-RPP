@@ -63,3 +63,46 @@ if (openProfileModal) {
         }
     });
 }
+
+const openModalSaveButton = document.getElementById("saveBtn");
+const modalsave = document.getElementById("modalSavePost");
+
+function openModalSavePost() {
+    const buttonRecta = openModalSaveButton.getBoundingClientRect();
+    modalsave.style.left = buttonRecta.left + "px";
+    modalsave.style.top = buttonRecta.bottom + "px";
+    modalsave.style.marginTop = "20px";
+    modalsave.style.display = "block";
+}
+
+if (modalsave && openModalSaveButton) {
+    window.addEventListener("click", function(event) {
+        if (event.target !== openModalSaveButton && event.target !== modalsave) {
+            modalsave.style.display = "none";
+        }
+    });
+}
+
+function openModalLadoById(btnid, id) {
+    const modalId = document.getElementById(id);
+    const btnId = document.getElementById(btnid);
+    const buttonAtb = btnId.getBoundingClientRect();
+
+    if (modalId.style.display === "block") {
+        modalId.style.display = "none";
+    } else {
+        modalId.style.left = buttonAtb.left + "px";
+        modalId.style.top = buttonAtb.bottom + "px";
+        modalId.style.marginTop = "20px";
+        modalId.style.display = "block";
+    }
+}
+
+modalOptComponent = document.getElementsByClassName('modalOpt');
+if (modalsave) {
+    window.addEventListener("click", function(event) {
+        if (event.target !== openModalSaveButton && event.target !== modalsave) {
+            modalsave.style.display = "none";
+        }
+    });
+}

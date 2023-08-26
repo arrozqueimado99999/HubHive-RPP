@@ -57,3 +57,48 @@ function optsection(){
 
     ff.display = "block";
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function addCategInLabel(id) {
+    var btn = document.getElementById("btnAddCateg");
+    var label = document.getElementById("categoriaEscolhida");
+    var inputcateg = document.getElementById("inputCategoria");
+    var categEscolhido = document.getElementById(id);
+    var idcateg = categEscolhido.id;
+
+    btn.className = "btn_dark_selected";
+    inputcateg.value = idcateg; // Corrigido: atribuição usando "=" ao invés de "()"
+    var categName = categEscolhido.textContent;
+    label.textContent = categName; // Corrigido: atribuição usando "=" ao invés de "()"
+}
+
+function addOrientInLabel(id) {
+    var btno = document.getElementById("btnAddOrient");
+    var labelo = document.getElementById("orientadorEscolhido");
+    var inputorient = document.getElementById("inputOrient");
+    var g = document.getElementById("nome" + id);
+    var orientEscolhido = document.getElementById(id);
+    var idorient = orientEscolhido.id;
+
+    btno.className = "btn_dark_selected";
+    inputorient.value = idorient; // Corrigido: atribuição usando "=" ao invés de "()"
+    var orientName = g.textContent;
+    labelo.textContent = orientName; // Corrigido: atribuição usando "=" ao invés de "()"
+}
+
+function addProjetoInLabel(id) {
+    var btnp = document.getElementById("btnProjectSelect");
+    var labelp = document.getElementById("projetoEscolhido");
+    var inputprojeto = document.getElementById("inputProjeto");
+    var p = document.getElementById("projetoTtlToPost");
+    var projetoEscolhido = document.getElementById(id);
+    var idprojeto = projetoEscolhido.id;
+
+    btnp.className = "btn_dark_selected";
+    inputprojeto.value = idprojeto; // Corrigido: atribuição usando "=" ao invés de "()"
+    var orientName = p.textContent;
+    labelp.textContent = orientName; // Corrigido: atribuição usando "=" ao invés de "()"
+}
+
+

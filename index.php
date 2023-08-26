@@ -62,21 +62,7 @@ function _url($url)
 	$local = substr($local, 0, strpos($local, "index.php")) . $url;
 	return "http://" . $local;
 }
-//______________________________________________________________________________________________________
-/*
-$url = (isset($_GET['url']) ? $_GET['url'] : 'hubhive');
-$url = array_filter(explode('/', $url));
 
-if (file_exists('app/controllers/'.$url[0].'Controller.php')){
-	include_once 'app/controllers/'.$url[0].'Controller.php';
-	$methods = get_class_methods($url[0]."Controller");
-	if ( !in_array($url[1],$methods) ){
-		print("Pagina não encontrada!");
-	}
-}
-*/
-
-//___________________________________________________________________________________________________
 function render($name, $send = array())
 {
 	global $server_url;
@@ -115,11 +101,10 @@ if ($parts != "") {
 	$parts = array();
 }
 
-//carrega a classe controle
 if (_v($parts, 0) != "") {
 	$class = ucwords(strtolower($parts[0]));
 } else {
-	$class = "Hubhive";
+	$class = "Home";
 }
 
 include 'app/controller/' . $class . 'Controller.php';

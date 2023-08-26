@@ -57,16 +57,28 @@ include 'header.php';
                     </button>
                 </div>
                 <div class="row">
-                    <a class="btn_post_act" id="saveBtn">
+                    <div id="modalSavePost">
+                        <p>Salvar em</p>
+                        <?php
+                    foreach ($colecao as $cole) : ?>
+                            <form action="<?=route("post/saveinColecao/?post={$send['0']['id']}")?> class="savePostInColecao">
+                                <button class="colecaoButtonSave" name="colecaoid" value="<?=$cole['id']?>">
+                                <div>
+                                    <h3><?=$cole['nome']?></h3>
+                                </div>
+                                </button>
+                            </form>
+                            <?php endforeach ?>
+                        </div>
+                    <button onclick="openModalSavePost()" class="btn_post_act" id="saveBtn">
                         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.5 2.25h-9A2.25 2.25 0 0 0 5.25 4.5v17.25l6.75-6 6.75 6V4.5a2.25 2.25 0 0 0-2.25-2.25Z"></path>
                         </svg>
-                    </a>
+                    </button>
 
                     <a data-value="<?= $send['securtiu'] ?>" href="<?= route("post/like/?post={$send['0']['id']}") ?>" class="btn_post_act" id="likeBtn">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16.544 3.75c-3.043 0-4.543 3-4.543 3s-1.5-3-4.544-3C4.984 3.75 3.026 5.82 3 8.288c-.051 5.125 4.066 8.77 8.579 11.832a.75.75 0 0 0 .843 0c4.512-3.063 8.63-6.707 8.578-11.832-.025-2.469-1.983-4.538-4.456-4.538Z"></path>
-                        </svg>
+                        <div id="hu">                        
+                        </div>    
                         <h3><?= $send['curtidas'] ?></h3>
                     </a>
                 </div>
