@@ -4,47 +4,67 @@ namespace models;
 
 use mysqli;
 
-class Model{
+class Model {
     protected $conn;
 
     protected $table = null;
     protected $fields = [];
-    
+    protected $id;
+
     public function __construct() {
+
+        $this->id = $_SESSION['user']['id'];
+
         $server = "localhost";
         $username = "root";
         $password = "";
         $dbname = "hubhive";
 
-        global $conn;
-        $conn = new mysqli($server, $username, $password, $dbname);
-        $this->conn = $conn;
-
-        if ($conn->connect_error) {
-            die("Falha na conexão: " . $conn->connect_error);
-        }      
+        $this->conn = new mysqli($server, $username, $password, $dbname);
+        if ($this->conn->connect_error) {
+            die("Falha na conexão: " . $this->conn->connect_error);
+        }
     }
 
-    public function acessPost($id, $postid){
-        $sql = "SELECT posts.*
+    public function projetosByUser() {
+        $projeto = new Projeto();
+        $projetos = $projeto->projectsByUser($this->id);
+        return $projetos;
+    }
+
+    public function allCateg() {
+        $categ = new Categorias();
+        $categorias = $categ->allCateg();
+        return $categorias;
+    }
+
+    public function colecoesByUser() {
+        $cole = new Colecao();
+        $colecoes = $cole->colecoesByUser($this->id);
+        return $colecoes;
+    }
+
+    public function accessPost($postid) {
+        $sql = "SELECT COUNT(posts.id)
         FROM posts
         INNER JOIN projetos ON posts.projeto_id = projetos.id
         INNER JOIN usuarios ON projetos.usuario_id = usuarios.id
-        WHERE usuarios.id = ? AND posts.id = ?"; 
-
+        WHERE usuarios.id = ? AND posts.id = ?";
+    
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ii", $id, $postid);
+        $stmt->bind_param("ii", $this->id, $postid);
         $stmt->execute();
-
-        $stmt->execute();
-        $stmt->store_result();
-        $result = $stmt->num_rows;
-
-
-            if ($result > 0){
-                return "arroz";
-            } else {
-                return "nadacomnada";
-            }
+        $stmt->bind_result($count);
+    
+        $stmt->fetch();
+    
+        $stmt->close();
+    
+        if ($count > 0) {
+            return Posts::ACCESS_TRUE;
+        } else {
+            return Posts::ACCESS_FALSE;
+        }
     }
+    
 }

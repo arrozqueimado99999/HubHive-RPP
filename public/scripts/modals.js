@@ -27,7 +27,7 @@ function openModalLado() {
     modal.style.left = buttonRect.left + "px";
     modal.style.top = buttonRect.bottom + "px";
     modal.style.marginTop = "20px";
-    modal.style.display = "block";
+    modal.style.display = "flex";
 }
 
 if (openModalButton) {
@@ -47,8 +47,8 @@ function openModalProfile() {
     modalProfile.style.width = buttonRect.width + "px";
     modalProfile.style.left = buttonRect.left + "px";
     modalProfile.style.top = buttonRect.bottom + "px";
-    modalProfile.style.marginTop = "20px";
-    modalProfile.style.display = "block";
+    modalProfile.style.marginTop = "var(--pad)";
+    modalProfile.style.display = "flex";
 }
 
 if (openProfileModal) {
@@ -71,8 +71,8 @@ function openModalSavePost() {
     const buttonRecta = openModalSaveButton.getBoundingClientRect();
     modalsave.style.left = buttonRecta.left + "px";
     modalsave.style.top = buttonRecta.bottom + "px";
-    modalsave.style.marginTop = "20px";
-    modalsave.style.display = "block";
+    modalsave.style.marginTop = "var(--pad)";
+    modalsave.style.display = "flex";
 }
 
 if (modalsave && openModalSaveButton) {
@@ -81,6 +81,23 @@ if (modalsave && openModalSaveButton) {
             modalsave.style.display = "none";
         }
     });
+}
+
+/*
+function openModalLadoById(btnid, id) {
+    const modalId = document.getElementById(id);
+    const btnId = document.getElementById(btnid);
+    const buttonAtb = btnId.getBoundingClientRect();
+
+    if (modalId.style.display === "block") {
+        modalId.style.display = "none";
+    } else {
+        modalId.style.width = Math.max(buttonAtb.width, 200) + "px"; // Largura mínima de 200px
+        modalId.style.left = buttonAtb.left + "px";
+        modalId.style.top = buttonAtb.bottom + "px";
+        modalId.style.marginTop = "20px";
+        modalId.style.display = "block";
+    }
 }
 
 function openModalLadoById(btnid, id) {
@@ -98,11 +115,18 @@ function openModalLadoById(btnid, id) {
     }
 }
 
-modalOptComponent = document.getElementsByClassName('modalOpt');
-if (modalsave) {
-    window.addEventListener("click", function(event) {
-        if (event.target !== openModalSaveButton && event.target !== modalsave) {
-            modalsave.style.display = "none";
-        }
-    });
+*/
+function openModalLadoById(btnid, id) {
+    const modalId = document.getElementById(id);
+    const btnId = document.getElementById(btnid);
+    const buttonAtb = btnId.getBoundingClientRect();
+
+    if (modalId.style.display === "flex") {
+        modalId.style.display = "none";
+    } else {
+        modalId.style.left = buttonAtb.left + "px";
+        modalId.style.top = buttonAtb.bottom + window.scrollY + "px"; // Adicionando a posição atual de rolagem
+        modalId.style.marginTop = "var(--pad)";
+        modalId.style.display = "flex";
+    }
 }

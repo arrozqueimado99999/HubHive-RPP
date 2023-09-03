@@ -67,4 +67,9 @@ class LoginController{
             redirect("login?new");
         }
     }
+
+    function exit(){
+        session_destroy();
+        redirect("login");    
+    }
 }

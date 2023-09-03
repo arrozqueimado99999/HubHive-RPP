@@ -90,15 +90,15 @@ function addOrientInLabel(id) {
 function addProjetoInLabel(id) {
     var btnp = document.getElementById("btnProjectSelect");
     var labelp = document.getElementById("projetoEscolhido");
-    var inputprojeto = document.getElementById("inputProjeto");
-    var p = document.getElementById("projetoTtlToPost");
+    var inputprojeto = document.getElementById("inputprojeto");
+    var p = document.getElementById("projeto" + id);
     var projetoEscolhido = document.getElementById(id);
     var idprojeto = projetoEscolhido.id;
 
     btnp.className = "btn_dark_selected";
     inputprojeto.value = idprojeto; // Corrigido: atribuição usando "=" ao invés de "()"
-    var orientName = p.textContent;
-    labelp.textContent = orientName; // Corrigido: atribuição usando "=" ao invés de "()"
+    var projectName = p.textContent;
+    labelp.textContent = projectName; // Corrigido: atribuição usando "=" ao invés de "()"
 }
 
 

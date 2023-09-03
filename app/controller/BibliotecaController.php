@@ -27,7 +27,7 @@ class BibliotecaController{
         } 
         
         $allProj = $projects->projectsByUser($_SESSION['user']['id']);
-        $allCole = $cole->colecoesByUser($_SESSION['user']['id']);
+        $allCole = $cole->colecoesByUser();
         $send['projetosByUser'] = $allProj;
         $send['colecoesByUser'] = $allCole;
         $send['allOrient'] = $allOrient;

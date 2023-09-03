@@ -40,6 +40,7 @@
     display: grid;
     grid-template-columns: 3fr 4fr;
     grid-gap: var(--gap);
+    padding: calc(var(--gap)*2);
 }
 
 .anexo{
@@ -50,11 +51,8 @@
     background: var(--light);
     border-radius: var(--radius);
     width: 100%;
-}
-
-.drop{
-    height: 100%;
-    border: 2px solid transparent;
+    border: 2px solid var(--hover);
+    aspect-ratio: 1/1;
 }
 
 .drag-over{
@@ -62,12 +60,21 @@
 }
 
 #droparea:hover{
-    border: 2px solid var(--purple);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    color: var(--purple);
 }
 
 #droparea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: var(--light);
+    border-radius: var(--radius);
     width: 100%;
     height: 100%;
+    border: 2px solid var(--hover);
+    aspect-ratio: 1/1;
     cursor: pointer;
 }
 
@@ -310,6 +317,7 @@ object{
     display: none;
     position: absolute;
     background: var(--white);
+    flex-direction: column;
     padding: var(--pad);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     z-index: 800;
@@ -320,9 +328,26 @@ object{
 .modalOpt{
     display: none;
     position: absolute;
+    flex-direction: column;
     background: var(--white);
     padding: var(--pad);
     max-height: 180px;
+    overflow: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 800;
+    animation: esmaecer .3s;
+    gap: var(--gap);
+    border-radius: var(--radius);
+    font-size: 14px;
+}
+
+.modalOptBig{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background: var(--white);
+    padding: var(--pad);
+    max-height: 310px;
     overflow: auto;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     z-index: 800;
@@ -343,7 +368,6 @@ object{
 
 .opt{
     display: flex;
-    width: 100%;
     align-items: center;
     justify-content: flex-start;
     border-radius: var(--radius);
@@ -375,6 +399,10 @@ object{
     gap: var(--gap);
 }
 
+#modalOptPost::-webkit-scrollbar {
+    width: 0px;
+}
+
 .colecaoButtonSave{
     border-radius: var(--radius);
     border: none;
@@ -399,20 +427,24 @@ object{
     scale: 1.02;
 }
 
+#modalSavePost::-webkit-scrollbar {
+    width: 0px;
+}
+
 #modalSavePost{
     display: none;
     position: absolute;
+    flex-direction: column;
+    gap: var(--gap);
     background: var(--white);
     padding: var(--pad);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     z-index: 800;
     gap: var(--gap);
+    max-height: 240px;
+    overflow: auto;
     animation: esmaecer .3s;
     border-radius: var(--radius);
-}
-
-#modalSavePost p{
-    margin-bottom: var(--pad);
 }
 
 .btnsProfileOpt{
@@ -490,37 +522,19 @@ object{
     background: none;
 }
 
-#legendaPost{
-    background: var(--light
-    );
-    border-radius: 100px;
-    padding: var(--pad) 20px;
-    width: 100%;
-    border: var(--purple);
-    height: fit-content;
-    outline: none;
-    min-height: 44px;
-    font-size: 16px;
-    color: var(--dark);
-    border-bottom: 2px solid var(--light
-    );
-}
-
 #projectSelect{
     display: flex;
     gap: var(--gap);
     align-items: center;
     padding: 0px 20px;
-    background: var(--light
-    );
+    background: var(--light);
     border-radius: 200px;
     width: 60%;
     height: fit-content;
     min-height: 44px;
     font-size: 16px;
     color: var(--dark);
-    border-bottom: 2px solid var(--light
-    );
+    border-bottom: 2px solid var(--light);
     cursor: pointer;
 }
 

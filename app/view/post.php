@@ -2,6 +2,8 @@
 
 include 'head.php';
 include 'header.php';
+
+//var_dump($send);
 ?>
 
 <article class="postDiv">
@@ -34,7 +36,7 @@ include 'header.php';
                     <h3><?= $send['0']['legenda'] ?></h3>
                     <div id="modalOptPost">
                         <?php
-                        if ($_SESSION['acesso'] == "sim") : ?>
+                        if ($_SESSION['acesso'] == "0101_LIB") : ?>
                             <a href="<?= route("post/deletePost/?post={$send['0']['id']}") ?>">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" fill="currentColor" viewBox="0 0 448 512">
                                     <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
@@ -58,18 +60,33 @@ include 'header.php';
                 </div>
                 <div class="row">
                     <div id="modalSavePost">
-                        <p>Salvar em</p>
+                        <nav class="navNormal">
+                        <button onclick="openModal('newColecaoModal')" class="opt">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m21.706 5.291-2.999-2.998A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.291A.994.994 0 0 0 2 5.999V19c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5.999a.993.993 0 0 0-.294-.708ZM6.414 4h11.172l.999.999H5.415L6.414 4ZM4 19V6.999h16L20.002 19H4Z"></path>
+                                <path d="M15 12H9v-2H7v4h10v-4h-2v2Z"></path>
+                            </svg>
+                            <h3>Nova coleção</h3>
+                        </button>
+                        </nav>
                         <?php
-                    foreach ($colecao as $cole) : ?>
-                            <form action="<?=route("post/saveinColecao/?post={$send['0']['id']}")?> class="savePostInColecao">
-                                <button class="colecaoButtonSave" name="colecaoid" value="<?=$cole['id']?>">
-                                <div>
-                                    <h3><?=$cole['nome']?></h3>
-                                </div>
-                                </button>
-                            </form>
-                            <?php endforeach ?>
-                        </div>
+                        if ($allCole != "") {
+                            foreach ($allCole as $cole) : ?>
+                                <form action="<?= route("post/saveinColecao/?post={$send['0']['id']}") ?>" method="post" class="savePostInColecao">
+                                    <input type="text" value="<?= $send['0']['id'] ?>" name="postToSave" class="inputhide">
+                                    <input type="text" value="<?= $cole['id'] ?>" name="colecaoToSave" class="inputhide">
+                                    <button class="colecaoButtonSave" name="colecaoid">
+                                        <div>
+                                            <h3><?= $cole['nome'] ?></h3>
+                                        </div>
+                                    </button>
+                                </form>
+                        <?php
+                            endforeach;
+                        } else {
+                            print("<p>Você não possui nenhuma coleção ainda</p>");
+                        } ?>
+                    </div>
                     <button onclick="openModalSavePost()" class="btn_post_act" id="saveBtn">
                         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.5 2.25h-9A2.25 2.25 0 0 0 5.25 4.5v17.25l6.75-6 6.75 6V4.5a2.25 2.25 0 0 0-2.25-2.25Z"></path>
@@ -77,8 +94,8 @@ include 'header.php';
                     </button>
 
                     <a data-value="<?= $send['securtiu'] ?>" href="<?= route("post/like/?post={$send['0']['id']}") ?>" class="btn_post_act" id="likeBtn">
-                        <div id="hu">                        
-                        </div>    
+                        <div id="hu">
+                        </div>
                         <h3><?= $send['curtidas'] ?></h3>
                     </a>
                 </div>
@@ -109,7 +126,7 @@ include 'header.php';
                 if (in_array($fileExtension, $fileIMG)) { ?>
                     <div class="post">
                         <a href="<?= route("post/?post={$post['id']}") ?>">
-                            <img src="<?=route( $post['anexo'] )?>" alt="não tem">
+                            <img src="<?= route($post['anexo']) ?>" alt="não tem">
                         </a>
                     </div>
                 <?php

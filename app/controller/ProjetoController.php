@@ -1,8 +1,7 @@
 <?php
 
 use models\Posts;
-use models\Projeto;
-use models\Secao;
+use models\Projeto; 
 use models\Usuario;
 
 class ProjetoController{
@@ -22,8 +21,10 @@ class ProjetoController{
     function deleteProjeto(){
         $projeto = new Projeto;
 
-        $deleteProj = $projeto->deleteProject($_GET['project']);
-        redirect("biblioteca"); 
+        $project = $_GET['project'];
+
+        $deleteProj = $projeto->deleteProject($project);
+        redirect("perfil"); 
     }
 
 

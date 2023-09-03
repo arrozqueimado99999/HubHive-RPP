@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?= assets('css/newpost.css') ?>">
     <link rel="stylesheet" href="<?= assets('css/errorsStyle.css') ?>">
     <link rel="stylesheet" href="<?= assets('css/project.css') ?>">
+    <link rel="stylesheet" href="<?= assets('css/perfil.css') ?>">
     <link rel="stylesheet" href="<?= assets('css/header.css') ?>">
     <link rel="stylesheet" href="<?= assets('css/animations.css') ?>">
     <link rel="stylesheet" href="<?= assets('css/variables.css') ?>">

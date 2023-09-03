@@ -50,6 +50,17 @@ class Projeto extends Model {
     } 
 
     function deleteProject($id){
+        $sqlCurt = "DELETE FROM curtidas
+        WHERE post_id IN (
+            SELECT id
+            FROM posts
+            WHERE projeto_id = ?
+        );";
+
+        $stmt0 = $this->conn->prepare($sqlCurt);
+        $stmt0->bind_param("i", $id);
+        $stmt0->execute();
+
         $sqlPosts = "DELETE posts FROM posts
              JOIN projetos ON posts.projeto_id = projetos.id
              WHERE posts.projeto_id = ?";
@@ -85,6 +96,7 @@ class Projeto extends Model {
             redirect('feed');
         }
     }
+    
     
     function projectsByUser($id){
         $sql = "SELECT * FROM {$this->table} WHERE usuario_id = $id";        

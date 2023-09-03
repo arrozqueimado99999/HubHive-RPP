@@ -6,10 +6,42 @@ class Posts extends Model {
     protected $table = "posts";
     protected $fields = ["id","projeto_id","titulo","texto", "anexo"];
 
-    function selectAll(){
+    const ACCESS_TRUE = 8;
+    const ACCESS_FALSE = 88;
+
+    public static $access = [Posts::ACCESS_TRUE=>"0101_LIB",
+                                Posts::ACCESS_FALSE=>"1010_NLIB"];
+
+    function allPosts(){
         $sql = "SELECT * FROM {$this->table}";        
     
         $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();    
+        $dados = array();
+    
+        if (mysqli_num_rows($result) > 0) {
+            // Loop para percorrer os resultados e armazenar os valores em um array
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+    }
+
+    function postsByColecao($idcolecao){
+        $sql = "SELECT posts.*
+        FROM posts
+        JOIN colecoes_posts ON posts.id = colecoes_posts.post_id
+        WHERE colecoes_posts.colecao_id = ?";
+               
+    
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $idcolecao);
         $stmt->execute();
     
         $result = $stmt->get_result();    
@@ -212,7 +244,7 @@ class Posts extends Model {
         return $dados;
     }
 
-    function newPost($projectId, $legenda){
+    function createPost($projetoId, $legenda){
         $characters = '0123456789';
         $postId = '';
     
@@ -222,7 +254,7 @@ class Posts extends Model {
         }
 
         $user = $_SESSION['user']['usuario'];
-        $dirPath = 'app/users/' . $user . "/"."projectDocs/" . $projectId ;
+        $dirPath = 'app/users/' . $user . "/"."projectDocs/" . $projetoId ;
 
             if (isset($_FILES['postanexo'])) {
                 $anexo = $_FILES['postanexo']['name'];
@@ -230,24 +262,14 @@ class Posts extends Model {
                 
                 if (move_uploaded_file($_FILES['postanexo']['tmp_name'], $caminhoArquivo)) {
                     $sql = "INSERT INTO posts (id, legenda, projeto_id, anexo)
-                    VALUES (?, ?, ?, ?)";
+                            VALUES (?, ?, ?, ?)";
                     $stmt = $this->conn->prepare($sql);
-                    $stmt->bind_param("isis", $postId, $legenda,$projectId, $caminhoArquivo);
+                    $stmt->bind_param("isis", $postId, $legenda, $projetoId, $caminhoArquivo);
                     $stmt->execute();
 
-                    if ($stmt->affected_rows > 0) {
-                        redirect('feed');
-                    } else {
-                        redirect('biblioteca');
                 }
-
-                }
-            } else{
-            echo ("fudeu");
-            print_r($_FILES);
-        }
-
-        
+                return $postId;
+            }        
     }
 
     function deletePost($postid){

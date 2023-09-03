@@ -1,48 +1,36 @@
 <?php
 
-use models\Categorias;
 use models\Colecao;
-use models\Usuario;
-use models\Projeto;
-use models\Midia;
 use models\Model;
 use models\Posts;
 
 class PostController{
     function index($post = null){
         $send = [];
-        $allPost = null;
-        $id = $_SESSION['user']['id'];
-
+        
+        $model = new Model();        
         $posts = new Posts();
-        $model = new Model();
-        $cole = new Colecao();
-        $acesspost = $model->acessPost($id, $post);
-        if ($acesspost == "arroz"){
-            $_SESSION['acesso'] = "sim";
+        
+        $accesspost = $model->accessPost($post);
+        if ($accesspost == Posts::ACCESS_TRUE){
+            $_SESSION['acesso'] = "0101_LIB";
         } else {
-            $_SESSION['acesso'] = "não";            
-        }
-        $count = $posts->countLikes($post);
-        //print_r($r);
-        //die();
+            $_SESSION['acesso'] = "1010_NLIB";            
+        }        
         
         if($post != null){
             $send = $posts->allForPost($post);            
             $send['projectByPost'] = $posts->projectsByPostId($post);
-        }
+        }        
 
-        $securtiu = $posts->testSeCurtiu($post);
-        $allPosts = $posts->selectAllExcept($post);
-        $allCole = $cole->colecoesByUser($id);
-        $send['securtiu'] = $securtiu;
-        $send['allPosts'] = $allPosts;
-        $send['curtidas'] = $count;
-        $send['colecao'] = $allCole;
+        $send['colecoesByUser'] = $model->colecoesByUser();
+        $send['projetosByUser'] = $model->projetosByUser();
+        $send['allCateg'] = $model->allCateg(); 
+        $send['allCole'] = $model->colecoesByUser(); 
+        $send['securtiu'] = $posts->testSeCurtiu($post);
+        $send['curtidas'] = $posts->countLikes($post);
+        $send['allPosts'] = $posts->selectAllExcept($post);
 
-        //var_dump($send[0]);
-        //die();
-                
         render("post", $send); 
     }
 
@@ -53,17 +41,42 @@ class PostController{
         redirect('post/?post=' . $postid);
     }
 
+    function createPost(){
+        if(isset($_POST["projetotopost"]) && isset($_POST["legendaPost"])){
+            $projeto = $_POST["projetotopost"];
+            $legenda =  $_POST["legendaPost"];
+        }else{
+            $projeto = "";
+            $legenda =  "";
+        } 
+
+        $model = new Posts();
+        $postId = $model->createPost($projeto, $legenda);
+
+        redirect('post/?post=' . $postId);
+    }
+
     function deletePost(){
         $postid = $_GET['post'];
         $posts = new Posts();
-        $deletepost = $posts->deletePost($postid);
+        $posts->deletePost($postid);
         redirect('home');
     }
 
-    function saveinColecao($post = null){
-        $colecaoid = $_POST['colecaoid'];
+    function saveinColecao(){
+        $colecao = new Colecao;
+        if(isset($_POST["colecaoToSave"]) && isset($_POST["postToSave"])){
+            $cole = $_POST["colecaoToSave"];
+            $topost = $_POST["postToSave"];
+        }else{
+            $cole = "";
+            $topost = "";
+        } 
 
+        $colecao->savePostInColecao($cole, $topost);
         
+        redirect("home");
+        //redirect("post/?post=". $topost);
     }
 }
 

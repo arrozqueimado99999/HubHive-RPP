@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var securtiu = meuBotao.getAttribute("data-value");
 
         if (securtiu == 0){
-            meuBotao.style.backgroundColor = "white";
+            meuBotao.style.backgroundColor = "var(--light)";
             hu.innerHTML = iconline ;
         } else {
             hu.innerHTML = iconsolid;

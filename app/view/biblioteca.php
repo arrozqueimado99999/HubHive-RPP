@@ -53,11 +53,64 @@ include 'header.php';
 </div>
 
 <nav class="nav_library">
-    <button onclick="openModal('newprojectModal')" class="btn_library">
+    <button onclick="openModalLadoById('btnCriarNovo','modalOptCriarNovo')" id="btnCriarNovo" class="btn_library">
         <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M12 6a1.2 1.2 0 0 1 1.2 1.2v3.6h3.6a1.2 1.2 0 1 1 0 2.4h-3.6v3.6a1.2 1.2 0 1 1-2.4 0v-3.6H7.2a1.2 1.2 0 1 1 0-2.4h3.6V7.2A1.2 1.2 0 0 1 12 6Z" clip-rule="evenodd"></path>
         </svg>
-    </button>
+    </button>   
+
+    <div class="modalOpt" id="modalOptCriarNovo">
+        <button onclick="openModal('newColecaoModal')" class="opt">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="m21.706 5.291-2.999-2.998A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.291A.994.994 0 0 0 2 5.999V19c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5.999a.993.993 0 0 0-.294-.708ZM6.414 4h11.172l.999.999H5.415L6.414 4ZM4 19V6.999h16L20.002 19H4Z"></path>
+            <path d="M15 12H9v-2H7v4h10v-4h-2v2Z"></path>
+        </svg>
+            <h3>Coleção</h3>
+        </button>
+        
+        <button onclick="openModal('newprojectModal')" class="opt">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 8h14M5 8a2 2 0 1 1 0-4h14a2 2 0 0 1 0 4M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8m-9 4h4"></path>
+        </svg>
+            <h3>Projeto</h3>
+        </button>
+    </div>
+
+    <div id="newColecaoModal" class="modal">
+        <article id="modalcontentnewcolecao" class="modal-content">
+            <div class="nav">
+                <div class="flex gap">
+                    <h3>Nova coleção</h3>
+                </div>
+
+                <button class="close" onclick="closeModal('newColecaoModal')">
+                    <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M5.152 5.152a1.2 1.2 0 0 1 1.696 0L12 10.303l5.152-5.151a1.2 1.2 0 1 1 1.696 1.696L13.697 12l5.151 5.152a1.2 1.2 0 0 1-1.696 1.696L12 13.697l-5.152 5.151a1.2 1.2 0 0 1-1.696-1.696L10.303 12 5.152 6.848a1.2 1.2 0 0 1 0-1.696Z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <section>
+                <form class="form_newcolecao" id="form_newcolecao" action="<?= route('biblioteca/newColecao') ?>" method="post">
+                    <div class="grid_newproject">
+                        <div class="flex_column">
+                            <input type="text" placeholder="Nome da coleção" id="inputNomeColecao" name="colecao_nome" class="inputsNewProjeto">
+                        </div>
+                    </div>
+                    <div class="row_end">
+                        <button id="submitFormNewColecao" disabled form="form_newcolecao">
+                            <svg width="26" height="26" fill="currentColor" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M20.048 6.352a1.2 1.2 0 0 1 0 1.696l-9.6 9.6a1.2 1.2 0 0 1-1.696 0l-4.8-4.8a1.2 1.2 0 0 1 1.696-1.696L9.6 15.103l8.752-8.751a1.2 1.2 0 0 1 1.696 0Z" clip-rule="evenodd"></path>
+                            </svg>
+                            Concluir
+                        </button>
+                    </div>
+                </form>
+    </div>
+
+
+
+
     <div id="newprojectModal" class="modal">
         <article id="modalcontentnewproject" class="modal-content">
             <div class="nav">
@@ -76,12 +129,9 @@ include 'header.php';
                         </div>
 
                         <div id="formbanner">
-                            <svg width="46" height="46" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M19.5 3.75h-15A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V6a2.25 2.25 0 0 0-2.25-2.25Z"></path>
-                                <path d="M15.75 9.75a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path>
-                                <path d="M14.25 15.743 10 11.502a1.5 1.5 0 0 0-2.056-.061L2.25 16.503"></path>
-                                <path d="m10.5 20.253 5.782-5.781a1.5 1.5 0 0 1 2.02-.094l3.448 2.875"></path>
-                            </svg>
+                        <svg width="46" height="46" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M15 10v6H9v-6H5l7-7 7 7h-4Zm4 10v-2H5v2h14Z" clip-rule="evenodd"></path>
+                        </svg>
                             <h3>Adicionar banner</h3>
                             <p>Imagens jpg, jpeg ou png até 5Mb</p>
                         </div>

@@ -18,3 +18,40 @@ function checkInputs() {
 inputTitulo.addEventListener("input", checkInputs);
 inputCategoria.addEventListener("input", checkInputs);
 inputDesc.addEventListener("input", checkInputs);
+
+
+const inputNomeColecao = document.getElementById("inputNomeColecao");
+const submitFormNewColecao = document.getElementById("submitFormNewColecao");
+
+function checkInputcolecao() {
+  if (
+    inputNomeColecao.value.trim() !== ""
+  ) {
+    submitFormNewColecao.disabled = false;
+  } else {
+    submitFormNewColecao.disabled = true;
+  }
+}
+
+inputNomeColecao.addEventListener("input", checkInputcolecao);
+
+const inputProjetoToPost = document.getElementById("inputcolecao");
+const postanexo = document.getElementById("postanexo");
+const inputLegenda = document.getElementById("legendaPost");
+const submitFormNewPost = document.getElementById("submitFormNewPost");
+
+function checkInputPost() {
+  if (
+    inputProjetoToPost.value.trim() !== "" &&
+    postanexo.value.trim() !== "" &&
+    inputLegenda.value.trim() !== ""
+  ) {
+    submitFormNewPost.disabled = false;
+  } else {
+    submitFormNewPost.disabled = true;
+  }
+}
+
+inputProjetoToPost.addEventListener("input", checkInputPost);
+postanexo.addEventListener("input", checkInputPost);
+inputLegenda.addEventListener("input", checkInputPost);

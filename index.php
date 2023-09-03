@@ -28,8 +28,10 @@ if (isset($_SESSION['user']['id'])){
             $_SESSION['tipo'] = Usuario::COMUM_USER;
         }
 } else {
-	echo "";
+	echo 'uyg';
 }
+
+//var_dump($_SESSION);
 
 
 $server_url = "http://" . $_SERVER['SERVER_NAME'] . explode("index.php", $_SERVER['SCRIPT_NAME'])[0];
@@ -104,7 +106,7 @@ if ($parts != "") {
 if (_v($parts, 0) != "") {
 	$class = ucwords(strtolower($parts[0]));
 } else {
-	$class = "Home";
+	$class = "home";
 }
 
 include 'app/controller/' . $class . 'Controller.php';

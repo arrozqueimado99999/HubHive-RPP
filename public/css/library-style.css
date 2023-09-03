@@ -17,19 +17,16 @@
   animation: pulse 5s infinite;
 }
 
-.teste{
-  background-color: aqua;
-  color: black;
+.navNormal{
   border-radius: var(--radius);
-  padding: var(--pad);
+  display: flex;
 }
 
 .projects{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: var(--gap);
-  padding: calc(var(--pad)*2);
-  height: 100%;
+  height: fit-content;
   width: 100%;
   background: var(--light);
 }
@@ -113,8 +110,8 @@
 }
 
 #profilefoto{
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     margin: 10px;
     object-fit: cover;
@@ -144,6 +141,7 @@
 }
 
 .modal-content{
+  overflow: hidden;
     background-color: #fff;
     width: 60%;
     height: fit-content;
@@ -168,7 +166,7 @@
   padding: calc(var(--pad)*2);
 }
 
-#formbanner{
+#formbanner, #formpost{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -180,7 +178,7 @@
   font-size: 12px;
 }
 
-.form_newproject{
+.form_newproject,.form_newcolecao{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -284,6 +282,17 @@
 #bannerAdd{
   width: 100%;
   height: fit-content;
+  max-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--temp);
+}
+
+#bannerAdd img{
+  width: auto;
+  height: 100%;
+  max-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -364,15 +373,38 @@
   color: var(--dark);
 }
 
+.opt_projeto {
+  height: 120px;
+  min-width: 400px;
+  box-shadow: 0px 10px 20px rgba(0,0,0,0.04);
+  border-radius: var(--radius);
+  transition: 0.2s ease-in-out;
+  background: var(--white);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.opt_projeto h3{
+  color: var(--white);
+}
+
+.opt_projeto p{
+  font-size: 12px;
+}
+
 /******************************************************************************************************/
 .cardcole {
   min-height: 200px;
   max-width: 100%;
-  height: fit-content;
+  height: 100%;
   box-shadow: 0px 10px 20px rgba(0,0,0,0.04);
   border-radius: var(--radius);
   transition: 0.2s ease-in-out;
-  color: var(--dark);
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: var(--white);
 }
 
 /******************************************************************************************************/
@@ -394,7 +426,6 @@
   width: 100%;
   height: 60px;
   background: var(--light);
-  padding:  0px calc(var(--pad)*2);
 }
 
 #add_project{
@@ -426,9 +457,22 @@
 
 .card img {
   width: 100%;
-  aspect-ratio: 2/1;
+  aspect-ratio: 4/1;
   object-fit: cover;
-  max-height: 200px;
+  min-height: 120px;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  /*background: linear-gradient(45deg, #ffce47, #9fa7ff);*/
+  display: flex;
+  align-items: top;
+  justify-content: right;
+}
+
+.card_projeto img {
+  width: 100%;
+  aspect-ratio: 4/1;
+  object-fit: cover;
+  max-height: 80px;
   border-top-left-radius: var(--radius);
   border-top-right-radius: var(--radius);
   /*background: linear-gradient(45deg, #ffce47, #9fa7ff);*/
@@ -445,7 +489,7 @@
 }
 
 .text h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--purple);
   max-width: 300px;
@@ -455,11 +499,11 @@
 }
 
 .text p {
-  color: var(--dark);
-  font-size: 13px;
-  overflow-wrap: break-word;
-  max-width: 300px;
-  word-wrap: break-word;
+  font-size: 12px;
+  color: var(--mid);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .icon-box .span {
@@ -567,15 +611,17 @@
   padding: var(--pad);
   color: var(--dark);
   display: flex;
+  border-radius: var(--radius);
   align-items: flex-end;
   justify-content: flex-start;
   background: var(--white);
   font-size: 1rem;
+  border: 2px solid var(--light);
 }
 
 .inputsNewProjeto:focus {
-  border-bottom: 2px solid var(--mid);
-  background: var(--hover);
+  border: 2px solid var(--hover);
+  background: var(--light);
 }
 
 .inputsNewProjeto::placeholder {
