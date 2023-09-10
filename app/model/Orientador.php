@@ -43,4 +43,28 @@ class Orientador extends Model
 
         return $dados;
     }
+
+    function orientByProjeto($projetoid){
+        $sql = "SELECT usuarios.id, usuarios.nome, usuarios.foto_perfil
+        FROM usuarios
+        JOIN orientadores ON usuarios.id = orientadores.usuario_id
+        JOIN projetos ON orientadores.id = projetos.orient_id
+        WHERE projetos.id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $projetoid);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $dados = array();
+
+        if ($result->num_rows > 0) {
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }
+        } else {
+            return $dados[] = "";
+        }
+
+        return $dados;
+    }
 }

@@ -83,43 +83,18 @@ if (modalsave && openModalSaveButton) {
     });
 }
 
-/*
 function openModalLadoById(btnid, id) {
     const modalId = document.getElementById(id);
     const btnId = document.getElementById(btnid);
     const buttonAtb = btnId.getBoundingClientRect();
 
-    if (modalId.style.display === "block") {
-        modalId.style.display = "none";
-    } else {
-        modalId.style.width = Math.max(buttonAtb.width, 200) + "px"; // Largura mínima de 200px
-        modalId.style.left = buttonAtb.left + "px";
-        modalId.style.top = buttonAtb.bottom + "px";
-        modalId.style.marginTop = "20px";
-        modalId.style.display = "block";
-    }
-}
-
-function openModalLadoById(btnid, id) {
-    const modalId = document.getElementById(id);
-    const btnId = document.getElementById(btnid);
-    const buttonAtb = btnId.getBoundingClientRect();
-
-    if (modalId.style.display === "block") {
-        modalId.style.display = "none";
-    } else {
-        modalId.style.left = buttonAtb.left + "px";
-        modalId.style.top = buttonAtb.bottom + "px";
-        modalId.style.marginTop = "20px";
-        modalId.style.display = "block";
-    }
-}
-
-*/
-function openModalLadoById(btnid, id) {
-    const modalId = document.getElementById(id);
-    const btnId = document.getElementById(btnid);
-    const buttonAtb = btnId.getBoundingClientRect();
+    // Fecha todas as modais que estão abertas
+    const modaisAbertas = document.querySelectorAll('.modalOpt');
+    modaisAbertas.forEach((modal) => {
+        if (modal !== modalId && modal.style.display === 'flex') {
+            modal.style.display = 'none';
+        }
+    });
 
     if (modalId.style.display === "flex") {
         modalId.style.display = "none";
@@ -130,3 +105,16 @@ function openModalLadoById(btnid, id) {
         modalId.style.display = "flex";
     }
 }
+
+function fecharModalAoClicarFora() {
+    const modais = document.querySelectorAll('.modalOpt');
+    modais.forEach((modal) => {
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+}
+
+fecharModalAoClicarFora();

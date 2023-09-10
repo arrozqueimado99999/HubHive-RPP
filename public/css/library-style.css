@@ -22,9 +22,35 @@
   display: flex;
 }
 
+.orientProj{
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: var(--pad);
+  display: flex;
+  justify-content: flex-start;
+  width: fit-content;
+  gap: var(--gap);
+  align-items: center;
+}
+
+.orientProj img{
+  border-radius: 50%;
+  height: 32px;
+  width: auto;
+}
+
 .projects{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-gap: var(--gap);
+  height: fit-content;
+  width: 100%;
+  background: var(--light);
+}
+
+.projects_5{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: var(--gap);
   height: fit-content;
   width: 100%;
@@ -113,6 +139,7 @@
     width: 160px;
     height: 160px;
     border-radius: 50%;
+    background: var(--light);
     margin: 10px;
     object-fit: cover;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.04);
@@ -142,7 +169,7 @@
 
 .modal-content{
   overflow: hidden;
-    background-color: #fff;
+    background-color: var(--white);
     width: 60%;
     height: fit-content;
     border-radius: var(--radius);
@@ -371,6 +398,8 @@
   border-radius: var(--radius);
   transition: 0.2s ease-in-out;
   color: var(--dark);
+  overflow: hidden;
+  background: var(--white);
 }
 
 .opt_projeto {
@@ -401,7 +430,7 @@
   border-radius: var(--radius);
   transition: 0.2s ease-in-out;
   display: flex;
-  overflow: hidden;
+
   flex-direction: column;
   justify-content: flex-end;
   color: var(--white);
@@ -542,6 +571,13 @@
   overflow-y: auto;
 }
 
+.flex_start{
+  gap: var(--gap);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .flex_column{
   gap: calc(var(--gap)/2);
   display: flex;
@@ -590,7 +626,7 @@
 }
 
 .btn_dark_selected{
-  background-color: var(--dark);
+  background-color: var(--purple);
   border-radius: var(--btn-radius);
   border: none;
   color: var(--light);
@@ -616,14 +652,23 @@
   justify-content: flex-start;
   background: var(--white);
   font-size: 1rem;
-  border: 2px solid var(--light);
+  border: 2px solid var(--hover);
 }
 
 .inputsNewProjeto:focus {
-  border: 2px solid var(--hover);
-  background: var(--light);
+  border: 2px solid var(--mid);
+  background: var(--hover);
 }
 
 .inputsNewProjeto::placeholder {
   color: var(--mid);
+}
+
+.pesquisaResult{
+  gap: var(--gap);
+  display: flex;
+  flex-direction: column;
+  padding: 0 calc(var(--pad)*2);
+  margin: var(--pad);
+  border-left: var(--purple) solid 3px;
 }

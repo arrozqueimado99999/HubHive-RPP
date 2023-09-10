@@ -1,6 +1,6 @@
     <header>
         <div>
-            <a class="link_home" href="<?= route('home') ?>">
+            <a class="link_home" onmouseenter="alert('block','fudeu de vez meu amigo')" href="<?= route('home') ?>">
                 <img src="<?= assets('imgs/hubhive-logo-icon.svg') ?>" height="32px" fill="currentColor" alt="hubhivelogo">
             </a>
             <ul class="ulGap">
@@ -18,25 +18,24 @@
         </div>
 
         <div class="headerlastnav">
-            <button id="changeuimode">
+            <span id="changeuimode" onclick="changeuimode()">
                 <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18 px" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                     <path d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z" />
                 </svg>
-
-            </button>
-            <button id="newprojeto" onclick="openModal('modali')">
+            </span>
+            <span id="btnCriarNovo" onclick="openModalLadoById('btnCriarNovo','modalOptCriarNovo')">
                 <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M12 6a1.2 1.2 0 0 1 1.2 1.2v3.6h3.6a1.2 1.2 0 1 1 0 2.4h-3.6v3.6a1.2 1.2 0 1 1-2.4 0v-3.6H7.2a1.2 1.2 0 1 1 0-2.4h3.6V7.2A1.2 1.2 0 0 1 12 6Z" clip-rule="evenodd"></path>
                 </svg>
                 Criar
-            </button>
+            </span>
 
-            <button id="openModalProfile" class="profile" onclick="openModalProfile()">
+            <span id="openModalProfile" class="profile" onclick="openModalProfile()">
                 <img src="<?=route($_SESSION['user']['foto_perfil']) ?>" alt="não tem" class="profileImg">
                 <p><?= $_SESSION['user']['usuario'] ?></p>
-            </button>
+            </span>
 
-            <div id="modalProfile">
+            <div id="modalProfile" class="modalOpt">
                 <a href="<?= route('perfil') ?>" id="btnBiblioteca" class="btnsProfileOpt">
                     <svg width="22" height="22" fill="currentColor" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M12 10.8a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2ZM3.6 21.6a8.4 8.4 0 0 1 16.8 0H3.6Z" clip-rule="evenodd"></path>

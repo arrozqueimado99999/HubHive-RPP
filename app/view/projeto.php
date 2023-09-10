@@ -103,23 +103,57 @@ include 'header.php';
                 <path fill-rule="evenodd" d="M9.248 17.648a1.2 1.2 0 0 1-1.696 0l-4.8-4.8a1.2 1.2 0 0 1 0-1.696l4.8-4.8a1.2 1.2 0 0 1 1.696 1.696L6.497 10.8H20.4a1.2 1.2 0 1 1 0 2.4H6.497l2.751 2.752a1.2 1.2 0 0 1 0 1.696Z" clip-rule="evenodd"></path>
             </svg>
         </a>
-        <div class="secoesByProject">
-            <button class="btnTranslucido" onclick="criarSecao()">
-                <svg width="46" height="46" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.6 17.52a6 6 0 1 0-5.97-6.6H7.2a1.8 1.8 0 0 0-1.8-1.8H4.2a1.8 1.8 0 0 0-1.8 1.8v1.2a1.8 1.8 0 0 0 1.8 1.8h1.2a1.8 1.8 0 0 0 1.8-1.8h2.43a6 6 0 0 0 5.97 5.4Zm.6-9v2.4h2.4a.6.6 0 1 1 0 1.2h-2.4v2.4a.6.6 0 1 1-1.2 0v-2.4h-2.4a.6.6 0 1 1 0-1.2H15v-2.4a.6.6 0 1 1 1.2 0Z"></path>
-                </svg>
-                <h3>Adicionar seção</h3>
-            </button>
-
-            <div id="inputaddsecao">
-                <form id="formNewSecao" action="<?= route("projeto/addSecao/?project={$send['0']['id']}") ?>" method="post"></form>
-            </div>
-
-        </div>
     </div>
     <div class="project">
-        <div class="projectbannerimg">
-            <img src="<?= route($send['0']['banner']) ?>" alt="">
+        <div class="projectbannerimg" style="background: url(<?= route($send['0']['banner']) ?>);">
+            <div class="escuro2">
+            <div class="dadosProject">
+                <div class="row_btwn">
+                    <div class="tituloProj">
+                        <h2 id="projectTittle"><?= $send['0']['titulo'] ?></h2>
+                        <p><?= $send['0']['descricao'] ?></p>
+                        <p id="dataCriacaoProject">Criado em <?= $send['0']['data_postagem'] ?></p>
+                    </div>
+    
+                    <?
+                    if (isset($orientador)){
+                        ?>
+                        <a href="" class="orientProj">
+                            <img src="<?=route($send['orientador']['0']['foto_perfil'])?>" alt="">
+                            <p><?=$send['orientador']['0']['nome']?></p>
+                        </a>
+                        <?
+                    } else {?>
+                        <button id="btnAddOrient" onclick="openModalLadoById('btnAddOrient','modalOrient')" class="btn_dark">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.6 19.2s-1.2 0-1.2-1.2 1.2-4.8 7.2-4.8 7.2 3.6 7.2 4.8c0 1.2-1.2 1.2-1.2 1.2h-12Zm6-7.2a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2Z"></path>
+                                <path fill-rule="evenodd" d="M18.6 8.4a.6.6 0 0 1 .6.6v1.8H21a.6.6 0 1 1 0 1.2h-1.8v1.8a.6.6 0 1 1-1.2 0V12h-1.8a.6.6 0 1 1 0-1.2H18V9a.6.6 0 0 1 .6-.6Z" clip-rule="evenodd"></path>
+                            </svg>
+                            <h3 id="orientadorEscolhido">Orientador</h3>
+                        </button>                        
+                        <?
+                        }
+                    
+                    ?>
+
+                    <div class="modalOpt" id="modalOrient">
+                        <?php
+                        foreach ($allOrient as $orient) : ?>
+                            <span onclick="addOrientInLabel('<?= $orient['id'] ?>')" class="opt" id="<?= $orient['id']; ?>">
+                                <img src="<?= route($orient['foto_perfil']) ?>" alt="">
+                                <div class="column">
+                                    <h3 id="<?= "nome" . $orient['id'] ?>"><?= $orient['nome']; ?></h3>
+                                    <p><?= $orient['usuario']; ?></p>
+                                </div>
+                            </span>
+                        <?php
+                        endforeach;
+                        ?>
+                    </div>
+                </div>
+            </div>
+
+            </div>
         </div>
 
         <div id="modalOptProjeto" class="modalOpt">
@@ -131,12 +165,7 @@ include 'header.php';
                 </a>
         </div>
 
-        <div class="projectPostsInfo">
-            <div class="dadosProject">
-                <h2 id="projectTittle"><?= $send['0']['titulo'] ?></h2>
-                <p><?= $send['0']['descricao'] ?></p>
-                <p id="dataCriacaoProject">Criado em <?= $send['0']['data_postagem'] ?></p>
-            </div>
+        <div class="nav_library">
             <div>
                 <button class="btnCirculo" onclick="openModalLadoById('openModalOptPost','modalOptProjeto')" id="openModalOptPost">
                     <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -144,10 +173,9 @@ include 'header.php';
                     </svg>
                 </button>
             </div>
-            <div class="orientProj">
-
-            </div>
         </div>
+
+        <h1 contenteditable="true"> Sou editável pelo usuário </h1>
 
         <div>
             <div class="postsbyproject">

@@ -5,7 +5,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
+    color: var(--dark);
     padding: var(--pad);
     flex-direction: column;
     border-radius: var(--radius);
@@ -21,7 +21,13 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    border-radius: var(--radius);
     gap: var(--gap);
+    overflow: auto;
+}
+
+.perfil_conteudo::-webkit-scrollbar{
+    width: 100%;
 }
 
 .perfil{
@@ -39,5 +45,87 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: var(--gap);
+    height: 100%;
     align-items: center;
 }
+
+.cardUser {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.04);
+  }
+
+  .cardUser .nav{
+    width: 100%;
+    height: 64px;
+    gap: var(--pad);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--pad);
+    background: var(--dark);
+  }
+
+  .cardUser:hover{
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .cardUser .nav a{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--pad) 0 20px;
+    background: #ffffff12;
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    border-radius: var(--btn-radius);
+  }
+
+  .infoCardUser{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    padding: 32px var(--pad) ;
+  }
+
+  .cardUser .nav a:hover{
+    background: var(--white);
+    color: var(--dark);
+  }
+
+  .imguser{
+    width: 80px;
+    height: 80px;
+    background: var(--white);
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    object-fit: cover;
+    align-items: center;
+    border-radius: 50%;
+    height: auto;
+  }
+  
+  .nomeuser {
+    font-size: 22px;
+    color: var(--green);
+    font-weight: 600;
+  }
+  
+  .username {
+    font-size: 14px;
+    color: var(--dark);
+  }

@@ -60,7 +60,7 @@
 }
 
 #droparea:hover{
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px var(--hover);
     color: var(--purple);
 }
 
@@ -250,7 +250,6 @@ object{
     background: var(--light);
     padding: var(--pad);
     color: var(--dark);
-    margin-bottom: 20px;
 }
 
 #voltarPag:hover{
@@ -283,19 +282,6 @@ object{
     justify-content: flex-end;
 }
 
-.secaoProjectDiv{
-    color: var(--white);
-    background: #ffffff45;
-    border: none;
-    padding: var(--pad);
-    display: flex;
-    align-items: center;
-    border-radius: var(--radius);
-    gap: 6px;
-    cursor: pointer;
-    justify-content: space-between;
-}
-
 .secaoProjectDiv:hover .btn_secaoopt{
     opacity: 1;
 }
@@ -319,7 +305,7 @@ object{
     background: var(--white);
     flex-direction: column;
     padding: var(--pad);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px var(--hover);
     z-index: 800;
     animation: esmaecer .3s;
     border-radius: var(--radius);
@@ -331,14 +317,18 @@ object{
     flex-direction: column;
     background: var(--white);
     padding: var(--pad);
-    max-height: 180px;
+    max-height: 200px;
     overflow: auto;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px var(--hover);
     z-index: 800;
     animation: esmaecer .3s;
-    gap: var(--gap);
+    gap: calc(var(--gap)/2);
     border-radius: var(--radius);
     font-size: 14px;
+}
+
+.modalOpt::-webkit-scrollbar, .modalOptBig::-webkit-scrollbar{
+    display: none;
 }
 
 .modalOptBig{
@@ -347,12 +337,12 @@ object{
     position: absolute;
     background: var(--white);
     padding: var(--pad);
-    max-height: 310px;
+    height: 310px;
     overflow: auto;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px var(--hover);
     z-index: 800;
     animation: esmaecer .3s;
-    gap: var(--gap);
+    gap: calc(var(--gap)/2);
     border-radius: var(--radius);
     font-size: 14px;
 }
@@ -362,7 +352,6 @@ object{
 }
 
 #orientadorEscolhido, #categoriaEscolhida{
-    color: var(--light);
     font-size: 14px;
 }
 
@@ -438,7 +427,7 @@ object{
     gap: var(--gap);
     background: var(--white);
     padding: var(--pad);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px var(--hover);
     z-index: 800;
     gap: var(--gap);
     max-height: 240px;
@@ -476,23 +465,6 @@ object{
 
 .secaooptlist{
     display: none;
-}
-
-.btn_secaoopt{
-    background: transparent;
-    color: var(--white);
-    border-radius: var(--radius);
-    border: none;
-    aspect-ratio: 1/1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    opacity: 0;
-}
-
-.btn_secaoopt:hover{
-    background: #ffffff14;
 }
 
 .btnNovaSecao{
@@ -572,23 +544,6 @@ object{
     padding: calc(var(--pad)*2);
 }
 
-.btnTranslucido{
-    color: var(--white);
-    background: #ffffff45;
-    border: none;
-    padding: calc(var(--pad)/2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: var(--radius);
-    gap: 6px;
-    cursor: pointer;
-}
-
-.btnTranslucido:hover{
-    background: #ffffff56;
-}
-
 .secaoProjeto{
     width: 100%;
     height: fit-content;
@@ -660,7 +615,7 @@ object{
 }
 
 .post:hover, .video_post:hover, .post_pdf_ext:hover{
-    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 18px 0 var(--hover);
 }
 
 #postimg{
@@ -678,6 +633,9 @@ object{
     width: 100%;
     background: var(--light);
     padding: calc(var(--pad)*3) 16%;
+    gap: var(--gap);
+    display: flex;
+    flex-direction: column;
 }
 
 .postagem{

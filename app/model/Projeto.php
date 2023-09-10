@@ -6,6 +6,59 @@ class Projeto extends Model {
     protected $table = "projetos";
     protected $fields = ["id","nome","email","senha"];
 
+    //////////////////PARA A ABA DE PESQUISA///////////////////////////////////
+    function findbyTitulo($q){
+        $sql = "SELECT id, titulo, banner
+        FROM projetos
+        WHERE titulo LIKE '%$q%'";        
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();    
+        $dados = array();
+        
+        if (mysqli_num_rows($result) > 0) {
+            // Loop para percorrer os resultados e armazenar os valores em um array
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+
+    }
+
+    function findbyDesc($q){
+        $sql = "SELECT *
+        FROM projetos
+        WHERE descricao LIKE '%$q%'";        
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();    
+        $dados = array();
+        
+        if (mysqli_num_rows($result) > 0) {
+            // Loop para percorrer os resultados e armazenar os valores em um array
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+
+    }
+
+
+
+    ///////////////////////////////////////////////////////////////////////////
+
     function createProject($titulo, $descricao, $categ, $orient){ 
         $characters = '0123456789';
         $projectId = '';

@@ -6,12 +6,14 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     transition: var(--temp);
+    margin-block-end: 0;
+    margin-block-start: 0;
 }
 
 html {
     transition: var(--temp);
     scroll-behavior: smooth;
-    height: 100vh;
+    height: fit-content;
     min-height: fit-content;
     text-size-adjust: 100%;
   }
@@ -19,7 +21,6 @@ html {
 body{
     background: var(--light);
     background-size: 2em 2em;
-    background-color: var(--green);
     opacity: 1;
     display: flex;
     flex-direction: column;
@@ -71,8 +72,8 @@ ul{
 .row_btwn{
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    max-width: 100%;
+    align-items: flex-end;
+    width: 100%;
     height: fit-content;
     gap: var(--gap);
 }
@@ -87,7 +88,7 @@ ul{
 }
 
 #submitFormNewPost, #submitFormNewProjeto, #submitFormNewColecao{
-    background-color: var(--dark);
+    background-color: var(--purple);
     border-radius: var(--btn-radius);
     border: none;
     color: var(--light);
@@ -111,6 +112,7 @@ ul{
     gap: var(--gap);
     justify-content: center;
     align-items: center;
+    opacity: .4;
 }
 
 /*******************************************************************************************************/
@@ -173,6 +175,7 @@ ul{
 .row_btwn h3{
     display: flex;
     word-break: break-all;
+    color: var(--dark);
 }
 
 header{
@@ -238,11 +241,41 @@ header div{
     font-size: 1rem;
 }
 
+@keyframes aparecer {
+    from {
+        bottom: -10px;
+        filter: blur(5px);
+    }
+
+    to{
+        filter: blur(0px);
+        bottom: var(--pad);
+    }
+}
+
+.alert{
+    position: absolute;
+    padding: var(--pad);
+    background: var(--dark);
+    border-radius: var(--radius);
+    color: var(--light);
+    left: 50%;
+    bottom: var(--pad);
+    animation: aparecer .3s ease-in-out;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    gap: var(--gap);
+    align-items: center;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.1);
+}
+
 .search input {
     height: 100%;
     width: 100%;
     border: 2px solid transparent;
     outline: none;
+    background: var(--white);
     padding: 0 1rem;
 }
 
@@ -250,7 +283,7 @@ header div{
     border: 2px solid var(--hover);
 }
 
-#newprojeto {
+#btnCriarNovo {
     height: 100%;
     width: 15%;
     border-radius: 50px;
@@ -264,11 +297,12 @@ header div{
     justify-content: center;
     cursor: pointer;
     font-weight: 600;
+    font-size: 14px;
     background: var(--white);
     gap: 5px;
 }
 
-#newprojeto:hover, #changeuimode:hover {
+#btnCriarNovo:hover, #changeuimode:hover {
     border: var(--hover) solid 2px;
 }
   
@@ -347,6 +381,7 @@ header div{
     font-size: 18px;
     cursor: pointer;
     position: relative;
+    color: var(--dark);
     border: none;
     background: none;
     display: flex;

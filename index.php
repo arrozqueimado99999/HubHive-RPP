@@ -27,8 +27,6 @@ if (isset($_SESSION['user']['id'])){
         } else {
             $_SESSION['tipo'] = Usuario::COMUM_USER;
         }
-} else {
-	echo 'uyg';
 }
 
 //var_dump($_SESSION);

@@ -12,7 +12,28 @@ class Usuario extends Model {
     public static $userTypes = [Usuario::COMUM_USER=>"Usuário comum",
                                 Usuario::ORIENT_USER=>"Orientador"];
                                 
+    ///////////////PARA PESQUISAS/////////////////////
+    public function findbyUserandNome($u){
+        $sql = "SELECT id, nome, usuario, foto_perfil FROM {$this->table} WHERE nome LIKE '%$u%' OR usuario LIKE '%$u%'";        
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->get_result();    
+        $dados = array();
     
+        if (mysqli_num_rows($result) > 0) {
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+    }
+    ////////////////////////////////////////////////////
+
     public function findLogin($email, $senha){
         $sql = "SELECT * FROM {$this->table} "
                 ." WHERE email = ? and senha = ?";        

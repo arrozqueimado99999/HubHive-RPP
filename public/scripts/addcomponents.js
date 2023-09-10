@@ -60,7 +60,7 @@ function optsection(){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function addCategInLabel(id) {
+function addCategInLabel(id, pfechar) {
     var btn = document.getElementById("btnAddCateg");
     var label = document.getElementById("categoriaEscolhida");
     var inputcateg = document.getElementById("inputCategoria");
@@ -71,34 +71,41 @@ function addCategInLabel(id) {
     inputcateg.value = idcateg; // Corrigido: atribuição usando "=" ao invés de "()"
     var categName = categEscolhido.textContent;
     label.textContent = categName; // Corrigido: atribuição usando "=" ao invés de "()"
+
+    var modal = document.getElementById(pfechar);
+    modal.style.display = "none";  
 }
 
-function addOrientInLabel(id) {
+function addOrientInLabel(id, pfechar) {
     var btno = document.getElementById("btnAddOrient");
     var labelo = document.getElementById("orientadorEscolhido");
     var inputorient = document.getElementById("inputOrient");
     var g = document.getElementById("nome" + id);
     var orientEscolhido = document.getElementById(id);
     var idorient = orientEscolhido.id;
-
+    
     btno.className = "btn_dark_selected";
-    inputorient.value = idorient; // Corrigido: atribuição usando "=" ao invés de "()"
+    inputorient.value = idorient; 
     var orientName = g.textContent;
-    labelo.textContent = orientName; // Corrigido: atribuição usando "=" ao invés de "()"
+    labelo.textContent = orientName; 
+    var modal = document.getElementById(pfechar);
+    modal.style.display = "none";  
 }
 
-function addProjetoInLabel(id) {
+function addProjetoInLabel(id, pfechar) {
     var btnp = document.getElementById("btnProjectSelect");
     var labelp = document.getElementById("projetoEscolhido");
     var inputprojeto = document.getElementById("inputprojeto");
     var p = document.getElementById("projeto" + id);
     var projetoEscolhido = document.getElementById(id);
     var idprojeto = projetoEscolhido.id;
-
+    
     btnp.className = "btn_dark_selected";
-    inputprojeto.value = idprojeto; // Corrigido: atribuição usando "=" ao invés de "()"
+    inputprojeto.value = idprojeto;
     var projectName = p.textContent;
-    labelp.textContent = projectName; // Corrigido: atribuição usando "=" ao invés de "()"
+    labelp.textContent = projectName;
+    var modal = document.getElementById(pfechar);
+    modal.style.display = "none";  
 }
 
 

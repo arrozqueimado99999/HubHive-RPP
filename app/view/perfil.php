@@ -3,7 +3,7 @@ include 'head.php';
 include 'header.php';
 ?>
 
-<article class="perfil">
+<div class="perfil">
 
     <nav class="profile_nav">
         <img id="profilefoto" src="<?= $asset = $_SESSION['user']['foto_perfil'];
@@ -56,28 +56,7 @@ include 'header.php';
 
     <div class="perfil_info">
         <nav class="nav_library">
-            <button onclick="openModalLadoById('btnCriarNovo','modalOptCriarNovo')" id="btnCriarNovo" class="btn_library">
-                <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12 6a1.2 1.2 0 0 1 1.2 1.2v3.6h3.6a1.2 1.2 0 1 1 0 2.4h-3.6v3.6a1.2 1.2 0 1 1-2.4 0v-3.6H7.2a1.2 1.2 0 1 1 0-2.4h3.6V7.2A1.2 1.2 0 0 1 12 6Z" clip-rule="evenodd"></path>
-                </svg>
-            </button>
-
-            <div class="modalOpt" id="modalOptCriarNovo">
-                <button onclick="openModal('newColecaoModal')" class="opt">
-                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="m21.706 5.291-2.999-2.998A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.291A.994.994 0 0 0 2 5.999V19c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5.999a.993.993 0 0 0-.294-.708ZM6.414 4h11.172l.999.999H5.415L6.414 4ZM4 19V6.999h16L20.002 19H4Z"></path>
-                        <path d="M15 12H9v-2H7v4h10v-4h-2v2Z"></path>
-                    </svg>
-                    <h3>Coleção</h3>
-                </button>
-
-                <button onclick="openModal('newprojectModal')" class="opt">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 8h14M5 8a2 2 0 1 1 0-4h14a2 2 0 0 1 0 4M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8m-9 4h4"></path>
-                    </svg>
-                    <h3>Projeto</h3>
-                </button>
-            </div>
+            
         </nav>
 
         <div class="perfil_conteudo">
