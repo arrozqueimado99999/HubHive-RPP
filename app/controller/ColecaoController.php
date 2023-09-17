@@ -7,13 +7,14 @@ use models\Usuario;
 
 class ColecaoController{
     function index($colection = null){
-        $projeto = new Projeto;
+
+        $send = [];
         $colecao = new Colecao;
         $posts = new Posts;
         $send = [];
         $send = $colecao->findById($colection);
+        $send['colecoesByUser'] = $colecao->colecoesByUser($_SESSION['user']['id']);
         $send['postsByColecao'] = $posts->postsByColecao($colection);
-        $send['projetosInColecao'] = $projeto->projectsByUser($_SESSION['user']['id']);
         
         //print_r($send);
         

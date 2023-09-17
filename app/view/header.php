@@ -1,8 +1,7 @@
     <header>
         <div>
             <a class="link_home" onmouseenter="alert('block','fudeu de vez meu amigo')" href="<?= route('home') ?>">
-                <img src="<?= assets('imgs/hubhive-logo-icon.svg') ?>" height="32px" fill="currentColor" alt="hubhivelogo">
-            </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32px" height="32px" viewBox="0 0 581.1 581.1"><defs><style>.cls-1{fill: currentColor;}</style></defs><g id="Camada_2" data-name="Camada 2"><g id="Camada_1-2" data-name="Camada 1"><path class="cls-1" d="M306.15,201.44H275a75.94,75.94,0,0,0-45.1,14.79h121.4A75.94,75.94,0,0,0,306.15,201.44Z"/><path class="cls-1" d="M503.85,0H77.26A77.26,77.26,0,0,0,0,77.26V503.85A77.26,77.26,0,0,0,77.26,581.1H503.85a77.26,77.26,0,0,0,77.25-77.25V77.26A77.26,77.26,0,0,0,503.85,0ZM405.72,490h-99.1V457.88h80.54l87.32-151.26H106.62L194,457.88h80.53V490H175.39L60.22,290.55,175.39,91.08h99.09v32.15H194L106.62,274.48h70.59A97.92,97.92,0,0,1,274.32,180l16.23-51.71L306.78,180a97.91,97.91,0,0,1,97.11,94.45h70.59L387.16,123.23H306.62V91.08h99.1L520.88,290.55Z"/><path class="cls-1" d="M364.49,228.6H216.61a76.5,76.5,0,0,0-8.36,12.09H372.86A77.23,77.23,0,0,0,364.49,228.6Z"/><path class="cls-1" d="M200.21,262.12a76.08,76.08,0,0,0-1.57,12.36H382.46a76.08,76.08,0,0,0-1.57-12.36Z"/></g></g></svg>            </a>
             <ul class="ulGap">
                 <li>
                     <a class="link" href="<?= route('home') ?>">
@@ -18,9 +17,9 @@
         </div>
 
         <div class="headerlastnav">
-            <span id="changeuimode" onclick="changeuimode()">
-                <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18 px" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                    <path d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z" />
+            <span id="changeuimode">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M12 2.4a1.2 1.2 0 0 1 1.2 1.2v1.2a1.2 1.2 0 1 1-2.4 0V3.6A1.2 1.2 0 0 1 12 2.4Zm4.8 9.6a4.8 4.8 0 1 1-9.6 0 4.8 4.8 0 0 1 9.6 0Zm-.557 5.94.849.848a1.2 1.2 0 0 0 1.696-1.696l-.848-.849a1.2 1.2 0 0 0-1.697 1.697Zm2.544-12.728a1.2 1.2 0 0 1 0 1.696l-.847.849a1.2 1.2 0 1 1-1.697-1.697l.849-.848a1.2 1.2 0 0 1 1.696 0ZM20.4 13.2a1.2 1.2 0 1 0 0-2.4h-1.2a1.2 1.2 0 0 0 0 2.4h1.2ZM12 18a1.2 1.2 0 0 1 1.2 1.2v1.2a1.2 1.2 0 1 1-2.4 0v-1.2A1.2 1.2 0 0 1 12 18ZM6.06 7.757A1.2 1.2 0 1 0 7.758 6.06l-.85-.848a1.2 1.2 0 0 0-1.696 1.696l.848.849ZM7.757 17.94l-.849.848a1.2 1.2 0 0 1-1.696-1.696l.848-.849a1.2 1.2 0 0 1 1.697 1.697ZM4.8 13.2a1.2 1.2 0 1 0 0-2.4H3.6a1.2 1.2 0 0 0 0 2.4h1.2Z" clip-rule="evenodd"></path>
                 </svg>
             </span>
             <span id="btnCriarNovo" onclick="openModalLadoById('btnCriarNovo','modalOptCriarNovo')">

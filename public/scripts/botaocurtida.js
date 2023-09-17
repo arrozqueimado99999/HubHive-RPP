@@ -22,3 +22,4 @@ document.addEventListener("DOMContentLoaded", function() {
     // Chama a função para fazer a consulta quando o botão é clicado
     meuBotao.addEventListener("click", mudaBtnStyle);
 });
+

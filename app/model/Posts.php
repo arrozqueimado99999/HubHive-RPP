@@ -4,7 +4,7 @@ namespace models;
 
 class Posts extends Model {
     protected $table = "posts";
-    protected $fields = ["id","projeto_id","titulo","texto", "anexo"];
+    protected $fields = ["id","usuario_id","colecao_id","titulo","texto", "anexo"];
 
     const ACCESS_TRUE = 8;
     const ACCESS_FALSE = 88;
@@ -36,8 +36,8 @@ class Posts extends Model {
     function postsByColecao($idcolecao){
         $sql = "SELECT posts.*
         FROM posts
-        JOIN colecoes_posts ON posts.id = colecoes_posts.post_id
-        WHERE colecoes_posts.colecao_id = ?";
+        JOIN post_colecao ON posts.id = post_colecao.post_id
+        WHERE post_colecao.colecao_id = ?";
                
     
         $stmt = $this->conn->prepare($sql);
@@ -72,52 +72,6 @@ class Posts extends Model {
     
         if (mysqli_num_rows($result) > 0) {
             // Loop para percorrer os resultados e armazenar os valores em um array
-            while ($linha = mysqli_fetch_assoc($result)) {
-                $dados[] = $linha;
-            }                
-        } else {
-            return $dados[] = "";
-        }
-        
-        return $dados;
-    }
-
-    function projectsByPostId($id){
-        $sql = "SELECT projetos.*
-        FROM projetos
-        JOIN posts ON projetos.id = posts.projeto_id
-        WHERE posts.id = $id";    
-    
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-    
-        $result = $stmt->get_result();    
-        $dados = array();
-    
-        if (mysqli_num_rows($result) > 0) {
-            // Loop para percorrer os resultados e armazenar os valores em um array
-            while ($linha = mysqli_fetch_assoc($result)) {
-                $dados[] = $linha;
-            }                
-        } else {
-            return $dados[] = "";
-        }
-        
-        return $dados;
-        //print_r($dados);
-        //die();
-
-    }
-
-    function postsBySecao($secaoid){
-        $sql = "SELECT * FROM posts WHERE secao_id = $secaoid";    
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-    
-        $result = $stmt->get_result();    
-        $dados = array();
-    
-        if (mysqli_num_rows($result) > 0) {
             while ($linha = mysqli_fetch_assoc($result)) {
                 $dados[] = $linha;
             }                
@@ -180,49 +134,6 @@ class Posts extends Model {
         }
     }
 
-    function testSeSalvou($projeto, $postid){
-        $sql = "SELECT * FROM posts_externos WHERE peojwto_id = ? AND post_id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $user = $_SESSION['user']['id'];
-        $stmt->bind_param("ii",$projeto, $postid);
-        
-        $stmt->execute();
-        $result = $stmt->get_result();    
-
-        if (mysqli_num_rows($result) > 0) {
-            return 1;      
-        } else {
-            return 0;
-        }
-    }
-
-    function postsByProjectId($id){
-        $sql = "SELECT posts.*
-        FROM posts
-        JOIN projetos ON posts.projeto_id = projetos.id
-        WHERE posts.projeto_id = $id";    
-    
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-    
-        $result = $stmt->get_result();    
-        $dados = array();
-    
-        if (mysqli_num_rows($result) > 0) {
-            // Loop para percorrer os resultados e armazenar os valores em um array
-            while ($linha = mysqli_fetch_assoc($result)) {
-                $dados[] = $linha;
-            }                
-        } else {
-            return $dados[] = "";
-        }
-        
-        return $dados;
-        //print_r($dados);
-        //die();
-
-    }
-
     function allForPost($postId){
         $sql = "SELECT * FROM {$this->table} WHERE id = $postId";        
     
@@ -244,7 +155,8 @@ class Posts extends Model {
         return $dados;
     }
 
-    function createPost($projetoId, $legenda){
+    function createPost($legenda = null, $colecaoid){
+        $userId = $_SESSION['user']['id'];
         $characters = '0123456789';
         $postId = '';
     
@@ -252,25 +164,32 @@ class Posts extends Model {
             $randomIndex = rand(0, strlen($characters) - 1);
             $postId .= $characters[$randomIndex];
         }
-
+    
         $user = $_SESSION['user']['usuario'];
-        $dirPath = 'app/users/' . $user . "/"."projectDocs/" . $projetoId ;
+        $dirPath = 'app/users/' . $user . "/"."UserPosts/";
+    
+        if (isset($_FILES['postanexo'])) {
+            $anexo = $_FILES['postanexo']['name'];
+            $caminhoArquivo = $dirPath . "/". $anexo;
+    
+            if (move_uploaded_file($_FILES['postanexo']['tmp_name'], $caminhoArquivo)) {            
+                $sql = "INSERT INTO posts (id, legenda, usuario_id, anexo)
+                        VALUES (?, ?, ?, ?)";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("isis", $postId, $legenda, $userId, $caminhoArquivo);
+                $stmt->execute();                
+            }
+        }
+        
+        if ($colecaoid !== "") {
+            $colecao = new Colecao();
+            $colecao->savePostInColecao($colecaoid, $postId);
+        }
 
-            if (isset($_FILES['postanexo'])) {
-                $anexo = $_FILES['postanexo']['name'];
-                $caminhoArquivo = $dirPath . "/". $anexo;
-                
-                if (move_uploaded_file($_FILES['postanexo']['tmp_name'], $caminhoArquivo)) {
-                    $sql = "INSERT INTO posts (id, legenda, projeto_id, anexo)
-                            VALUES (?, ?, ?, ?)";
-                    $stmt = $this->conn->prepare($sql);
-                    $stmt->bind_param("isis", $postId, $legenda, $projetoId, $caminhoArquivo);
-                    $stmt->execute();
-
-                }
-                return $postId;
-            }        
+        return $postId;
     }
+    
+
 
     function deletePost($postid){
         $sql = "DELETE FROM curtidas WHERE post_id = $postid"; 

@@ -47,8 +47,7 @@ class Model {
     public function accessPost($postid) {
         $sql = "SELECT COUNT(posts.id)
         FROM posts
-        INNER JOIN projetos ON posts.projeto_id = projetos.id
-        INNER JOIN usuarios ON projetos.usuario_id = usuarios.id
+        INNER JOIN usuarios ON posts.usuario_id = usuarios.id
         WHERE usuarios.id = ? AND posts.id = ?";
     
         $stmt = $this->conn->prepare($sql);

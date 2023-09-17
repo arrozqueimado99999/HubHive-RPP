@@ -63,7 +63,7 @@ class Usuario extends Model {
         //cria um diretorio para cada usuario cadastrado
         $dirPath = 'app/users/' . $usuario;
         $dirProf = 'app/users/' . $usuario . "/profilePic";
-        $dirCole = 'app/users/' . $usuario . "/colecaoDocs";
+        $dirCole = 'app/users/' . $usuario . "/UserPosts";
         $dirProj = 'app/users/' . $usuario . "/projectDocs";
         if (!file_exists($dirPath)) {
             mkdir($dirPath, 0777, true);

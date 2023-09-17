@@ -2,11 +2,19 @@
 
 use models\Colecao;
 use models\Model;
+use models\Orientador;
 use models\Posts;
+use models\Projeto;
 
 class PostController{
     function index($post = null){
+        
         $send = [];
+        $colecao = new Colecao;
+        $posts = new Posts;
+        $send = [];
+        $send['colecoesByUser'] = $colecao->colecoesByUser($_SESSION['user']['id']);
+
         
         $model = new Model();        
         $posts = new Posts();
@@ -20,7 +28,6 @@ class PostController{
         
         if($post != null){
             $send = $posts->allForPost($post);            
-            $send['projectByPost'] = $posts->projectsByPostId($post);
         }        
 
         $send['colecoesByUser'] = $model->colecoesByUser();
@@ -43,15 +50,19 @@ class PostController{
 
     function createPost(){
         if(isset($_POST["projetotopost"]) && isset($_POST["legendaPost"])){
-            $projeto = $_POST["projetotopost"];
+            $colecao = $_POST["projetotopost"];
             $legenda =  $_POST["legendaPost"];
         }else{
-            $projeto = "";
+            $colecao = "";
             $legenda =  "";
         } 
 
+        //var_dump($_POST);
+        //die();
+
         $model = new Posts();
-        $postId = $model->createPost($projeto, $legenda);
+        $cole = new Colecao();
+        $postId = $model->createPost($legenda,$colecao);
 
         redirect('post/?post=' . $postId);
     }

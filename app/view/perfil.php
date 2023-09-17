@@ -86,42 +86,48 @@ include 'header.php';
     }
     ?>
 
-    <div class="projects">
-        <?php
-        if ($colecoesByUser !== "") {
-            foreach ($colecoesByUser as $cole) {
-                ?>
-                <a class="cardcole" style="background: url('<?=assets("imgs/colecao_fundo2.jpg")?>');" href="<?= route("colecao/?colection={$cole['id']}") ?>">
-                <div class="escuro">
-                            <h3><?= $cole['nome']; ?></h3>
-                            <p class="criadoem"><?= "Criado em " . $cole['data_criacao'] ?></p>
-                </div>    
-                </a>
-                <?php
+    <div class="f">
+        <div class="projects">
+            <?php
+            if ($colecoesByUser !== "") {
+                foreach ($colecoesByUser as $cole) {
+                    ?>
+                    <a class="cardcole" style="background: url('<?=assets("imgs/colecao_fundo2.jpg")?>');" href="<?= route("colecao/?colection={$cole['id']}") ?>">
+                    <div class="escuro">
+                                <h3><?= $cole['nome']; ?></h3>
+                                <p class="criadoem"><?= "Criado em " . $cole['data_criacao'] ?></p>
+                    </div>    
+                    </a>
+                    <?php
+                }
             }
-        }
-        ?>
+            ?>
 
-        <?php
-        if ($projetosByUser !== "") {
-            foreach ($projetosByUser as $proj) {
-                ?>
-                <a class="card" href="<?= route("projeto/?project={$proj['id']}") ?>">
-                    <div>
-                        <img src="<?= $proj['banner'] ?>" alt="<?= $proj['banner']; ?>">
-                    </div>
-                    <div class="text">
-                        <h3><?= $proj['titulo']; ?></h3>
-                        <p id="descricao"><?= $proj['descricao'] ?></p>
-                    </div>
-                </a>
-                <?php
+            <?php
+            if ($projetosByUser !== "") {
+                foreach ($projetosByUser as $proj) {
+                    ?>
+                    <a class="card" href="<?= route("projeto/?project={$proj['id']}") ?>">
+                        <div>
+                            <img src="<?= $proj['banner'] ?>" alt="<?= $proj['banner']; ?>">
+                        </div>
+                        <div class="text">
+                            <h3><?= $proj['titulo']; ?></h3>
+                            <p id="descricao"><?= $proj['descricao'] ?></p>
+                        </div>
+                    </a>
+                    <?php
+                }
+            } else {
+                include 'errorsview/noprojects.php';
             }
-        } else {
-            include 'errorsview/noprojects.php';
-        }
-        ?>
+            ?>
+        </div>
+
+
+        
     </div>
+
 </div>
 
 </article>

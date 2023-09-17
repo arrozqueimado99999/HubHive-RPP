@@ -52,38 +52,31 @@
                                 <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M4.8 4.8a2.4 2.4 0 0 0-2.4 2.4v9.6a2.4 2.4 0 0 0 2.4 2.4h14.4a2.4 2.4 0 0 0 2.4-2.4V9.6a2.4 2.4 0 0 0-2.4-2.4h-6l-2.4-2.4h-6Zm8.4 6a1.2 1.2 0 0 0-2.4 0V12H9.6a1.2 1.2 0 0 0 0 2.4h1.2v1.2a1.2 1.2 0 0 0 2.4 0v-1.2h1.2a1.2 1.2 0 0 0 0-2.4h-1.2v-1.2Z" clip-rule="evenodd"></path>
                                 </svg>
-                                <h3 id="projetoEscolhido">Onde postar</h3>
+                                <h3 id="projetoEscolhido">Adicionar na coleção</h3>
                             </span>
 
-                            <input type="text" required id="inputprojeto" class="inputhide" name="projetotopost">
+                            <input type="text" id="inputprojeto" class="inputhide" name="projetotopost">
 
                             <div class="modalOptBig" id="modalProjetostoSelect">
-                                <nav class="navNormal">
-                                    <button onclick="openModal('newprojectModal')" class="opt">
-                                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5 8h14M5 8a2 2 0 1 1 0-4h14a2 2 0 0 1 0 4M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8m-9 4h4"></path>
-                                        </svg>
-                                        <h3>Novo Projeto</h3>
-                                    </button>
-                                </nav>
-                                <?php
-                                if ($projetosByUser != "") {
-                                    foreach ($projetosByUser as $userProj) : 
-                                        $backgroundStyle = route($userProj['banner']);
-                                        ?>
-                                        <div style="background: url('<?=$backgroundStyle?>');" class="opt_projeto" id="<?= $userProj['id'] ?>" onclick="addProjetoInLabel(<?= $userProj['id'] . ', \'modalProjetostoSelect\''; ?>)">
-                                            <div class="escuro">
-                                                    <h3 id="<?= "projeto" . $userProj['id'] ?>"><?= $userProj['titulo']; ?></h3>
-                                                    <p><?="Criado em " . $userProj['data_postagem']?></p>
+                                <div>
+                                    <?php
+                                    if ($colecoesByUser != "") {
+                                        foreach ($colecoesByUser as $cole) :
+                                            ?>
+                                            <div class="opt_projeto" id="<?= $cole['id'] ?>" onclick="addProjetoInLabel(<?= $cole['id'] . ', \'modalProjetostoSelect\''; ?>)">
+                                                <div class="escurop">
+                                                        <h3 id="<?= "projeto" . $cole['id'] ?>"><?= $cole['nome']; ?></h3>
+                                                        <p><?="Criado em " . $cole['data_criacao']?></p>
+                                                </div>
                                             </div>
-                                        </div>
-                                <?php
-                                    endforeach;
-                                } else {
-                                    print("<p>Você não possui projetos ainda</p>");
-                                } ?>
+                                    <?php
+                                        endforeach;
+                                    } else {
+                                        print("<p>Você não possui coleções criadas</p>");
+                                    } ?>
+                                </div>
                             </div>
-                            <input required placeholder="Digite alguma coisa" type="text" class="inputsNewProjeto" name="legendaPost" id="legendaPost">
+                            <input placeholder="Digite alguma coisa" type="text" class="inputsNewProjeto" name="legendaPost" id="legendaPost">
                         </div>
                     </div>
                 </form>
@@ -223,8 +216,27 @@
             </section>
         </article>
     </div>
-            
+
+    
 </body>
+
+<div class="loader">
+
+<div class="dot-spinner">
+<div class="dot-spinner__dot"></div>
+<div class="dot-spinner__dot"></div>
+<div class="dot-spinner__dot"></div>
+<div class="dot-spinner__dot"></div>
+<div class="dot-spinner__dot"></div>
+<div class="dot-spinner__dot"></div>
+<div class="dot-spinner__dot"></div>
+<div class="dot-spinner__dot"></div>
+</div>
+
+</div>
+
+
+
 <?php
 
 $caminho_pasta_js = './public/scripts/';

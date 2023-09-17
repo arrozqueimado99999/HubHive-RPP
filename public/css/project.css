@@ -4,33 +4,45 @@
     align-items: center;
     overflow: hidden;
     border-radius: var(--radius);
-    min-height:  260px;
+    height:  260px;
     max-height: 260px;
 }
 
+#modalProjetostoSelect div{
+    display: block;
+    height: 280px;
+    width: 100%;
+}
+
+#modalProjetostoSelect div div{
+    margin-bottom: var(--pad);
+    max-height: 120px;
+}
+
 .project{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    max-height: 100%;
-    min-height: 100%;
+    padding: calc(var(--pad)*2) calc(var(--pad)*2) calc(var(--pad)*2) 0 ;
+    display: block;
+    height: 100%;
+    gap: var(--pad);
     overflow-y: auto;
     background: var(--light);
 }
 
+.project::-webkit-scrollbar{
+    width: 0;
+}
+
 #mainProject{
+    height: 92%;
     display: grid;
-    grid-template-columns: 2fr 10fr;
-    width: 100%;
+    grid-template-columns: 1fr 4fr;
+    background: var(--light);
     position: relative;
-    height: 100%;
-    overflow: hidden;
-    padding: var(--pad);
-    grid-gap: var(--gap);
 }
 
 .navAllProjects{
-    padding: var(--pad);
+    margin: calc(var(--pad)*2);
+    padding:  var(--pad);
     background: var(--white);
     display: flex;
     border-radius: var(--radius);
@@ -42,10 +54,10 @@
 .postsbyproject{
     height: fit-content;
     background: var(--light);
-    display: grid;
-    grid-template-columns: 1fr;
+    width: 100%;
+    display: block;
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: var(--gap);
-    padding: calc(var(--pad)*2);
     overflow-y: auto;
 }
 
@@ -170,6 +182,21 @@
     height: 100%;
 }
 
+.escurop{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: #00000053;
+    backdrop-filter: blur(5px);
+    padding: var(--pad) calc(var(--pad)*2);
+    color: var(--green);
+    overflow: hidden;
+    border-radius: var(--radius);
+}
+
 .escuro{
     display: flex;
     align-items: flex-start;
@@ -215,4 +242,12 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
+}
+
+.content-project{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    gap: var(--gap);
+    flex-direction: column;
 }

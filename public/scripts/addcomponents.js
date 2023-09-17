@@ -42,9 +42,6 @@ function criarSecao() {
 
 }
 
-const pngback = document.getElementById('imgpost');
-pngback.style.background = 'url(/public/imgs/png_background.png)';
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function optsection(){

@@ -52,11 +52,11 @@ include 'header.php';
                             <p>Copiar link</p>
                         </a>
                     </div>
-                    <button onclick="openModalLado()" id="openModalOptPost" class="btn_post_act">
+                    <span onclick="openModalLado()" id="openModalOptPost" class="btn_post_act">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 440 440">
                             <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
                         </svg>
-                    </button>
+                    </span>
                 </div>
                 <div class="row">
                     <div id="modalSavePost">
@@ -100,15 +100,6 @@ include 'header.php';
                     </a>
                 </div>
             </div>
-
-            <a href="<?= route("projeto/?project={$send['0']['projeto_id']}") ?>" class="projectLink">
-                <p><?= $send['projectByPost']['0']['titulo'] ?></p>
-                <div class="svgLink">
-                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M14.752 6.352a1.2 1.2 0 0 1 1.696 0l4.8 4.8a1.2 1.2 0 0 1 0 1.696l-4.8 4.8a1.2 1.2 0 0 1-1.696-1.696l2.751-2.752H3.6a1.2 1.2 0 1 1 0-2.4h13.903l-2.751-2.752a1.2 1.2 0 0 1 0-1.696Z" clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-            </a>
         </div>
     </div>
 </article>
@@ -118,31 +109,14 @@ include 'header.php';
     <div class="postsRecomend">
         <?php
         if ($allPosts !== "") {
-            $fileIMG = ['jpg', 'jpeg', 'png'];
-            $fileVIDEO = ['mp4'];
-            foreach ($allPosts as $post) :
-                $fileExtension = pathinfo($post['anexo'], PATHINFO_EXTENSION);
-
-                if (in_array($fileExtension, $fileIMG)) { ?>
+            foreach ($allPosts as $post) { ?>
                     <div class="post">
                         <a href="<?= route("post/?post={$post['id']}") ?>">
                             <img src="<?= route($post['anexo']) ?>" alt="não tem">
                         </a>
                     </div>
-                <?php
-                } elseif (in_array($fileExtension, $fileVIDEO)) { ?>
-                    <div class="post">
-                        <a href="<?= route("post/?post={$post['id']}") ?>" class="video_post">
-                            <video preload="auto" loop muted autoplay>
-                                <source type="video/mp4" src="<?= route($post['anexo']) ?>">
-                                Erro ao reproduzir o vídeo
-                            </video>
-                        </a>
-                    </div>
-            <?php
-                }
-            endforeach;
-        } else { ?>
+                <?php }
+            } else { ?>
             <div>
                 <h3>Não há nenhuma postagem ainda</h3>
             </div>

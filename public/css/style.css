@@ -10,10 +10,12 @@
     margin-block-start: 0;
 }
 
+/* Estilos para a div que seguirá o mouse */
+
 html {
     transition: var(--temp);
     scroll-behavior: smooth;
-    height: fit-content;
+    height: 100vh;
     min-height: fit-content;
     text-size-adjust: 100%;
   }
@@ -182,7 +184,7 @@ header{
     z-index: 600;
     position: sticky;
     top: 0;
-    padding: calc(var(--pad)/1.5) calc(var(--pad)*2);
+    padding: var(--pad) calc(var(--pad)*2);
     background: var(--light);
     height: fit-content;
     max-height: 80px;
@@ -291,14 +293,14 @@ header div{
     outline: none;
     transition: var(--temp);
     padding-right: 1rem;
-    color: var(--dark);
+    color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     font-weight: 600;
     font-size: 14px;
-    background: var(--white);
+    background: var(--purple);
     gap: 5px;
 }
 

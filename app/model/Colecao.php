@@ -31,7 +31,7 @@ class Colecao extends Model {
     }
 
     function savePostInColecao($colecaoid, $postid){
-        $sql = "INSERT INTO colecoes_posts (colecao_id, post_id)
+        $sql = "INSERT INTO post_colecao (colecao_id, post_id)
         VALUES (?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ii", $colecaoid, $postid);
@@ -41,7 +41,6 @@ class Colecao extends Model {
     function createColecao($nome){
         $date = now();
         $iduser = $_SESSION['user']['id'];
-        $user = $_SESSION['user']['usuario'];
 
         $characters = '0123456789';
         $colecaoId = '';
@@ -50,9 +49,6 @@ class Colecao extends Model {
             $randomIndex = rand(0, strlen($characters) - 1);
             $colecaoId .= $characters[$randomIndex];
         }
-
-        $dirPath = 'app/users/' . $user . "/"."colecaoDocs/" . $colecaoId ;
-        mkdir($dirPath, 0777, true);
 
         $sql = "INSERT INTO colecoes (id, nome, data_criacao, usuario_id)
         VALUES (?, ?, ?, ?)";

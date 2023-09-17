@@ -26,30 +26,14 @@ include 'header.php';
 <div class="posts">
     <?php
     if ($allPosts !== "") {
-        $fileIMG = ['jpg', 'jpeg', 'png'];
-        $fileVIDEO = ['mp4'];
-        foreach ($allPosts as $post) :
-            $fileExtension = pathinfo($post['anexo'], PATHINFO_EXTENSION);
-
-            if (in_array($fileExtension, $fileIMG)) { ?>
+        foreach ($allPosts as $post) { ?>
                 <div class="post">
                     <a href="<?= route("post/?post={$post['id']}") ?>">
-                        <img src="<?= $post['anexo'] ?>" alt="não tem">
+                        <img src="<?= route($post['anexo']) ?>" alt="não tem">
                     </a>
                 </div>
-            <?php
-            } elseif (in_array($fileExtension, $fileVIDEO)) { ?>
-                <div class="post">
-                    <a href="<?= route("post/?post={$post['id']}") ?>" class="video_post">
-                        <video preload="auto" loop muted autoplay>
-                            <source type="video/mp4" src="<?= route($post['anexo']) ?>">
-                        </video>
-                    </a>
-                </div>
-        <?php
-            }
-        endforeach;
-    } else { ?>
+            <?php }
+        } else { ?>
         <div>
             <h3>Não há nenhuma postagem ainda</h3>
         </div>

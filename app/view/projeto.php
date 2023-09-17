@@ -96,7 +96,7 @@ include 'header.php';
     </div>
 </div>
 
-<article id="mainProject">
+<article class="perfil">
     <div class="navAllProjects">
         <a id="voltarPag" href="<?php echo $_SERVER['HTTP_REFERER']; ?>">
             <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -175,44 +175,10 @@ include 'header.php';
             </div>
         </div>
 
-        <h1 contenteditable="true"> Sou editável pelo usuário </h1>
+        <article class="content-project">
+            sdcwdece
+        </article>
 
-        <div>
-            <div class="postsbyproject">
-                <?php
-                if ($postsInfo !== "") {
-                    foreach ($postsInfo as $post) :
-                        $fileExtension = pathinfo($post['anexo'], PATHINFO_EXTENSION);
-                        $filePDF = ['pdf'];
-                        $fileIMG = ['jpg', 'jpeg', 'png'];
-
-
-                        if (in_array($fileExtension, $fileIMG)) {
-                ?>
-                            <a href="<?= route("post/?post={$post['id']}") ?>" class="postagemproject">
-                                <img src="<?= route($post['anexo']) ?>" alt="<?= $post['anexo'] ?>">
-                                <div class="postInfo">
-                                    <h3><?= $post['legenda'] ?></h3>
-                                </div>
-                            </a>
-                        <?php } elseif (in_array($fileExtension, $filePDF)) { ?>
-                            <a href="<?= route("post/?post={$post['id']}") ?>" class="postagemproject">
-                                <object data="<?= route($post['anexo']) ?>" type="application/pdf">
-                                    <p>Seu navegador não tem um plugin pra PDF</p>
-                                </object>
-                                <div class="postInfo">
-                                    <h3><?= $post['legenda'] ?></h3>
-                                </div>
-                            </a>
-                <?php
-                        }
-                    endforeach;
-                } else {
-                    include 'errorsview/noposts.php';
-                }
-                ?>
-            </div>
-        </div>
 
     </div>
 </article>
