@@ -3,24 +3,285 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    position: relative;
     border-radius: var(--radius);
     height:  260px;
     max-height: 260px;
-}
-
-#modalProjetostoSelect div{
-    display: block;
-    height: 280px;
-    width: 100%;
-}
-
-#modalProjetostoSelect div div{
     margin-bottom: var(--pad);
-    max-height: 120px;
+}
+
+.quadro-content{
+    border-radius: var(--radius);
+    background: var(--white);
+    color: var(--dark);
+    width: 100%;
+    height: 100%;
+    padding: var(--pad);
+}
+
+.nav-quadro{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--dark);
+    font-size: 26px;
+    font-weight: bold;
+    width: 100%;
+    background: transparent;
+    padding: 0 var(--pad) 0 var(--pad);
+}
+
+.quadro:hover .opt-quadro{
+    opacity: 100;
+}
+
+.opt-quadro{
+    opacity: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--gap);
+    width: fit-content;
+    height: 100%;
+}
+
+.quadro{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--gap);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--dark);
+    margin: var(--pad) 0 var(--pad) 0;
+    width: 100%;
+    height: fit-content;
+}
+
+.criarnota{
+    padding: var(--pad);
+    height: fit-content;
+    background: var(--light);
+    color: var(--dark);
+    font-size: 14px;
+    border-radius: var(--radius);
+    animation: escalar .1s ease-out;
+}
+
+.notaContent{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    border: none;
+    resize: none;
+    font-size: 14px;
+    color: var(--light);
+    font-weight: bold;
+}
+
+.notaContent::-webkit-scrollbar{
+    width: 0;
+}
+
+.notasByProject{
+    margin-top: var(--pad);
+    width: 100%;
+    height: fit-content;
+    background: transparent;
+    border-radius: var(--radius);
+    display: grid;
+    grid-gap: var(--gap);
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.nota{
+    position: relative;
+    background: var(--yellow);
+    color: var(--dark);
+    padding: var(--pad);
+    border-radius: var(--radius);
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.inputFile{
+    margin: var(--radius);
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple);
+    gap: var(--gap);
+    border-radius: var(--radius);
+    border: 2px dashed var(--purple);
+    cursor: pointer;
+}
+
+.galeria_img, .galeria_img img{
+    width: 100%;
+    height: auto;
+    background-color: var(--dark);
+    aspect-ratio: 1/1;
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.imgtoadd{
+    height: 520px;
+    width: auto;
+    display: flex;
+    margin: var(--pad);
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+}
+
+.imgtoadd img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.inputFile:hover{
+    background: var(--light);
+}
+
+.btnAddInGaleria{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-radius: var(--radius);
+    border: 2px dashed var(--purple);
+    background: transparent;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple);
+}
+
+.btnAddInGaleria:hover, .galeria_img:hover{
+    background: var(--hover);
+    scale: 1.02;
+}
+
+.galeria{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin-top: var(--pad);
+    min-height: 120px;
+    grid-gap: var(--pad);
+    padding: var(--pad);
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 2px solid var(--hover);
+}
+
+.foto-galeria{
+    width: 100%;
+    background-size: cover;
+    aspect-ratio: 1/1;
+    padding: var(--pad);
+    border: 2px solid var(--hover);
+}
+
+.nota:hover .navBasic{
+    opacity: 100;
+}
+
+.nota .navBasic{
+    opacity: 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to top, var(--yellow), transparent);
+    height: 100%;
+    padding: var(--pad);
+}
+
+
+
+.projectbannerimg:hover #openModalEditProjeto{
+    opacity: 100;
+}
+
+#openModalEditProjeto{
+    opacity: 0;
+    position: absolute;
+    top: var(--pad);
+    right: var(--pad);
+}
+
+.noteText{
+    padding: var(--pad);
+    resize: none;
+    background: transparent;
+    border: var(--white) solid 2px;
+    color: var(--dark);
+    outline: none;
+    font-size: 14px;
+    margin: var(--pad);
+    border-radius: var(--radius);
+}
+
+.noteText:focus{
+    border: var(--purple) solid 2px;
+}
+
+@keyframes escalar{
+    from{
+        scale: .7;
+        opacity: 0;
+        filter: blur(20px);
+    }
+    to{
+        scale: 1;
+        opacity: 100;
+        filter: blur(0px);
+    }
+}
+
+@keyframes esticar{
+    from{
+        width: 0;
+    }
+    to{
+        width: 180px;
+    }
+}
+
+.formQuadro{
+    display: none;
+}
+
+.inputQuadro{
+    background: transparent;
+    border: none;
+    outline: none;
+    animation: esticar .1s ease-in;
+    color: var(--dark);
+}
+
+.inputQuadro:focus{
+    border-bottom: solid 1px var(--purple);
 }
 
 .project{
-    padding: calc(var(--pad)*2) calc(var(--pad)*2) calc(var(--pad)*2) 0 ;
     display: block;
     height: 100%;
     gap: var(--pad);
@@ -41,14 +302,62 @@
 }
 
 .navAllProjects{
-    margin: calc(var(--pad)*2);
-    padding:  var(--pad);
     background: var(--white);
     display: flex;
     border-radius: var(--radius);
-    gap: var(--gap);
     flex-direction: column;
-    min-width: 260px;
+    justify-content: space-between;
+}
+
+.btnCirculo:hover{
+    border: 2px solid var(--hover);
+}
+
+.quadro_btn{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: var(--radius);
+    color: var(--dark);
+    padding: var(--pad);
+    cursor: pointer;
+}
+
+.modalNomeFuncao{
+    background: var(--purple);
+    padding: var(--pad);
+    color: var(--light);
+    position: absolute;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: var(--radius);
+}
+
+.quadro_btn:hover{
+    background: var(--hover);
+}
+
+.quadrosInProject{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 var(--pad) 0 var(--pad);
+}
+
+.navAllProjects .nav_library{
+    padding: var(--pad);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    gap: var(--gap);
+    background: transparent;
+    color: var(--dark);
 }
 
 .postsbyproject{
@@ -68,14 +377,6 @@
     background: #fff;
     width: 80%;
 
-}
-
-.secaolist{
-    background: var(--light);
-    padding:  var(--pad) 0px;
-    display: flex;
-    gap: var(--gap);
-    width: 100%;
 }
 
 .projectInfo{
@@ -98,7 +399,7 @@
     border: none;
     background: var(--white);
     color: var(--dark);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 5px var(--shadow);
     padding: 8px;
     cursor: pointer;
 }
@@ -106,7 +407,7 @@
 .optionsProject:hover{
     background: #ffffffab;
     color: #000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--shadow);
 }
 
 #expandedOptProject{
@@ -117,7 +418,7 @@
     background-color: #f0f0f0;
     padding: 10px;
     border-radius: var(--radius);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 5px var(--shadow);
     width: fit-content;
     font-size: 14px;
     text-align: center;
@@ -157,6 +458,33 @@
     color: var(--mid);
 }
 
+.user{
+    width: 100%;
+    height: 64px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap);
+    color: var(--dark);
+    border-top: 2px solid var(--hover);
+    padding: var(--pad);
+}
+
+.user h3{
+    font-size: 16px;
+}
+
+.user p{
+    font-size: 12px;
+}
+
+.user img{
+    width: auto;
+    height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
 .criadoem{
     font-size: 14px;
     color: var(--mid);
@@ -171,10 +499,11 @@
     justify-content: center;
     align-items: center;
     padding: var(--pad);
-    background: var(--hover);
+    background: var(--white);
     border-radius: 50%;
+    color: var(--dark);
     cursor: pointer;
-    border: none;
+    border: 2px solid transparent;
 }
 
 .colecao{
@@ -192,7 +521,7 @@
     background: #00000053;
     backdrop-filter: blur(5px);
     padding: var(--pad) calc(var(--pad)*2);
-    color: var(--green);
+    color: #fff;
     overflow: hidden;
     border-radius: var(--radius);
 }
@@ -206,7 +535,7 @@
     height: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.854), rgba(0, 0, 0, 0));
     padding: var(--pad) calc(var(--pad)*2);
-    color: var(--light);
+    color: #fff;
     overflow: hidden;
     border-radius: var(--radius);
 }
@@ -227,7 +556,7 @@
     height: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.808), rgba(0, 0, 0, 0.123));
     padding: calc(var(--pad)*2);
-    color: var(--light);
+    color: #fff;
     overflow: hidden;
     border-radius: var(--radius);
 }
@@ -236,12 +565,57 @@
     color: var(--yellow);
 }
 
-.colecao_header{
+.colecao_header_div{
+    width: 100%;
     height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light);
+    background-image: linear-gradient(0deg, transparent 24%, var(--hover) 25%, var(--hover) 26%, transparent 27%,transparent 74%, var(--hover) 75%, var(--hover) 76%, transparent 77%,transparent),
+        linear-gradient(90deg, transparent 24%, var(--hover) 25%, var(--hover) 26%, transparent 27%,transparent 74%, var(--hover) 75%, var(--hover) 76%, transparent 77%,transparent);
+    background-size: 55px 55px;
+    animation: backanimate infinite linear 100s;
+}
+
+.btnInTop{
+    border: 2px solid transparent;
+    position: absolute;
+    top: var(--pad);
+    left: var(--pad);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 50%;
+    height: fit-content;
+    width: fit-content;
+    font-size: 15px;
+    background: var(--dark);
+    padding: calc(var(--pad)/2);
+    color: var(--light);
+}
+
+.btnInTop:hover{
+    border: 2px solid var(--hover);
+}
+
+.colecao_header{
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
+    background: linear-gradient(to top, var(--light), transparent);
+    padding: var(--pad) calc(var(--pad)*2);
+    color: var(--dark);
+    overflow: hidden;
+    position: relative;
+}
+
+.colecao_header h2{
+    font-size: 40px;
 }
 
 .content-project{

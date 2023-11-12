@@ -8,16 +8,18 @@ function setUIMode() {
     root.style.setProperty('--white', '#323437');
     root.style.setProperty('--dark', '#ffffff');
     root.style.setProperty('--mid', '#D1D3D6');
-    root.style.setProperty('--hover', '#ffffff10');
+    root.style.setProperty('--hover', '#ffffff23');
     root.style.setProperty('--purple', '#c195ff');
+    root.style.setProperty('--shadow', '#00000071');
   } else {
     // Defina os valores para o modo claro aqui
-    root.style.setProperty('--light', "#f1f1f1");
-    root.style.setProperty('--white', "#fff");
+    root.style.setProperty('--light', "#f4f4f4");
+    root.style.setProperty('--white', "#ffffff");
     root.style.setProperty('--dark', "#323437");
     root.style.setProperty('--mid', "#a1a1a1");
     root.style.setProperty('--hover', "#00000010");
     root.style.setProperty('--purple', "#9758ef");
+    root.style.setProperty('--shadow', '#00000010');
   }
 }
 

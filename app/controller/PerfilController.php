@@ -2,6 +2,7 @@
 
 use models\Categorias;
 use models\Colecao;
+use models\Eixo;
 use models\Usuario;
 use models\Projeto;
 use models\Midia;
@@ -9,51 +10,36 @@ use models\Orientador;
 use models\Posts;
 
 class PerfilController{
+    function __construct()
+    {
+        if (!isset($_SESSION["user"])){
+            redirect("access");
+            die();
+        }    
+    }
     function index(){
         $send = [];
 
         $user = new Usuario();
-        $categ = new Categorias();
-        $projects = new Projeto();
+        $categ = new Eixo();
+        $post = new Posts();
         $cole = new Colecao();
-        $orient = new Orientador();
 
-        $allcateg = $categ->allCateg();
-        $allOrient = $orient->allOrient();
-
-        if ($_SESSION['tipo'] == Usuario::ORIENT_USER){
-            $allProj = $projects->projectsByOrient($_SESSION['user']['id']);
-            $send['projetosByOrient'] = $allProj;            
-        }
-        
-        $allProj = $projects->projectsByUser($_SESSION['user']['id']);
-        $allCole = $cole->colecoesByUser();
-        $send['projetosByUser'] = $allProj;
-        $send['colecoesByUser'] = $allCole;
-        $send['allOrient'] = $allOrient;
-        $send['allCategorias'] = $allcateg;   
+        $send['colecoesByUser'] = $cole->colecoesByUser();
+        $send['allCategorias'] = $categ->allCateg();
         //$_SESSION['user'] = $update;
                 
         render("perfil", $send); 
     }
 
-    function profilePic() {
-        $model = new Midia();
-        $upload = $model->profilePic($_SESSION['user']['id']);
-
-        redirect('perfil');
-    }    
-
-    function newProject(){
-        $titulo = isset($_POST["titulo"]) ? $_POST["titulo"] : "";
-        $descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : "";
-        $categ = isset($_POST["categ"]) ? $_POST["categ"] : "";
-        $orient = isset($_POST["orient"]) ? $_POST["orient"] : "";
-
-        //var_dump($_POST);
-        //die();
-        $model = new Projeto();
-        $upload = $model->createProject($titulo, $descricao, $categ, $orient);
+    function editProfile() {
+        $model = new Usuario();
+        $id = $_SESSION['user']['id'];
+        $nome = isset($_POST["EditProfnome"]) ? $_POST["EditProfnome"] : "";
+        $user = isset($_POST["EditProfuser"]) ? $_POST["EditProfuser"] : "";
+        $email = isset($_POST["EditProfemail"]) ? $_POST["EditProfemail"] : "";
+        
+        $query = $model->editUser($id, $nome, $user, $email);
         redirect('perfil');
     }
 
@@ -62,6 +48,12 @@ class PerfilController{
 
         $model = new Colecao();
         $upload = $model->createColecao($nome);
+        redirect('perfil');
+    }
+
+    function deleteColecao($id){
+        $model = new Colecao();
+        $q = $model->deleteColecao($id);
         redirect('perfil');
     }
 }

@@ -9,3 +9,17 @@
         meuPost.innerHTML = '';
         meuPost.appendChild(postanexo);
     });
+
+
+
+
+// Estilize e exiba o código na div
+var codigoDiv = document.getElementById('codigo');
+codigoDiv.innerHTML = `<pre><code class="language-javascript">${codigoFonte}</code></pre>`;
+Prism.highlightAll();
+
+function mostrarCodigo(codigo) {
+    var divCodigo = document.getElementById("div-codigo");
+    var codigoFormatado = "<pre><code>" + codigo + "</code></pre>";
+    divCodigo.innerHTML = codigoFormatado;
+  }

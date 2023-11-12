@@ -2,7 +2,6 @@
 
 
 use models\Usuario;
-use models\Orientador;
 
 class LoginController{
     function index(){
@@ -12,7 +11,6 @@ class LoginController{
     function login(){
         $send = [];
         $model = new Usuario;
-        $orient = new Orientador;
     
         if(isset($_POST["email"]) && isset($_POST["senha"])){
             $email = $_POST["email"];
@@ -24,19 +22,14 @@ class LoginController{
         
         $result = $model->findLogin($email, hash('sha256', $senha));
         $send['user'] = $result;
-        $orientador = $orient->seOrient($send['user']['id']);
-
-        if ($orientador){
-            $send['tipo'] = Usuario::ORIENT_USER;
-        } else {
-            $send['tipo'] = Usuario::COMUM_USER;
-        }
-    
+        
         if($result != null){
+            session_start();
             $_SESSION = $send;
             redirect("home"); 
         } else {
-            redirect("login");
+            $send = ["msg"=>"Login ou senha incorretos"];
+            render("login", $send);
         }
     }
 

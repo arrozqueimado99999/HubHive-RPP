@@ -12,13 +12,14 @@ class Model {
     protected $id;
 
     public function __construct() {
-
-        $this->id = $_SESSION['user']['id'];
+        if (isset($_SESSION['user'])){
+            $this->id = $_SESSION['user']['id'];
+        }
 
         $server = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "hubhive";
+        $dbname = "hubhive2";
 
         $this->conn = new mysqli($server, $username, $password, $dbname);
         if ($this->conn->connect_error) {
@@ -26,14 +27,8 @@ class Model {
         }
     }
 
-    public function projetosByUser() {
-        $projeto = new Projeto();
-        $projetos = $projeto->projectsByUser($this->id);
-        return $projetos;
-    }
-
     public function allCateg() {
-        $categ = new Categorias();
+        $categ = new Eixo();
         $categorias = $categ->allCateg();
         return $categorias;
     }

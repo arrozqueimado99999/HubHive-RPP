@@ -3,15 +3,16 @@
     --dark: #323437;
     --mid: #a1a1a1;    
     --white: #fff;
-    --light: #f1f1f1;
+    --light: #f4f4f4;
     --yellow: #FFBF1F;
     --green: #007639;
     --purple: #9758ef;
     --hover: #00000010;
+    --shadow: #00000071;
 
     --pad: 12px;
     --marg: 12px;
-    --radius: 18px;
+    --radius: 12px;
     --btn-radius: 200px;
     --gap: 12px;
     --temp: .15s ease;
@@ -20,4 +21,6 @@
     radial-gradient(circle at bottom,transparent 9%, #008d44 10% ,#008d44 15% , transparent 16%),
     radial-gradient(circle at right,transparent 9%, #008d44 10% ,#008d44 15% , transparent 16%),
     radial-gradient(circle at left,transparent 9%, #008d44 10% ,#008d44 15% , transparent 16%);
+
+    --backdark: radial-gradient(rgba(255, 255, 255, 0.171) 2px, transparent 0);
 }

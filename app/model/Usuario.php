@@ -5,12 +5,6 @@ namespace models;
 class Usuario extends Model {
     protected $table = "usuarios";
     protected $fields = ["id", "usuario", "nome","email","senha", "foto_perfil"];
-
-    const COMUM_USER = 1;
-    const ORIENT_USER = 5;
-
-    public static $userTypes = [Usuario::COMUM_USER=>"Usuário comum",
-                                Usuario::ORIENT_USER=>"Orientador"];
                                 
     ///////////////PARA PESQUISAS/////////////////////
     public function findbyUserandNome($u){
@@ -54,17 +48,25 @@ class Usuario extends Model {
     }
 
     function createUser($nome, $usuario, $email, $senha){
+        $characters = '0123456789';
+        $id = '';
+    
+        for ($i = 0; $i < 8; $i++) {
+            $randomIndex = rand(0, strlen($characters) - 1);
+            $id .= $characters[$randomIndex];
+        }
+
         $sql = "INSERT INTO {$this->table} "
-                ." (nome, usuario, email, senha) VALUES(?, ?, ?, ?)";
+                ." (id, nome, usuario, email, senha) VALUES(?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssss", $nome, $usuario, $email, $senha);
+        $stmt->bind_param("issss", $id, $nome, $usuario, $email, $senha);
         $stmt->execute();
 
         //cria um diretorio para cada usuario cadastrado
-        $dirPath = 'app/users/' . $usuario;
-        $dirProf = 'app/users/' . $usuario . "/profilePic";
-        $dirCole = 'app/users/' . $usuario . "/UserPosts";
-        $dirProj = 'app/users/' . $usuario . "/projectDocs";
+        $dirPath = 'app/users/' . $id;
+        $dirProf = 'app/users/' . $id . "/profilePic";
+        $dirCole = 'app/users/' . $id . "/UserPosts";
+        $dirProj = 'app/users/' . $id . "/projectDocs";
         if (!file_exists($dirPath)) {
             mkdir($dirPath, 0777, true);
             mkdir($dirProf, 0777, true);
@@ -79,6 +81,38 @@ class Usuario extends Model {
             redirect('login');
             return true;
         }
+    }
+
+    function editUser($id, $nome, $usuario, $email) {
+        $sql = "UPDATE {$this->table} SET foto_perfil = ?  WHERE id = ? ";
+        if (isset($_FILES['profileEditImg'])) {
+            //print_r($_FILES);
+            $arquivo = $_FILES['profileEditImg']['name'];
+            $caminho = 'app/users/' . $id . '/' . 'profilePic/';
+            $caminhoArquivo = $caminho . $arquivo;
+            //print_r($caminhoArquivo);
+            //die();
+
+            if (move_uploaded_file($_FILES['profileEditImg']['tmp_name'], $caminhoArquivo)) {
+                // Inserindo o caminho do arquivo no banco de dados
+                $sql = "UPDATE usuarios SET foto_perfil = '$caminhoArquivo' WHERE id = $id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute();
+            }
+        }
+
+        $sql = "UPDATE {$this->table} SET nome = ?, usuario = ?, email = ? WHERE id = ? ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("sssi", $nome, $usuario, $email, $id);
+        $stmt->execute();
+
+    
+        if ($stmt->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 
     function findById($id){

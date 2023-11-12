@@ -1,16 +1,67 @@
-.noprojectsDiv{
+.nopostDiv{
     width: 100%;
     height: 100%;
     padding: 5% 20%;
-    background: var(--light);
+    --m: rgba(0, 0, 0, 0.142);
+    background-color: var(--dark);
+    background-image: linear-gradient(0deg, transparent 24%, var(--m) 25%, var(--m) 26%, transparent 27%,transparent 74%, var(--m) 75%, var(--m) 76%, transparent 77%,transparent),
+        linear-gradient(90deg, transparent 24%, var(--m) 25%, var(--m) 26%, transparent 27%,transparent 74%, var(--m) 75%, var(--m) 76%, transparent 77%,transparent);
+    background-size: 55px 55px;
+    animation: backanimate infinite linear 40s;
     display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--gap);
+    color: var(--yellow);
+    animation: backanimate infinite linear 60s;
+}
+
+.modalError{
+    color: #d64848;
+    padding: calc(var(--pad)/2) var(--pad);
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.noprojectsDiv img{
+    max-height: 180px;
+}
+
+@keyframes backanimate {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 100%;
+
+    }
+}
+
+.noaccess_div{
+    padding: 120px;
+    width: 100%;
+    height: 100%;
+    --m: rgba(0, 0, 0, 0.142);
+    background-color: var(--light);
+    background-image: linear-gradient(0deg, transparent 24%, var(--m) 25%, var(--m) 26%, transparent 27%,transparent 74%, var(--m) 75%, var(--m) 76%, transparent 77%,transparent),
+        linear-gradient(90deg, transparent 24%, var(--m) 25%, var(--m) 26%, transparent 27%,transparent 74%, var(--m) 75%, var(--m) 76%, transparent 77%,transparent);
+    background-size: 55px 55px;
+    animation: backanimate infinite linear 40s;
+    display: flex;
+    position: relative;
     align-items: center;
     flex-direction: column;
     gap: var(--gap);
     color: var(--dark);
 }
 
-.noprojectsDiv img{
-    max-height: 180px;
+.noaccess_div img{
+    width: 260px;
+    height: auto;
+    filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.158)); 
 }
 

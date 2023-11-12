@@ -16,7 +16,7 @@ include 'header.php';
         <?php
         $fileExtension = pathinfo($send['0']['anexo'], PATHINFO_EXTENSION);
         $filePDF = ['pdf'];
-        $fileIMG = ['jpg', 'jpeg', 'png'];
+        $fileIMG = ['jpg', 'jpeg', 'png', 'gif'];
         $fileVIDEO = ['mp4'];
 
         if (in_array($fileExtension, $fileIMG)) { ?>
@@ -35,6 +35,22 @@ include 'header.php';
                 <div class="row_btwn">
                     <h3><?= $send['0']['legenda'] ?></h3>
                     <div id="modalOptPost">
+                        <span class="opt" onclick="downloadFile('<?= route($send[0]['anexo']) ?>')">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1"></path>
+                                <path d="m16 12-4 4-4-4"></path>
+                                <path d="M12 16V4"></path>
+                            </svg>
+                            <p>Baixar</p>
+                        </span>
+
+                        <span class="opt" onclick="copyURLToClipboard()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" fill="currentColor" viewBox="0 0 640 512">
+                                <path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" />
+                            </svg>
+                            <p>Copiar link</p>
+                        </span>
+
                         <?php
                         if ($_SESSION['acesso'] == "0101_LIB") : ?>
                             <a href="<?= route("post/deletePost/?post={$send['0']['id']}") ?>">
@@ -45,17 +61,11 @@ include 'header.php';
                             </a>
                         <?php endif ?>
 
-                        <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" fill="currentColor" viewBox="0 0 640 512">
-                                <path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" />
-                            </svg>
-                            <p>Copiar link</p>
-                        </a>
                     </div>
                     <span onclick="openModalLado()" id="openModalOptPost" class="btn_post_act">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 440 440">
-                            <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-                        </svg>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+                        </span>
                     </span>
                 </div>
                 <div class="row">
@@ -76,6 +86,13 @@ include 'header.php';
                                     <input type="text" value="<?= $send['0']['id'] ?>" name="postToSave" class="inputhide">
                                     <input type="text" value="<?= $cole['id'] ?>" name="colecaoToSave" class="inputhide">
                                     <button class="colecaoButtonSave" name="colecaoid">
+                                        <div class="molduraColecao">
+                                            <?php if (!empty($cole['postsInColecao']['0']['anexo'])):?>
+                                                <img src="<?= route($cole['postsInColecao']['0']['anexo']) ?>" alt="empty">
+                                                <?php else:?>
+                                                <img src="<?= assets('imgs/png_background.png') ?>" alt="empty">                                            
+                                            <?php endif?>
+                                        </div>
                                         <div>
                                             <h3><?= $cole['nome'] ?></h3>
                                         </div>
@@ -93,8 +110,9 @@ include 'header.php';
                         </svg>
                     </button>
 
+                    
                     <a data-value="<?= $send['securtiu'] ?>" href="<?= route("post/like/?post={$send['0']['id']}") ?>" class="btn_post_act" id="likeBtn">
-                        <div id="hu">
+                    <div id="hu">
                         </div>
                         <h3><?= $send['curtidas'] ?></h3>
                     </a>

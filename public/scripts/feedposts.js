@@ -32,3 +32,34 @@ document.addEventListener('DOMContentLoaded', function() {
     //dribbblePost.addEventListener('mouseover', showAdditionalContent);
     //dribbblePost.addEventListener('mouseout', hideAdditionalContent);
   });
+
+const inputs = document.querySelectorAll('input');
+
+// Itere sobre todos os elementos de input e defina o atributo autocomplete como "off"
+inputs.forEach(input => {
+  input.setAttribute('autocomplete', 'off');
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function copyURLToClipboard() {
+  // Crie um elemento de input oculto
+  const input = document.createElement('input');
+  
+  // Defina o valor do input como a URL atual
+  input.value = window.location.href;
+
+  // Adicione o input à página
+  document.body.appendChild(input);
+
+  // Selecione o texto dentro do input
+  input.select();
+
+  // Execute o comando de cópia
+  document.execCommand('copy');
+
+  // Remova o input da página
+  document.body.removeChild(input);
+  
+  criaralert("clipboard", "Copiado para a área de transferência");
+}

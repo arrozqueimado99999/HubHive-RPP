@@ -97,12 +97,65 @@ function addProjetoInLabel(id, pfechar) {
     var projetoEscolhido = document.getElementById(id);
     var idprojeto = projetoEscolhido.id;
     
-    btnp.className = "btn_dark_selected";
+    btnp.className = "btnDivSelected";
     inputprojeto.value = idprojeto;
     var projectName = p.textContent;
     labelp.textContent = projectName;
     var modal = document.getElementById(pfechar);
-    modal.style.display = "none";  
+    modal.style.display = "none"; 
+    
+    var btntirar = document.getElementById('tirarCole');
+    btntirar.style.display = "flex"; 
+    
 }
 
+////////////////////////////////////////////////////////////////////////////// 
 
+const btnAddQuadro = document.getElementById("btnaddquadro");
+const form = document.getElementById("formNewQuadro");
+
+function toggleModal(event) {
+  const isVisible = form.style.display === "block";
+
+  if (isVisible) {
+    form.style.display = "none";
+  } else {
+    form.style.display = "block";
+    btnAddQuadro.appendChild(form);
+    const input = form.querySelector("input");
+    if (input) {
+      input.focus();
+    }
+  }
+
+  if (isVisible && event.target === form) {
+    event.stopPropagation();
+  }
+}
+
+btnAddQuadro.addEventListener("click", toggleModal);
+
+form.addEventListener("click", function (event) {
+  event.stopPropagation();
+});
+
+const inputQuadro = document.getElementById("inputQuadro");
+
+inputQuadro.addEventListener("input", function() {
+  const inputValue = inputQuadro.value;
+  if (inputValue.length > 0) {
+    inputQuadro.value = inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
+  }
+});
+
+function limpar(){
+  const divr = document.getElementById('btnProjectSelect');
+  var value = document.getElementById('inputprojeto');
+  var text = document.getElementById("projetoEscolhido");
+  divr.className = "btnDivSelect";
+  value.value = "";
+  text.innerHTML = "Adicionar na coleção";
+
+  const btntirar = document.getElementById("tirarCole");
+  btntirar.style.display = "none"; 
+}

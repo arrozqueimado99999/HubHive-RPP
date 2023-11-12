@@ -117,4 +117,48 @@ function fecharModalAoClicarFora() {
     });
 }
 
+let modalAberta = null; // Variável global para rastrear a modal atualmente aberta
+
+function abrirfuncaonome(btnid, texto) {
+    // Feche qualquer modal aberta anteriormente com a mesma classe
+    fecharTodasAsModais();
+
+    const btnElement = document.getElementById(btnid);
+
+    const modalnome = document.createElement("div");
+    modalnome.className = "modalNomeFuncao";
+    modalnome.innerText = texto;
+
+    const rect = btnElement.getBoundingClientRect();
+
+    modalnome.style.left = rect.left + "px";
+    modalnome.style.top = rect.bottom + window.scrollY + 8 +"px";
+
+    document.body.appendChild(modalnome);
+
+    // Rastreie a modal atualmente aberta
+    modalAberta = modalnome;
+
+    // Use setTimeout para fazer a modal desaparecer após 2 segundos
+    setTimeout(() => {
+        fecharfuncaonome(modalnome);
+    }, 800);
+}
+
+function fecharfuncaonome(modal) {
+    if (modal) {
+        modal.style.display = "none";
+        // Remova a modal do DOM, se desejar
+        modal.remove();
+        modalAberta = null; // Limpe a referência à modal aberta
+    }
+}
+
+function fecharTodasAsModais() {
+    const modais = document.querySelectorAll(".modalNomeFuncao");
+    modais.forEach((modal) => {
+        fecharfuncaonome(modal);
+    });
+}
+
 fecharModalAoClicarFora();

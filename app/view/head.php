@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HubHive: Desenvolva suas ideias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
     <link rel="icon" type="image/x-icon" href="<?= assets('imgs/hubhive_vazado.svg') ?>">
     <link rel="stylesheet" href="<?= assets('css/library-style.css') ?>">
     <link rel="stylesheet" href="<?= assets('css/style.css') ?>">
@@ -29,6 +30,7 @@
     }
     ?>
 
+    <script src="https://kit.fontawesome.com/2bac8b6445.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">

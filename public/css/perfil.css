@@ -1,15 +1,15 @@
 .profile_nav{
-    background: var(--white);
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    color: var(--dark);
-    padding: var(--pad);
-    flex-direction: column;
-    border-radius: var(--radius);
-    box-shadow: 0px 10px 20px rgba(0,0,0,0.04);
+  background: var(--white);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: var(--dark);
+  padding: var(--pad);
+  flex-direction: column;
+  border-radius: var(--radius);
+  box-shadow: 0px 10px 20px var(--shadow);
 }
 
 .profile_nav h1{
@@ -27,6 +27,36 @@
     color: var(--dark);
 }
 
+.btnmudarperfil{
+  position: absolute;
+  bottom: var(--pad);
+  right: var(--pad);
+  cursor: pointer;
+  border-radius: 50%;
+  width: fit-content;
+  padding: calc(var(--pad)/2);
+  transition: var(--temp);
+  color: var(--white);
+  justify-content: center;
+  align-items: center;
+  background: var(--dark);
+  font-size: 14px;
+  border: 2px solid var(--hover);
+  animation: esmaecer .4s ease-out;
+  display: none;
+}
+
+.profileimgdiv:hover .btnmudarperfil{
+  display: flex;
+}
+
+.profileimgdiv{
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  position: relative;
+}
+
 .perfil_conteudo::-webkit-scrollbar{
     width: 100%;
 }
@@ -34,6 +64,8 @@
 .perfil{
     height: 92%;
     display: grid;
+    grid-gap: calc(var(--pad)*1.6);
+    padding: calc(var(--pad)*1.6);
     grid-template-columns: 1fr 4fr;
     background: var(--light);
 }
@@ -57,7 +89,7 @@
     overflow: hidden;
     background: var(--white);
     border-radius: var(--radius);
-    box-shadow: 0px 10px 20px rgba(0,0,0,0.04);
+    box-shadow: 0px 10px 20px var(--shadow);
   }
 
   .cardUser .nav{
@@ -72,7 +104,7 @@
   }
 
   .cardUser:hover{
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 5px 5px 20px var(--shadow);
   }
 
   .cardUser .nav a{
@@ -128,4 +160,15 @@
   .username {
     font-size: 14px;
     color: var(--dark);
+  }
+
+  @media screen and (max-width: 1000px){
+    .perfil{
+      height: 100%;
+      display: grid;
+      grid-gap: calc(var(--pad)*1.6);
+      padding: calc(var(--pad)*1.6);
+      grid-template-columns: 1fr;
+      background: var(--light);
+  }
   }

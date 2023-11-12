@@ -16,7 +16,7 @@ include 'header.php';
         <?php
         foreach ($allCateg as $categ) : ?>
             <a href="<?= route("pesquisa/?categ={$categ['id']}") ?>" class="cardForuns">
-                <h2><?= $categ['titulo'] ?></h2>
+                <p><?= $categ['titulo'] ?></p>
             </a>
         <?php
         endforeach; ?>
@@ -29,6 +29,9 @@ include 'header.php';
         foreach ($allPosts as $post) { ?>
                 <div class="post">
                     <a href="<?= route("post/?post={$post['id']}") ?>">
+                    <div class="infoByPost">
+                        <p><?=$post['legenda']?></p>
+                    </div>
                         <img src="<?= route($post['anexo']) ?>" alt="não tem">
                     </a>
                 </div>

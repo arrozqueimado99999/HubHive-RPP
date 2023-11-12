@@ -6,13 +6,6 @@
                 <h3>Postagem</h3>
         </button>
 
-        <button onclick="openModal('newProjectModal')" class="opt">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 8h14M5 8a2 2 0 1 1 0-4h14a2 2 0 0 1 0 4M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8m-9 4h4"></path>
-            </svg>
-                <h3>Projeto</h3>
-        </button>
-
         <button onclick="openModal('newColecaoModal')" class="opt">
             <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h14Z"></path>
@@ -42,18 +35,28 @@
                                     <path fill-rule="evenodd" d="M15 10v6H9v-6H5l7-7 7 7h-4Zm4 10v-2H5v2h14Z" clip-rule="evenodd"></path>
                                 </svg>
                                     <h3>Arraste aqui</h3>
-                                    <p>Documentos até 20Mb</p>
+                                    <div class="fileExtDiv">
+                                        <span class="fileExtInput">.jpeg, .png, .gif, .mp4, .pdf</span>
+                                    </div>
                             </div>
                         </label>
                         <input type="file" required name="postanexo" id="postanexo">
 
                         <div id="inputsforPost">
-                            <span id="btnProjectSelect" onclick="openModalLadoById('btnProjectSelect','modalProjetostoSelect')" name="categ" class="btn_dark">
-                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M4.8 4.8a2.4 2.4 0 0 0-2.4 2.4v9.6a2.4 2.4 0 0 0 2.4 2.4h14.4a2.4 2.4 0 0 0 2.4-2.4V9.6a2.4 2.4 0 0 0-2.4-2.4h-6l-2.4-2.4h-6Zm8.4 6a1.2 1.2 0 0 0-2.4 0V12H9.6a1.2 1.2 0 0 0 0 2.4h1.2v1.2a1.2 1.2 0 0 0 2.4 0v-1.2h1.2a1.2 1.2 0 0 0 0-2.4h-1.2v-1.2Z" clip-rule="evenodd"></path>
-                                </svg>
-                                <h3 id="projetoEscolhido">Adicionar na coleção</h3>
-                            </span>
+                            <div class="row">
+                                <span id="btnProjectSelect" onclick="openModalLadoById('btnProjectSelect','modalProjetostoSelect')" name="categ" class="btnDivSelect">
+                                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M4.8 4.8a2.4 2.4 0 0 0-2.4 2.4v9.6a2.4 2.4 0 0 0 2.4 2.4h14.4a2.4 2.4 0 0 0 2.4-2.4V9.6a2.4 2.4 0 0 0-2.4-2.4h-6l-2.4-2.4h-6Zm8.4 6a1.2 1.2 0 0 0-2.4 0V12H9.6a1.2 1.2 0 0 0 0 2.4h1.2v1.2a1.2 1.2 0 0 0 2.4 0v-1.2h1.2a1.2 1.2 0 0 0 0-2.4h-1.2v-1.2Z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <p id="projetoEscolhido">Adicionar na coleção</p>
+                                </span>
+
+                                <span id="tirarCole" onclick="limpar()" class="btnCircle">
+                                    <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M5.152 5.152a1.2 1.2 0 0 1 1.696 0L12 10.303l5.152-5.151a1.2 1.2 0 1 1 1.696 1.696L13.697 12l5.151 5.152a1.2 1.2 0 0 1-1.696 1.696L12 13.697l-5.152 5.151a1.2 1.2 0 0 1-1.696-1.696L10.303 12 5.152 6.848a1.2 1.2 0 0 1 0-1.696Z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </span>
+                            </div>
 
                             <input type="text" id="inputprojeto" class="inputhide" name="projetotopost">
 
@@ -63,10 +66,16 @@
                                     if ($colecoesByUser != "") {
                                         foreach ($colecoesByUser as $cole) :
                                             ?>
-                                            <div class="opt_projeto" id="<?= $cole['id'] ?>" onclick="addProjetoInLabel(<?= $cole['id'] . ', \'modalProjetostoSelect\''; ?>)">
-                                                <div class="escurop">
-                                                        <h3 id="<?= "projeto" . $cole['id'] ?>"><?= $cole['nome']; ?></h3>
-                                                        <p><?="Criado em " . $cole['data_criacao']?></p>
+                                            <div class="colecaoButtonSave" id="<?= $cole['id'] ?>" onclick="addProjetoInLabel(<?= $cole['id'] . ', \'modalProjetostoSelect\''; ?>)">
+                                                <div class="molduraColecao">
+                                                    <?php if (!empty($cole['postsInColecao']['0']['anexo'])):?>
+                                                        <img src="<?= route($cole['postsInColecao']['0']['anexo']) ?>" alt="empty">
+                                                        <?php else:?>
+                                                        <img src="<?= assets('imgs/png_background.png') ?>" alt="empty">                                            
+                                                    <?php endif?>
+                                                </div>
+                                                <div>
+                                                    <p id="<?= "projeto" . $cole['id'] ?>"><?= $cole['nome'] ?></p>
                                                 </div>
                                             </div>
                                     <?php
@@ -125,99 +134,6 @@
             </section>
         </div>
     </div>
-
-    <div id="newProjectModal" class="modal">
-        <article id="modalcontentnewproject" class="modal-content">
-            <div class="nav">
-                <h3>Novo projeto</h3>
-                <button class="close" onclick="closeModal('newProjectModal')">
-                    <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M5.152 5.152a1.2 1.2 0 0 1 1.696 0L12 10.303l5.152-5.151a1.2 1.2 0 1 1 1.696 1.696L13.697 12l5.151 5.152a1.2 1.2 0 0 1-1.696 1.696L12 13.697l-5.152 5.151a1.2 1.2 0 0 1-1.696-1.696L10.303 12 5.152 6.848a1.2 1.2 0 0 1 0-1.696Z" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <section>
-                <form class="form_newproject" id="form_newproject" action="<?= route('perfil/newProject') ?>" method="post" enctype="multipart/form-data">
-                    <label id="bannerAdd" class="send" for="inputbanner">
-                        <div id="bannerimgchange">
-                        </div>
-
-                        <div id="formbanner">
-                        <svg width="46" height="46" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M15 10v6H9v-6H5l7-7 7 7h-4Zm4 10v-2H5v2h14Z" clip-rule="evenodd"></path>
-                        </svg>
-                            <h3>Adicionar banner</h3>
-                            <p>Imagens jpg, jpeg ou png até 5Mb</p>
-                        </div>
-                        <input type="file" name="inputbanner" id="inputbanner">
-                    </label>
-
-                    <div class="grid_newproject">
-                        <div class="row_start">
-                            <span id="btnAddCateg" onclick="openModalLadoById('btnAddCateg','modalCateg')" name="categ" class="btn_dark">
-                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6 3.6A2.4 2.4 0 0 0 3.6 6v2.4A2.4 2.4 0 0 0 6 10.8h2.4a2.4 2.4 0 0 0 2.4-2.4V6a2.4 2.4 0 0 0-2.4-2.4H6Zm0 9.6a2.4 2.4 0 0 0-2.4 2.4V18A2.4 2.4 0 0 0 6 20.4h2.4a2.4 2.4 0 0 0 2.4-2.4v-2.4a2.4 2.4 0 0 0-2.4-2.4H6ZM13.2 6a2.4 2.4 0 0 1 2.4-2.4H18A2.4 2.4 0 0 1 20.4 6v2.4a2.4 2.4 0 0 1-2.4 2.4h-2.4a2.4 2.4 0 0 1-2.4-2.4V6Zm3.6 7.2a1.2 1.2 0 0 1 1.2 1.2v1.2h1.2a1.2 1.2 0 1 1 0 2.4H18v1.2a1.2 1.2 0 1 1-2.4 0V18h-1.2a1.2 1.2 0 0 1 0-2.4h1.2v-1.2a1.2 1.2 0 0 1 1.2-1.2Z"></path>
-                                </svg>
-                                <h3 id="categoriaEscolhida">Categoria</h3>
-                            </span>
-
-                            <input type="text" id="inputCategoria" name="categ">
-                            <input type="text" id="inputOrient" name="orient">
-
-                            <span id="btnAddOrient" onclick="openModalLadoById('btnAddOrient','modalOrient')" class="btn_dark">
-                                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3.6 19.2s-1.2 0-1.2-1.2 1.2-4.8 7.2-4.8 7.2 3.6 7.2 4.8c0 1.2-1.2 1.2-1.2 1.2h-12Zm6-7.2a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2Z"></path>
-                                    <path fill-rule="evenodd" d="M18.6 8.4a.6.6 0 0 1 .6.6v1.8H21a.6.6 0 1 1 0 1.2h-1.8v1.8a.6.6 0 1 1-1.2 0V12h-1.8a.6.6 0 1 1 0-1.2H18V9a.6.6 0 0 1 .6-.6Z" clip-rule="evenodd"></path>
-                                </svg>
-                                <h3 id="orientadorEscolhido">Orientador</h3>
-                            </span>
-                        </div>
-
-                        <div class="flex_column">
-                            <input type="text" placeholder="Titulo" id="inputTitulo" name="titulo" class="inputsNewProjeto">
-                            <textarea type="text" cols="30" rows="5" placeholder="Descrição" id="inputDesc" name="descricao" class="inputsNewProjeto"></textarea>
-                        </div>
-                        <div class="modalOpt" id="modalCateg">
-                            <?php
-                            foreach ($allCategorias as $categ) : ?>
-                                <span onclick="addCategInLabel(<?= $categ['id'] . ', \'modalCateg\''; ?>)" class="opt" id="<?= $categ['id']; ?>" value="<?= $categ['id']; ?>">
-                                    <p><?= $categ['titulo']; ?></p>
-                                </span>
-                            <?php
-                            endforeach;
-                            ?>
-                        </div>
-
-                        <div class="modalOpt" id="modalOrient">
-                            <?php
-                            foreach ($allOrient as $orient) : ?>
-                                <span onclick="addOrientInLabel(<?= $orient['id'] . ', \'modalOrient\''; ?>)" class="opt" id="<?= $orient['id']; ?>">
-                                    <img src="<?= route($orient['foto_perfil']) ?>" alt="">
-                                    <div class="column">
-                                        <h3 id="<?= "nome" . $orient['id'] ?>"><?= $orient['nome']; ?></h3>
-                                        <p><?= $orient['usuario']; ?></p>
-                                    </div>
-                                </span>
-                            <?php
-                            endforeach;
-                            ?>
-                        </div>
-                    </div>
-                    <div class="row_end">
-                        <button id="submitFormNewProjeto" disabled form="form_newproject">
-                            <svg width="26" height="26" fill="currentColor" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M20.048 6.352a1.2 1.2 0 0 1 0 1.696l-9.6 9.6a1.2 1.2 0 0 1-1.696 0l-4.8-4.8a1.2 1.2 0 0 1 1.696-1.696L9.6 15.103l8.752-8.751a1.2 1.2 0 0 1 1.696 0Z" clip-rule="evenodd"></path>
-                            </svg>
-                            Concluir
-                        </button>
-                    </div>
-                </form>
-            </section>
-        </article>
-    </div>
-
-    
 </body>
 
 <div class="loader">
@@ -249,3 +165,6 @@ foreach ($arquivosjs as $arquivojs) {
     $arquivojs = str_replace("./public/", "", $arquivojs);
     print('<script src="' . assets($arquivojs) . '"></script>');
 } ?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>

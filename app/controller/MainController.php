@@ -1,10 +1,9 @@
 <?php
 
 use models\Usuario;
-use models\Projeto;
-use models\Posts;
 use models\Categorias;
 use models\Colecao;
+use models\Eixo;
 
 class MainController{
     protected $id = $_SESSION['user']['id'];
@@ -18,17 +17,10 @@ class MainController{
     }
 
     function allCateg(){
-        $categ = new Categorias;
+        $categ = new Eixo;
         $categorias = $categ->allCateg();
 
         return $categorias;
-    }
-
-    function projectsByUser(){
-        $proj = new Projeto;
-        $projetos = $proj->projectsByUser($this->id);
-
-        return $projetos;
     }
 
     function colecoesByUser(){
@@ -37,8 +29,4 @@ class MainController{
 
         return $colecoes;
     }
-
-    
-
-
 }

@@ -1,25 +1,48 @@
+const inputEditNome = document.getElementById("EditProfnome");
+const profileEditImg = document.getElementById("profileEditImg");
+const inputEditUsuario = document.getElementById("EditProfuser");
+const inputEditEmail = document.getElementById("EditProfemail");
 const inputTitulo = document.getElementById("inputTitulo");
 const inputCategoria = document.getElementById("inputCategoria");
 const inputDesc = document.getElementById("inputDesc");
+const submitEditButton = document.getElementById("btnEditProfile");
 const submitButton = document.getElementById("submitFormNewProjeto");
 
-if (inputTitulo && inputCategoria && inputDesc && submitButton) {
-    function checkInputs() {
-        if (
-            inputTitulo.value.trim() !== "" &&
-            inputCategoria.value.trim() !== "" &&
-            inputDesc.value.trim() !== ""
-        ) {
-            submitButton.disabled = false;
-        } else {
-            submitButton.disabled = true;
-        }
-    }
+// Armazena os valores iniciais dos campos de entrada
+const initialValues = {
+    inputEditNome: inputEditNome.value.trim(),
+    profileEditImg: profileEditImg.value.trim(),
+    inputEditUsuario: inputEditUsuario.value.trim(),
+    inputEditEmail: inputEditEmail.value.trim()
+};
 
-    inputTitulo.addEventListener("input", checkInputs);
-    inputCategoria.addEventListener("input", checkInputs);
-    inputDesc.addEventListener("input", checkInputs);
+function checkInputs() {
+    const currentValues = {
+        inputEditNome: inputEditNome.value.trim(),
+        profileEditImg: profileEditImg.value.trim(),
+        inputEditUsuario: inputEditUsuario.value.trim(),
+        inputEditEmail: inputEditEmail.value.trim()
+    };
+
+    // Verifica se pelo menos um campo não está vazio e se os valores são diferentes dos valores iniciais
+    if (
+        (currentValues.profileEditImg !== "" && currentValues.profileEditImg !== initialValues.profileEditImg) ||
+        (currentValues.inputEditNome !== "" && currentValues.inputEditNome !== initialValues.inputEditNome) ||
+        (currentValues.inputEditUsuario !== "" && currentValues.inputEditUsuario !== initialValues.inputEditUsuario) ||
+        (currentValues.inputEditEmail !== "" && currentValues.inputEditEmail !== initialValues.inputEditEmail)
+    ) {
+        submitEditButton.disabled = false;
+    } else {
+        submitEditButton.disabled = true;
+    }
 }
+
+// Adiciona o ouvinte de evento para cada campo de entrada
+inputEditNome.addEventListener("input", checkInputs);
+inputEditUsuario.addEventListener("input", checkInputs);
+inputEditEmail.addEventListener("input", checkInputs);
+profileEditImg.addEventListener("input", checkInputs); // Adiciona o evento para o input profileEditImg
+
 
 const inputNomeColecao = document.getElementById("inputNomeColecao");
 const submitFormNewColecao = document.getElementById("submitFormNewColecao");

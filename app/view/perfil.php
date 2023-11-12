@@ -6,15 +6,24 @@ include 'header.php';
 <div class="perfil">
 
     <nav class="profile_nav">
-        <img id="profilefoto" src="<?= $asset = $_SESSION['user']['foto_perfil'];
-                                    assets($asset) ?>" alt="perfil foto">
+        <div class="profileimgdiv">
+            <img id="profilefoto" src="<?php
+            $asset = $_SESSION['user']['foto_perfil'];
+            print(route($asset))?>"
+            alt="perfil foto">
+            <button class="btnmudarperfil">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="m21 7.191-4.19-4.19a1.49 1.49 0 0 0-2.12 0l-2.474 2.465-8.775 8.785A1.49 1.49 0 0 0 3 15.31v4.19A1.5 1.5 0 0 0 4.5 21h4.19a1.493 1.493 0 0 0 1.06-.44L21 9.31a1.51 1.51 0 0 0 0-2.119Zm-16.19 7.81L13.5 6.31l1.566 1.566-8.691 8.69-1.566-1.565ZM4.5 16.81l2.69 2.69H4.5v-2.69ZM9 19.19l-1.566-1.565 8.691-8.691 1.566 1.566L9 19.19Z"></path>
+                </svg>
+            </button>
+        </div>
+
         <h1><?= $_SESSION['user']['nome'] ?></h1>
         <p>@<?= $_SESSION['user']['usuario'] ?></p>
 
         <div class="btn_div">
-            <button class="btn_library" onclick="openModal('myModal')">Editar perfil</button>
+            <button class="cardForuns" onclick="openModal('myModal')">Editar perfil</button>
         </div>
-
         <div id="myModal" class="modal">
             <article class="modal-content" id="contentModal">
                 <div class="nav">
@@ -22,31 +31,38 @@ include 'header.php';
                     <span class="close" onclick="closeModal('myModal')">&times;</span>
                 </div>
 
-                <section>
-                    <form class="form_newproject" method="POST" action="<?= route('perfil/profilePic') ?>" enctype="multipart/form-data">
-                        <label id="imagemAdd" class="send" for="file">
-                            <div id="imgchange">
+                <section class="secform">
+                    <form class="form_editprofile" id="form_editprofile" method="POST" action="<?= route('perfil/editProfile') ?>" enctype="multipart/form-data">
+                        <div class="formDivGrid">
+                            <div class="imgNavEditDiv">                                
+                                <label class="imgedit" for="profileEditImg">
+                                    <div id="imgchange">
+                                        <img src="<?=route($_SESSION['user']['foto_perfil'])?>" alt="">
+                                    </div>
+                                    <input type="file" class="hide" name="profileEditImg" id="profileEditImg">
+                                </label>
                             </div>
 
-                            <div id="formimg">
-                                <div class="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
-                                        <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                                        <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path>
-                                        </g>
-                                    </svg>
+                            <div class="inputsEditProfile">
+                                <div class="inputandlabel">
+                                    <label for="EditProfnome">Nome</label>
+                                    <input type="text" value="<?=$_SESSION['user']['nome']?>" name="EditProfnome" id="EditProfnome">
                                 </div>
-                                <div class="text">
-                                    <span>Faça o upload de um arquivo</span>
+                                <div class="inputandlabel">
+                                    <label for="EditProfuser">Usuário</label>
+                                    <input type="text" value="<?=$_SESSION['user']['usuario']?>" name="EditProfuser" id="EditProfuser">
+                                </div>
+                                <div class="inputandlabel">
+                                    <label for="EditProfemail">E-mail</label>
+                                    <input type="text" value="<?=$_SESSION['user']['email']?>" name="EditProfemail" id="EditProfemail">
                                 </div>
                             </div>
-                            <input type="file" required name="file" id="file">
-                        </label>
+                        </div>    
 
-                        <div class="letsgo" id="cu">
-                            <input type="submit" class="btn_library" value="Salvar informações">
+                        <div class="row_end">
+                            <button disabled id="btnEditProfile">
+                                Salvar
+                            </button>
                         </div>
                     </form>
                 </section>
@@ -54,80 +70,88 @@ include 'header.php';
         </div>
     </nav>
 
-    <div class="perfil_info">
+    <div class="project">
         <nav class="nav_library">
-            
+            <button class="cardForuns">
+                Todos
+            </button>
+
+            <button class="cardForuns">
+                Curtidos por mim
+            </button>
         </nav>
 
         <div class="perfil_conteudo">
-    <?php
-    if (isset($projetosByOrient) && $projetosByOrient !== "") {
-        ?>
-        <p>Projetos orientados</p>
-        <div class="projects">
             <?php
-            foreach ($projetosByOrient as $projorient) {
-                ?>
-                <a class="card" href="<?= route("projeto/?project={$projorient['id']}") ?>">
-                    <div>
-                        <img src="<?= $projorient['banner'] ?>" alt="<?= $projorient['banner']; ?>">
-                    </div>
-                    <div class="text">
-                        <h3><?= $projorient['titulo']; ?></h3>
-                        <p id="descricao"><?= $projorient['descricao'] ?></p>
-                        <p class="criadoem"><?= "Criado em " . $projorient['data_postagem'] ?></p>
-                    </div>
-                </a>
-                <?php
-            }
+            if (!empty($colecoesByUser)) {
             ?>
-        </div>
-        <?php
-    }
-    ?>
-
-    <div class="f">
-        <div class="projects">
-            <?php
-            if ($colecoesByUser !== "") {
-                foreach ($colecoesByUser as $cole) {
-                    ?>
-                    <a class="cardcole" style="background: url('<?=assets("imgs/colecao_fundo2.jpg")?>');" href="<?= route("colecao/?colection={$cole['id']}") ?>">
-                    <div class="escuro">
+                <div class="projects">
+                    <?php
+                    foreach ($colecoesByUser as $cole) {
+                    ?>                    
+                        <div class="colecaoDiv" href="<?= route("colecao/?colection={$cole['id']}") ?>">
+                            <div class="postsInColecao">
+                                <form id="formDeleteCole<?=$cole['id']?>" class="hide" action="<?=route("perfil/deleteColecao/?id={$cole['id']}")?>" method="post"></form>
+                                <div class="divBtnsColecao">
+                                    <button class="btnOptColecaoDiv">
+                                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2.4a6 6 0 0 0-6 6v2.4a2.4 2.4 0 0 0-2.4 2.4v6A2.4 2.4 0 0 0 6 21.6h12a2.4 2.4 0 0 0 2.4-2.4v-6a2.4 2.4 0 0 0-2.4-2.4H8.4V8.4a3.6 3.6 0 0 1 7.086-.9 1.2 1.2 0 0 0 2.324-.6A6.002 6.002 0 0 0 12 2.4Z"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="btnOptColecaoDiv" form="formDeleteCole<?=$cole['id']?>">
+                                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 11v6m4-6v6M4 7h16m-1 0-.867 12.142A2 2 0 0 1 16.138 21H7.862a2 2 0 0 1-1.995-1.858L5 7h14Zm-4 0V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v3h6Z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <?php
+                                if ($cole!=="") :?>
+                                    <div class="divimg">
+                                        <?php if (!empty($cole['postsInColecao']['0']['anexo'])):?>
+                                            <img src="<?= route($cole['postsInColecao']['0']['anexo']) ?>" alt="empty">
+                                            <?php else:?>
+                                            <img src="<?= assets('imgs/png_background.png') ?>" alt="empty">                                            
+                                        <?php endif?>
+                                    </div>
+                                    <div class="divimg">
+                                        <?php if (!empty($cole['postsInColecao']['1']['anexo'])):?>
+                                            <img src="<?= route($cole['postsInColecao']['1']['anexo']) ?>" alt="empty">
+                                            <?php else:?>
+                                            <img src="<?= assets('imgs/png_background.png') ?>" alt="empty">                                            
+                                        <?php endif?>
+                                    </div>
+                                    <div class="divimg">
+                                        <?php if (!empty($cole['postsInColecao']['2']['anexo'])):?>
+                                            <img src="<?= route($cole['postsInColecao']['2']['anexo']) ?>" alt="empty">
+                                            <?php else:?>
+                                            <img src="<?= assets('imgs/png_background.png') ?>" alt="empty">                                            
+                                        <?php endif?>
+                                    </div>
+                                    <?php endif ?>
+                            </div>
+                            <a class="nav_colecao" href="<?= route("colecao/?colection={$cole['id']}") ?>">
                                 <h3><?= $cole['nome']; ?></h3>
                                 <p class="criadoem"><?= "Criado em " . $cole['data_criacao'] ?></p>
-                    </div>    
-                    </a>
+                                <div class="opt gvgv">
+                                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M14.752 6.352a1.2 1.2 0 0 1 1.696 0l4.8 4.8a1.2 1.2 0 0 1 0 1.696l-4.8 4.8a1.2 1.2 0 0 1-1.696-1.696l2.751-2.752H3.6a1.2 1.2 0 1 1 0-2.4h13.903l-2.751-2.752a1.2 1.2 0 0 1 0-1.696Z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
                     <?php
-                }
-            }
-            ?>
-
-            <?php
-            if ($projetosByUser !== "") {
-                foreach ($projetosByUser as $proj) {
+                    }
                     ?>
-                    <a class="card" href="<?= route("projeto/?project={$proj['id']}") ?>">
-                        <div>
-                            <img src="<?= $proj['banner'] ?>" alt="<?= $proj['banner']; ?>">
-                        </div>
-                        <div class="text">
-                            <h3><?= $proj['titulo']; ?></h3>
-                            <p id="descricao"><?= $proj['descricao'] ?></p>
-                        </div>
-                    </a>
-                    <?php
-                }
+                </div>
+            <?php
             } else {
                 include 'errorsview/noprojects.php';
             }
             ?>
+
         </div>
-
-
-        
     </div>
-
+</div>
 </div>
 
 </article>

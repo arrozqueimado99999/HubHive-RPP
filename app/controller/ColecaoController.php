@@ -6,6 +6,13 @@ use models\Projeto;
 use models\Usuario;
 
 class ColecaoController{
+    function __construct()
+    {
+        if (!isset($_SESSION["user"])){
+            redirect("access");
+            die();
+        }    
+    }
     function index($colection = null){
 
         $send = [];

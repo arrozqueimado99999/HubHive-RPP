@@ -14,21 +14,14 @@ while ($file = readdir($handle)) {
 	}
 }
 
-if (isset($_SESSION['user']['id'])){
-	$id = $_SESSION['user']['id'];
-	$usuario = new Usuario;
-	$orient = new Orientador;
-	$updateUserInfo = $usuario->findById($id);
-	$_SESSION['user'] = $updateUserInfo;
-
-	$orientador = $orient->seOrient($id);
-        if ($orientador){
-            $_SESSION['tipo'] = Usuario::ORIENT_USER;
-        } else {
-            $_SESSION['tipo'] = Usuario::COMUM_USER;
-        }
+if (isset($_SESSION['user'])){
+	if(isset($_SESSION['user']['id'])){
+		$id = $_SESSION['user']['id'];
+		$usuario = new Usuario;
+		$updateUserInfo = $usuario->findById($id);
+		$_SESSION['user'] = $updateUserInfo;
+	}
 }
-
 //var_dump($_SESSION);
 
 
@@ -107,7 +100,11 @@ if (_v($parts, 0) != "") {
 	$class = "home";
 }
 
-include 'app/controller/' . $class . 'Controller.php';
+if (file_exists('app/controller/' . $class . 'Controller.php')) :
+	include 'app/controller/' . $class . 'Controller.php';
+else:
+	redirect('access');
+endif;
 
 function redirect($url)
 {

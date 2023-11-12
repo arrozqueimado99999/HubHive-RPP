@@ -57,39 +57,37 @@ class Colecao extends Model {
         $stmt->execute();
     }
 
-    function deleteColecao($nome){
-        $date = now();
+    function deleteColecao($id){
         $iduser = $_SESSION['user']['id'];
 
-        $sql = "DELETE FROM colecoes (nome, data_criacao, usuario_id)
-        VALUES (?, ?, ?)";
+        $sql = "DELETE FROM colecoes WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssi", $nome, $date, $iduser);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
     }
     
     function colecoesByUser(){
+        $post = new Posts;
         $id = $_SESSION['user']['id'];
         $sql = "SELECT * FROM {$this->table} WHERE usuario_id = $id";        
-        
+    
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        
+    
         $result = $stmt->get_result();    
         $dados = array();
-        
+    
         if (mysqli_num_rows($result) > 0) {
             // Loop para percorrer os resultados e armazenar os valores em um array
             while ($linha = mysqli_fetch_assoc($result)) {
+                $id = $linha['id'];
+                $linha['postsInColecao'] = $post->selecttocolecaodiv($id);
                 $dados[] = $linha;
-            }                
+            }         
         } else {
-            return $dados[] = "";
+            return [];
         }
-        
+    
         return $dados;
-        //print_r($dados);
-        //die();
-
-    }
+    }    
 }

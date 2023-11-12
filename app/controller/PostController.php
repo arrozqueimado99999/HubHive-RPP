@@ -2,17 +2,26 @@
 
 use models\Colecao;
 use models\Model;
-use models\Orientador;
 use models\Posts;
-use models\Projeto;
 
 class PostController{
+    function __construct()
+    {
+        if (!isset($_SESSION["user"])){
+            redirect("access");
+            die();
+        }    
+    }
     function index($post = null){
         
         $send = [];
         $colecao = new Colecao;
         $posts = new Posts;
-        $send = [];
+
+        if($posts->allForPost($post) == ""){
+            redirect("nopost");
+            die();           
+        } 
         $send['colecoesByUser'] = $colecao->colecoesByUser($_SESSION['user']['id']);
 
         
@@ -24,14 +33,13 @@ class PostController{
             $_SESSION['acesso'] = "0101_LIB";
         } else {
             $_SESSION['acesso'] = "1010_NLIB";            
-        }        
+        } 
         
         if($post != null){
             $send = $posts->allForPost($post);            
         }        
 
         $send['colecoesByUser'] = $model->colecoesByUser();
-        $send['projetosByUser'] = $model->projetosByUser();
         $send['allCateg'] = $model->allCateg(); 
         $send['allCole'] = $model->colecoesByUser(); 
         $send['securtiu'] = $posts->testSeCurtiu($post);

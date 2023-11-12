@@ -8,6 +8,7 @@
     transition: var(--temp);
     margin-block-end: 0;
     margin-block-start: 0;
+    object-fit: cover;
 }
 
 /* Estilos para a div que seguirá o mouse */
@@ -89,7 +90,7 @@ ul{
     gap: var(--gap);
 }
 
-#submitFormNewPost, #submitFormNewProjeto, #submitFormNewColecao{
+#submitFormNewPost, #submitFormNewProjeto, #submitFormNewColecao, #btnEditProfile{
     background-color: var(--purple);
     border-radius: var(--btn-radius);
     border: none;
@@ -103,7 +104,7 @@ ul{
     align-items: center;
 }
 
-#submitFormNewPost:disabled, #submitFormNewProjeto:disabled, #submitFormNewColecao:disabled{
+#submitFormNewPost:disabled, #submitFormNewProjeto:disabled, #submitFormNewColecao:disabled, #btnEditProfile:disabled{
     background-color: var(--mid);
     border-radius: var(--btn-radius);
     border: none;
@@ -146,7 +147,7 @@ ul{
     background-color: transparent;
     border-radius: 50%;
     transition-duration: .2s;
-    box-shadow: 5px 2px 7px rgba(8, 8, 8, 0.26);
+    box-shadow: 5px 2px 7px var(--shadow);
     border: 5px solid white;
   }
   
@@ -167,11 +168,21 @@ ul{
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    width: 100%;
+    height: fit-content;
+    gap: var(--gap);
+    background: var(--white);
+    padding: var(--pad);
+    box-shadow: 0 -0 10px var(--shadow);
+}
+
+.end{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     max-width: 100%;
     height: fit-content;
     gap: var(--gap);
-    padding: var(--pad);
-    box-shadow: 0 -0 10px rgba(0, 0, 0, 0.2);
 }
 
 .row_btwn h3{
@@ -181,7 +192,7 @@ ul{
 }
 
 header{
-    z-index: 600;
+    z-index: 999;
     position: sticky;
     top: 0;
     padding: var(--pad) calc(var(--pad)*2);
@@ -191,7 +202,11 @@ header{
     width: 100%;
     display: grid;
     grid-template-columns: 3fr 5fr;
-    color: var(--dark);
+    color: var(--purple);
+}
+
+.hide{
+    display: none;
 }
 
 header div{
@@ -199,6 +214,16 @@ header div{
     width: 100%;
     display: flex;
     align-items: center;
+}
+
+.navBasic{
+    display: flex;
+    gap: var(--gap);
+    align-items: center;
+    color: var(--dark);
+    font-size: 18px;
+    justify-content: space-between;
+    padding: var(--pad);
 }
 
 .headerlastnav{
@@ -237,6 +262,7 @@ header div{
     padding: 0 1rem;
     color: var(--dark);
     display: flex;
+    height: 38px;
     align-items: center;
     justify-content: flex-start;
     background: var(--white);
@@ -256,12 +282,13 @@ header div{
 }
 
 .alert{
-    position: absolute;
+    position: fixed;
     padding: var(--pad);
     background: var(--dark);
     border-radius: var(--radius);
     color: var(--light);
     left: 50%;
+    z-index: 999999999999999999999999999999;
     bottom: var(--pad);
     animation: aparecer .3s ease-in-out;
     transform: translate(-50%, -50%);
@@ -269,7 +296,7 @@ header div{
     justify-content: center;
     gap: var(--gap);
     align-items: center;
-    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 18px 0 var(--shadow);
 }
 
 .search input {
@@ -448,8 +475,11 @@ header div{
 }
 
 .login_art{
-    background: linear-gradient(80deg, #ffae3d, #FFCF60);
-    display: flex;
+    --m: rgba(63, 54, 36, 0.18);
+    background-color: var(--yellow);
+    background-image: radial-gradient(var(--m), 2px, transparent 0);
+    background-size: 30px 30px;
+    animation: backanimate infinite linear 40s;    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -527,6 +557,7 @@ header div{
     height: auto;
     animation: pulse 4s infinite 1s;
     filter: drop-shadow(#0000002a 0px 0px 10px);
+    margin-bottom: var(--pad);
 }
 
 #login-bee{
@@ -538,7 +569,8 @@ header div{
 
 .uppercase{
     text-transform: uppercase;
-    animation: shiny alternate-reverse 1s infinite;
+    width: 100%;
+    display: flex;
 }
 
 .secao{
@@ -606,6 +638,7 @@ header div{
     display: flex;
     justify-content: center;
     background: var(--yellow);
+    margin-top: var(--pad);
 }
 
 .btn_glow:hover{
@@ -619,7 +652,6 @@ header div{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--gap);
 }
 
 @keyframes scroll {
@@ -645,6 +677,7 @@ header div{
 
 .init{
     background-image: var(--back);
+    background-color: var(--green);
     background-size: 3% 7%;
     animation: scroll 60s linear infinite;
     display: flex;
@@ -653,6 +686,27 @@ header div{
     animation-delay: -5s;
     padding: 24px 15%;
     color: var(--white);
+}
+
+.columnr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.divnoaccess{
+    background-image: var(--backdark);
+    background-color: var(--dark);
+    background-size: 3% 7%;
+    animation: scroll 60s linear infinite;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    animation-delay: -5s;
+    padding: 24px 15%;
+    color: var(--white);
+    height: 100%;
 }
   
 .init h1{
@@ -727,7 +781,7 @@ header div{
    /*Hover*/
    .card_new:hover{
     border-color: var(--purple);
-    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 18px 0 var(--shadow);
     scale: 1.02;
    }
 
@@ -748,6 +802,7 @@ header div{
 .form-box {
     margin: auto 10%;
     max-width: 100%;
+    gap: calc(var(--gap)/2);
     overflow: hidden;
     color: var(--black);
     display: flex;
@@ -759,9 +814,8 @@ header div{
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: var(--pad);
-    gap: var(--gap);
     text-align: center;
+    gap: calc(var(--gap)/2);
   }
   
   /*Form text*/
@@ -780,7 +834,6 @@ header div{
     overflow: hidden;
     border-radius: var(--radius);
     background-color: var(--white);
-    margin: 1rem 0 .5rem;
     width: 100%;
   }
   
@@ -798,7 +851,6 @@ header div{
   }
   
   .form-section {
-    padding: 16px;
     font-size: .85rem;
     color: var(--black);
   }
@@ -819,18 +871,37 @@ header div{
   
   /*Button*/
   .form button {
-    width: 50%;
+    width: 30%;
     background-color: var(--green);
     color: var(--white);
     border: 0;
-    border-radius: var(--radius);
-    padding: 10px var(--pad);
+    border-radius: var(--btn-radius);
+    padding: 8px var(--pad);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--temp);
   }
+
+  @media screen and (max-width: 1000px) {
+    #imgbeeanimated1{
+        display: none;
+    }
+
+    #login_div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .posts{
+        width: 100%;
+        height: fit-content;
+        background: var(--light);
+        columns: 2;
+        flex: content;
+        column-gap: var(--gap);
+        padding: calc(var(--pad)*2);
+    }
+}
   
-  .form button:hover {
-    filter: brightness(1.4);
-  }

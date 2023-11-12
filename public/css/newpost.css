@@ -12,6 +12,17 @@
     }
 }
 
+.infoByPost{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    color: #fff;
+    background: linear-gradient(#22222230, #17171784);
+    z-index: 9999;
+    opacity: 0;
+    padding: var(--pad);
+}
+
 .postFeedInfo{
     background: var(--purple);
     position: absolute;
@@ -60,7 +71,7 @@
 }
 
 #droparea:hover{
-    box-shadow: 0px 0px 10px var(--hover);
+    box-shadow: 0px 0px 10px var(--shadow);
     color: var(--purple);
 }
 
@@ -91,16 +102,10 @@
     background: var(--light);
     padding: calc(var(--pad)*2);
     display: flex;
+    align-items: center;
+    justify-content: flex-start;
     font-size: 14px;
     gap: var(--gap);
-}
-
-.welcome a{
-    min-width: fit-content;
-    display: flex;
-    flex-wrap: nowrap;
-    font-size: 10px;
-    padding: 10px 25px;
 }
 
 .video_post{
@@ -252,6 +257,7 @@ object{
     color: var(--dark);
 }
 
+
 #voltarPag:hover{
     background: var(--hover);
 }
@@ -299,13 +305,19 @@ object{
     gap: 40px;
 }
 
+#btnDownloadFile{
+    position: absolute;
+    left: calc(var(--pad)*2);
+    bottom: calc(var(--pad)*2);
+}
+
 #modalOptPost{
     display: none;
     position: absolute;
     background: var(--white);
     flex-direction: column;
     padding: var(--pad);
-    box-shadow: 0px 0px 10px var(--hover);
+    box-shadow: 0px 0px 10px var(--shadow);
     z-index: 800;
     animation: esmaecer .3s;
     border-radius: var(--radius);
@@ -319,8 +331,8 @@ object{
     padding: var(--pad);
     max-height: 200px;
     overflow: auto;
-    box-shadow: 0px 0px 10px var(--hover);
-    z-index: 800;
+    box-shadow: 0px 0px 10px var(--shadow);
+    z-index: 9999;
     animation: esmaecer .3s;
     gap: calc(var(--gap)/2);
     border-radius: var(--radius);
@@ -329,22 +341,6 @@ object{
 
 .modalOpt::-webkit-scrollbar, .modalOptBig::-webkit-scrollbar{
     display: none;
-}
-
-.modalOptBig{
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    background: var(--white);
-    padding: var(--pad);
-    height: 310px;
-    overflow: auto;
-    box-shadow: 0px 0px 10px var(--hover);
-    z-index: 800;
-    animation: esmaecer .3s;
-    gap: calc(var(--gap)/2);
-    border-radius: var(--radius);
-    font-size: 14px;
 }
 
 #inputCategoria, #inputOrient{
@@ -392,30 +388,6 @@ object{
     width: 0px;
 }
 
-.colecaoButtonSave{
-    border-radius: var(--radius);
-    border: none;
-    min-height: 120px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    cursor: pointer;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='600' height='200' preserveAspectRatio='none' viewBox='0 0 600 200'%3e%3cg mask='url(%26quot%3b%23SvgjsMask2116%26quot%3b)' fill='none'%3e%3crect width='600' height='200' x='0' y='0' fill='url(%26quot%3b%23SvgjsLinearGradient2117%26quot%3b)'%3e%3c/rect%3e%3cuse xlink:href='%23SvgjsPath2118' x='30' y='30' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='30' y='90' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2119' x='30' y='150' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='30' y='210' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2120' x='90' y='30' stroke='rgba(21%2c 115%2c 16%2c 1)' stroke-width='3'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2121' x='90' y='90' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2122' x='90' y='150' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2120' x='90' y='210' stroke='rgba(255%2c 255%2c 255%2c 1)' stroke-width='3'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2123' x='150' y='30' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2123' x='150' y='90' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2123' x='150' y='150' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='150' y='210' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='210' y='30' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='210' y='90' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2123' x='210' y='150' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='210' y='210' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='270' y='30' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='270' y='90' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='270' y='150' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2121' x='270' y='210' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2123' x='330' y='30' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='330' y='90' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2123' x='330' y='150' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='330' y='210' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2123' x='390' y='30' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2123' x='390' y='90' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2122' x='390' y='150' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2119' x='390' y='210' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2122' x='450' y='30' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='450' y='90' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2119' x='450' y='150' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2123' x='450' y='210' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='510' y='30' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='510' y='90' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2122' x='510' y='150' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='510' y='210' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2118' x='570' y='30' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2123' x='570' y='90' stroke='rgba(21%2c 115%2c 16%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2121' x='570' y='150' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3cuse xlink:href='%23SvgjsPath2121' x='570' y='210' stroke='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/use%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask2116'%3e%3crect width='600' height='200' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='16.67%25' y1='-50%25' x2='83.33%25' y2='150%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient2117'%3e%3cstop stop-color='rgba(23%2c 180%2c 50%2c 1)' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(107%2c 255%2c 122%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3cpath d='M-1 0 a1 1 0 1 0 2 0 a1 1 0 1 0 -2 0z' id='SvgjsPath2121'%3e%3c/path%3e%3cpath d='M-3 0 a3 3 0 1 0 6 0 a3 3 0 1 0 -6 0z' id='SvgjsPath2122'%3e%3c/path%3e%3cpath d='M-5 0 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0z' id='SvgjsPath2118'%3e%3c/path%3e%3cpath d='M2 -2 L-2 2z' id='SvgjsPath2119'%3e%3c/path%3e%3cpath d='M6 -6 L-6 6z' id='SvgjsPath2123'%3e%3c/path%3e%3cpath d='M30 -30 L-30 30z' id='SvgjsPath2120'%3e%3c/path%3e%3c/defs%3e%3c/svg%3e");
-    width: 100%;
-    padding: var(--pad) 42px;
-}
-
-.colecaoButtonSave div{
-    background-repeat: no-repeat;
-    border-radius: var(--radius);
-    background: var(--white);
-    padding: var(--pad);
-}
-
-.colecaoButtonSave:hover div{
-    scale: 1.02;
-}
-
 #modalSavePost::-webkit-scrollbar {
     width: 0px;
 }
@@ -427,7 +399,23 @@ object{
     gap: var(--gap);
     background: var(--white);
     padding: var(--pad);
-    box-shadow: 0px 0px 10px var(--hover);
+    box-shadow: 0px 0px 10px var(--shadow);
+    z-index: 800;
+    gap: var(--gap);
+    max-height: 240px;
+    overflow: auto;
+    animation: esmaecer .3s;
+    border-radius: var(--radius);
+}
+
+.modalOptBig{
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    gap: var(--gap);
+    background: var(--white);
+    padding: var(--pad);
+    box-shadow: 0px 0px 10px var(--shadow);
     z-index: 800;
     gap: var(--gap);
     max-height: 240px;
@@ -575,15 +563,22 @@ object{
 }
 
 .post{
+    background-repeat: repeat-y;
     border-radius: calc(var(--radius));
     background: url(https://user-images.githubusercontent.com/20482760/56193735-a33f2800-6031-11e9-80c7-878dad341315.png);
     cursor: pointer;
     transition: var(--temp);
     width: 100%;
+    overflow: hidden;
     height: fit-content;
     display: block;
+    position: relative;
     margin-bottom: var(--gap);
     break-inside: avoid;
+}
+
+.post:hover .infoByPost{
+    opacity: 1;
 }
 
 .post a{
@@ -614,7 +609,7 @@ object{
 }
 
 .post:hover, .video_post:hover, .post_pdf_ext:hover{
-    box-shadow: 0 4px 18px 0 var(--hover);
+    box-shadow: 0 4px 18px var(--shadow);
     scale: 1.01;
 }
 
@@ -632,7 +627,7 @@ object{
     height: fit-content;
     width: 100%;
     background: var(--light);
-    padding: calc(var(--pad)*3) 16%;
+    padding: calc(var(--pad)*2) 16%;
     gap: var(--gap);
     display: flex;
     flex-direction: column;
@@ -682,16 +677,18 @@ object{
 
 .cardForuns {
     cursor: pointer;
-    height: 100%;
     border-radius: 100px;
-    padding: var(--pad) 24px ;
+    height: 40px;
+    padding: 10px 24px ;
     transition: var(--temp);
     display: flex;
     color: var(--dark);
     justify-content: center;
+    gap: var(--gap);
     text-align: center;
+    align-items: center;
     background: var(--white);
-    font-size: 10px;
+    font-size: 14px;
     border: 2px solid transparent;
    }
 
@@ -706,11 +703,70 @@ object{
 .postInfo{
     width: 100%;
     height: 100%;
-    padding: calc(var(--pad)*3);
+    padding: calc(var(--pad)*2);
     justify-content: space-between;
     display: flex;
     gap: calc(var(--gap)/2);
     flex-direction: column;
+}
+
+.btnDivSelect {
+    cursor: pointer;
+    border-radius: 100px;
+    height: 40px;
+    width: fit-content;
+    font-weight: 600;
+    padding: 12px 24px ;
+    transition: var(--temp);
+    display: flex;
+    color: var(--dark);
+    justify-content: flex-start;
+    gap: var(--gap);
+    text-align: center;
+    align-items: center;
+    background: var(--white);
+    font-size: 14px;
+    border: 2px solid var(--hover);
+}
+
+.btnDivSelected {
+    cursor: pointer;
+    border-radius: 100px;
+    height: 40px;
+    width: fit-content;
+    padding: 12px 24px ;
+    transition: var(--temp);
+    display: flex;
+    font-weight: 600;
+    color: var(--white);
+    justify-content: flex-start;
+    gap: var(--gap);
+    text-align: center;
+    align-items: center;
+    background: var(--purple);
+    font-size: 14px;
+    border: 2px solid var(--hover);
+}
+
+.btnCircle {
+    cursor: pointer;
+    border-radius: 50%;
+    width: fit-content;
+    padding: calc(var(--pad)/2);
+    transition: var(--temp);
+    color: var(--dark);
+    justify-content: flex-start;
+    gap: var(--gap);
+    text-align: center;
+    align-items: center;
+    background: var(--white);
+    font-size: 14px;
+    border: 2px solid var(--hover);
+    display: none;
+}
+
+.btnDivSelect:hover, .btnCircle:hover {
+    background: var(--hover);
 }
 
 .svgLink{
@@ -723,3 +779,144 @@ object{
     color: var(--dark);
     border-radius: 50%;
 }
+
+/*************************************************************/
+.colecaoDiv {
+    height: 260px;
+    width: 100%;
+    border-radius: 1em;
+    overflow: hidden;
+    background: var(--purple);
+    position: relative;    
+}
+
+.colecaoDiv:hover .btnOptColecaoDiv {
+    opacity: 1;   
+}
+
+.postsInColecao{
+    width: 100%;
+    height: 190px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    position: relative;
+  }
+
+  .divimg{
+    background: var(--mid);
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .divimg:hover{
+    filter: brightness(1.1);
+  }
+
+  .divimg img{
+    height: 100%;
+    width: auto;
+  }
+  
+  .color {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: flex 0.1s linear;
+  }
+  
+  .colecaoButtonSave{
+    background: var(--white);
+    border-radius: var(--radius);
+    width: 100%;
+    height: 68px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap);
+    color: var(--dark);
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: var(--pad);
+  }
+
+
+  .molduraColecao{
+    height: 100%;
+    width: 80px;
+    border-radius: calc(var(--radius)/2);
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .molduraColecao img{
+    height: 100%;
+    width: 100%;
+  }
+
+  .colecaoButtonSave:hover{
+    background: var(--hover);
+  }
+
+  .nav_colecao {
+    height: 70px;
+    width: 100%;
+    background: var(--white);
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--pad);
+    box-sizing: border-box;
+    color: var(--dark);
+  }
+
+  .nav_colecao:hover .gvgv {
+    opacity: 1;
+  }
+
+  .btnOptColecaoDiv{
+    border-radius: 50%;
+    background: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--dark);
+    font-size: 14px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: var(--pad);
+    z-index: 999;
+    opacity: 0;
+  }
+
+  .divBtnsColecao{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    gap: var(--gap);
+    position: absolute;
+    top: var(--pad);
+    right: var(--pad);
+  }
+
+  .gvgv{
+    opacity: 0;
+    position: absolute;
+    right: var(--pad);
+  }

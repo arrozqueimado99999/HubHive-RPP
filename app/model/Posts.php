@@ -82,6 +82,34 @@ class Posts extends Model {
         return $dados;
     }
 
+    function selecttocolecaodiv($id){
+        $sql = "SELECT p.anexo
+        FROM posts AS p
+        JOIN post_colecao AS pc ON p.id = pc.post_id
+        WHERE pc.colecao_id = ?
+        ORDER BY p.id DESC
+        LIMIT 3";          
+        //$sql = "SELECT anexo FROM posts WHERE id = ? ORDER BY RAND() LIMIT 3";          
+    
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();    
+        $dados = array();
+    
+        if (mysqli_num_rows($result) > 0) {
+            // Loop para percorrer os resultados e armazenar os valores em um array
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+    }
+
     function addLike($postid) {
         // Testa se o usuário já curtiu o post
         $usuario = $_SESSION['user']['id'];
@@ -166,7 +194,7 @@ class Posts extends Model {
         }
     
         $user = $_SESSION['user']['usuario'];
-        $dirPath = 'app/users/' . $user . "/"."UserPosts/";
+        $dirPath = 'app/users/' . $user . "/"."UserPosts";
     
         if (isset($_FILES['postanexo'])) {
             $anexo = $_FILES['postanexo']['name'];
