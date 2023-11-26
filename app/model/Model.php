@@ -2,6 +2,7 @@
 
 namespace models;
 
+
 use mysqli;
 
 class Model {
@@ -27,10 +28,10 @@ class Model {
         }
     }
 
-    public function allCateg() {
-        $categ = new Eixo();
-        $categorias = $categ->allCateg();
-        return $categorias;
+    public function allEixo() {
+        $eixo = new Eixo();
+        $eixos = $eixo->allEixo();
+        return $eixos;
     }
 
     public function colecoesByUser() {

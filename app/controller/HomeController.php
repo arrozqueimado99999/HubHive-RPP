@@ -1,5 +1,6 @@
 <?php
 
+use models\Artigos;
 use models\Eixo;
 use models\Posts;
 use models\Model;
@@ -18,11 +19,12 @@ class HomeController{
         $posts = new Posts;
         $model = new Model;
         $categ = new Eixo;
+        $artigo = new Artigos;
 
-        $send['allCategorias'] =  $categ->allCateg();          
+        $send['allEixo'] =  $model->allEixo();          
         $send['colecoesByUser'] = $model->colecoesByUser();
         $send['allPosts'] = $posts->allPosts();
-        $send['allCateg'] = $model->allCateg();
+        $send['artigosRecomend'] = $artigo->select3artigos();
                 
         render("home", $send); 
     }

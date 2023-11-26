@@ -21,8 +21,9 @@ class PesquisaController{
         
         $send['colecoesByUser'] = $model->colecoesByUser();
         $send['allPosts'] = $posts->allPosts();
-        $send['allCateg'] = $model->allCateg();
+        $send['allCateg'] = $model->allEixo();
         $send['search']  = $q;
+        $send['postsByPesquisa'] = $posts->selectByPesquisa($q);
 
         if ($q !== null) {
             $findUser = $user->findbyUserandNome($q);

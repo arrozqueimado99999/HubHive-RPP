@@ -437,6 +437,264 @@
     }
 }
 
+.divArtigosRecomend{
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap);
+    width: 440px;
+    height: 140px;
+    background: var(--green);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    position: fixed;
+    display: grid;
+    padding: var(--pad);
+    transition: all 0.3s ease;
+    bottom: -200px;
+    right: 24px;
+    z-index: 999999;
+}
+
+#btnShowArtigos{
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+}
+
+.artigoDiv{
+    height: 100%;
+    width: auto;
+    padding: var(--pad);
+    border-radius: var(--radius);
+    display: flex;
+    color: var(--dark);
+    flex-direction: column;
+    cursor: pointer;
+    background: var(--hover);
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    text-align: center;
+}
+
+.gridEixos{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    gap: var(--pad);
+    padding: calc(var(--pad)*2);
+}
+
+.artigoDivBig{
+    height: 100%;
+    min-height: 140px;
+    width: auto;
+    padding: var(--pad);
+    border-radius: var(--radius);
+    border: 2px solid transparent;
+    display: flex;
+    color: var(--dark);
+    flex-direction: column;
+    cursor: pointer;
+    background: var(--hover);
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    text-align: center;
+}
+
+.eixoDivBig{
+    height: 220px;
+    width: 100%;
+    border-radius: var(--radius);
+    overflow: hidden;
+    padding: var(--pad);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: calc(var(--gap)/2);
+    color: var(--yellow);
+    position: relative;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.ttlEixo{
+    transform: translateY(100px);
+    scale: .9;
+    z-index: 10;
+    color: var(--light);
+}
+
+.navEixo{
+    position: absolute;
+    width: 100%;
+    height: 38px;
+    bottom: 0;
+    background: var(--dark);
+    padding: var(--pad);
+    color: var(--purple);
+}
+
+.eixoDivBig:hover .ttlEixo{
+    scale: 1.2;
+    transform: translateY(0);
+    color: var(--yellow);
+}
+
+.eixoDivBig:hover .navEixo{
+    transform: translateY(50px) translateZ(0);
+}
+
+.eixoDivBig:hover .overlay{
+    transform: scale(1000) translateZ(0);
+}
+
+.overlay {
+    width: 1px;
+    position: absolute;
+    height: 1px;
+    border-radius: 50%;
+    background: #00000080;
+    top: 50%;
+    left: 50%;
+    z-index: 0;
+    transition: transform 0.6s ease-out;
+}
+
+.artigoDivBig:hover{
+    border: 2px solid var(--mid);
+}
+
+.artigoDiv:hover{
+    scale: 1.02;
+}
+
+.eixosList{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--gap);
+    padding: calc(var(--pad)*2) 0;
+}
+
+.btnResultados{
+    border-radius: var(--radius);
+    background: var(--purple);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    padding: var(--pad);
+    align-items: center;
+    cursor: pointer;
+    gap: calc(var(--pad)/2);
+}
+
+.btnResultados img{
+    height: 28px;
+    width: auto;
+    filter: brightness(100);
+}
+
+.eixoDivExplore{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: var(--pad);
+    min-height: 100px;
+    width: 140px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    color: var(--dark);
+}
+
+@keyframes deslizarEsquerda {
+    from{
+        bottom: -300px;
+    }
+    to{
+        right: 20px;
+    }
+}
+
+.ttl{
+    color: var(--dark);
+}
+
+.eixoBtn{
+    border-radius: var(--btn-radius);
+    background: var(--yellow);
+    color: var(--white);
+    padding: 6px var(--pad);
+    font-size: 12px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.inputTagDiv {
+    border-radius: 100px;
+    height: fit-content;
+    width: 100%;
+    font-weight: 600;
+    padding: 6px 24px ;
+    transition: var(--temp);
+    display: flex;
+    color: var(--dark);
+    justify-content: flex-start;
+    gap: var(--gap);
+    text-align: center;
+    align-items: center;
+    background: var(--white);
+    font-size: 14px;
+    border: 2px solid var(--hover);
+    position: relative;
+}
+
+.tagsListInPost{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--gap);
+    flex-wrap: wrap;
+}
+
+.btnAddTag{
+    position: absolute;
+    right: 0;
+    border-radius: var(--btn-radius);
+    height: fit-content;
+    padding: 6px;
+    background: var(--purple);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes scaliar {
+    from{
+        scale: 0.8;
+        filter: blur(5px);
+        opacity: 0;
+    }
+    to{
+        scale: 1;
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+
+.tagBtn{
+    border-radius: var(--btn-radius);
+    background: var(--hover);
+    color: var(--dark);
+    padding: 6px var(--pad);
+    font-size: 12px;
+    width: fit-content;
+    height: fit-content;
+    animation: scaliar .3s ease-out;
+}
+
 #projectTittle{
     font-size: 38px;
     white-space: nowrap;

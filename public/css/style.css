@@ -299,11 +299,19 @@ header div{
     box-shadow: 0 4px 18px 0 var(--shadow);
 }
 
+.inputTransparente{
+    border: 0px solid transparent;
+    outline: none;
+    color: var(--dark);
+    background: transparent;
+}
+
 .search input {
     height: 100%;
     width: 100%;
     border: 2px solid transparent;
     outline: none;
+    color: var(--dark);
     background: var(--white);
     padding: 0 1rem;
 }
@@ -835,6 +843,7 @@ header div{
     border-radius: var(--radius);
     background-color: var(--white);
     width: 100%;
+    position: relative;
   }
   
   .form-container input {
@@ -856,6 +865,7 @@ header div{
   }
   .form-section p{
     color: var(--black);
+    text-align: end;
   }
   
   .form-section a {
@@ -871,13 +881,13 @@ header div{
   
   /*Button*/
   .form button {
-    width: 30%;
+    width: fit-content;
     background-color: var(--green);
     color: var(--white);
     border: 0;
     border-radius: var(--btn-radius);
-    padding: 8px var(--pad);
-    font-size: 1rem;
+    padding: 8px 34px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: var(--temp);

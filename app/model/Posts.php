@@ -33,6 +33,30 @@ class Posts extends Model {
         return $dados;
     }
 
+    function postsByUser($iduser){
+        $sql = "SELECT * FROM posts
+        WHERE usuario_id = ?";
+               
+    
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $iduser);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();    
+        $dados = array();
+    
+        if (mysqli_num_rows($result) > 0) {
+            // Loop para percorrer os resultados e armazenar os valores em um array
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+    }
+    
     function postsByColecao($idcolecao){
         $sql = "SELECT posts.*
         FROM posts
@@ -42,6 +66,52 @@ class Posts extends Model {
     
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $idcolecao);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();    
+        $dados = array();
+    
+        if (mysqli_num_rows($result) > 0) {
+            // Loop para percorrer os resultados e armazenar os valores em um array
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+    }
+
+    function selectPostsByTag($q){
+        $sql = "SELECT *
+        FROM posts JOIN post_tag JOIN
+        post_tag.post_id = tags.id";               
+    
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();    
+        $dados = array();
+    
+        if (mysqli_num_rows($result) > 0) {
+            // Loop para percorrer os resultados e armazenar os valores em um array
+            while ($linha = mysqli_fetch_assoc($result)) {
+                $dados[] = $linha;
+            }                
+        } else {
+            return $dados[] = "";
+        }
+        
+        return $dados;
+    }
+
+    function selectByPesquisa($q){
+        $sql = "SELECT *
+        FROM posts
+        WHERE CONCAT(legenda, anexo) LIKE '%$q%'";                
+    
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
     
         $result = $stmt->get_result();    
@@ -89,7 +159,6 @@ class Posts extends Model {
         WHERE pc.colecao_id = ?
         ORDER BY p.id DESC
         LIMIT 3";          
-        //$sql = "SELECT anexo FROM posts WHERE id = ? ORDER BY RAND() LIMIT 3";          
     
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $id);
@@ -132,6 +201,17 @@ class Posts extends Model {
             $stmt->bind_param("ii", $usuario, $postid);
             $stmt->execute();
         }
+    }
+
+    function countPostsInEixo($eixoId) {
+        $sql = "SELECT COUNT(post_id) AS count_posts FROM post_eixo WHERE eixo_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i",$eixoId);      
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();        
+        return $row['count_posts'];
     }
     
 
@@ -183,7 +263,7 @@ class Posts extends Model {
         return $dados;
     }
 
-    function createPost($legenda = null, $colecaoid){
+    function createPost($legenda = null, $colecaoid, $eixoid, $tags){
         $userId = $_SESSION['user']['id'];
         $characters = '0123456789';
         $postId = '';
@@ -193,8 +273,7 @@ class Posts extends Model {
             $postId .= $characters[$randomIndex];
         }
     
-        $user = $_SESSION['user']['usuario'];
-        $dirPath = 'app/users/' . $user . "/"."UserPosts";
+        $dirPath = 'app/users/' . $userId . "/"."UserPosts";
     
         if (isset($_FILES['postanexo'])) {
             $anexo = $_FILES['postanexo']['name'];
@@ -213,6 +292,21 @@ class Posts extends Model {
             $colecao = new Colecao();
             $colecao->savePostInColecao($colecaoid, $postId);
         }
+
+        if ($eixoid !== "") {
+            $eixo = new Eixo();
+            $eixo->savePostInEixo($eixoid, $postId);
+        }
+
+        if ($tags !== "") {
+            $tag = new Tag();
+            $parts = $tag->stringToArray($tags);
+        
+            foreach ($parts as $part) {
+                $newtagid = $tag->createTag($part);
+                $tag->saveTagIntoPost($newtagid, $postId);
+            }
+        }        
 
         return $postId;
     }

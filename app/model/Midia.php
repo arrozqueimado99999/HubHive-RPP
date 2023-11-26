@@ -2,11 +2,10 @@
 
 namespace models;
 
+//phpinfo();
+
 class Midia extends Model
 {
-
-    protected $table = "midias";
-    protected $fields = ["id", "nome", "email", "senha"];
 
     function profilePic($id)
     {
@@ -49,20 +48,35 @@ class Midia extends Model
         $stmt->execute();
     }
 
-    function downloadFile($id){
-        $arquivo = 'caminho/para/o/arquivo.txt';
-        if (file_exists($arquivo)) {
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($arquivo) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($arquivo));
-            readfile($arquivo);
-            exit;
-        } else {
-            echo "O arquivo não existe.";
+    
+    function convertPDFtoImage($pdfPath, $outputImagePath){
+        try {
+            if (!file_exists($pdfPath)) {
+                throw new Exception('O arquivo PDF não existe.');
+            }
+    
+            $imagick = new \Imagick();
+    
+            $imagick->setResolution(300, 300);
+    
+            $imagick->readImage($pdfPath);
+    
+            $imagick = $imagick->flattenImages();
+    
+            $imagick->setImageFormat('png');
+    
+            $imagick->writeImage($outputImagePath);
+    
+            $imagick->clear();
+            $imagick->destroy();
+    
+            return ('Conversão bem-sucedida!');
+        } catch (\ImagickException $e) {
+            echo 'Erro ao escrever a imagem: ' . $e->getMessage();
+        } catch (Exception $e) {
+            echo 'Erro: ' . $e->getMessage();
         }
     }
+
+
 }

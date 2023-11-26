@@ -40,7 +40,7 @@
     animation: .3s reverse aparecer ease-in-out;
 }
 
-#inputsforPost{
+#inputsforPost, #inputsforArtigo{
     display: flex;
     flex-direction: column;
     gap: var(--gap);
@@ -554,10 +554,8 @@ object{
     width: 100%;
     height: fit-content;
     background: var(--light);
-    display: grid;
-    /*columns: 4;*/
-    grid-template-columns: repeat(5, 1fr);
-    /*grid-template-rows: repeat(1, 260px);*/
+    columns: 6;
+    flex: content;
     column-gap: var(--gap);
     padding: calc(var(--pad)*2);
 }
@@ -669,6 +667,22 @@ object{
     align-items: center;
     justify-content: space-between;
     border: 1px solid transparent;
+}
+
+.versenha{
+    border-radius: 50%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: calc(var(--pad)/2);
+    right: var(--pad);
+    cursor: pointer;
+}
+
+.versenha:hover{
+    scale: 0.9;
 }
 
 .projectLink:hover .svgLink{

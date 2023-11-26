@@ -17,7 +17,7 @@ include 'header.php';
         <?php
         foreach ($allCateg as $categ) : ?>
             <a href="<?= route("pesquisa/?categ={$categ['id']}") ?>" class="cardForuns">
-                <h2><?= $categ['titulo'] ?></h2>
+                <p><?= $categ['titulo'] ?></p>
             </a>
         <?php
         endforeach; ?>
@@ -30,8 +30,30 @@ include 'header.php';
             <path fill-rule="evenodd" d="M9.248 17.648a1.2 1.2 0 0 1-1.696 0l-4.8-4.8a1.2 1.2 0 0 1 0-1.696l4.8-4.8a1.2 1.2 0 0 1 1.696 1.696L6.497 10.8H20.4a1.2 1.2 0 1 1 0 2.4H6.497l2.751 2.752a1.2 1.2 0 0 1 0 1.696Z" clip-rule="evenodd"></path>
         </svg>
     </a>
-    <h2>Mostrando resultados para "<span style="color: var(--purple);"><?php echo $send['search']; ?></span>"</h2>
+    <h2 class="ttl">Mostrando resultados para "<span style="color: var(--purple);"><?php echo $send['search']; ?></span>"</h2>
 </div>
+
+<section class="welcome">
+    <a class="btnResultados" target="_blank" href="https://scholar.google.com.br/scholar?hl=pt-BR&as_sdt=0%2C5&q=<?=$send['search']?>">
+        <p>Resultados no</p>
+        <img src="<?=assets('imgs/Google_Scholar_logo.png')?>" alt="not_found">
+    </a>
+
+    <a class="btnResultados" target="_blank" href="<?= "https://search.scielo.org/?q=" . $send['search'] . "&lang=pt"?>">
+        <p>Resultados no</p>
+        <img src="<?=assets('imgs/SciELO_logo.png')?>" alt="not_found">
+    </a>
+
+    <a class="btnResultados" target="_blank" href="<?= "http://bdtd.ibict.br/vufind/Search/Results?lookfor=" . $send['search'] . "&type=AllFields"?>">
+        <p>Resultados na</p>
+        <img src="<?=assets('imgs/BDTD15.png')?>" alt="not_found">
+    </a>
+
+    <a class="btnResultados" target="_blank" href="<?= "https://eric.ed.gov/?q=" . $send['search']?>">
+        <p>Resultados no</p>
+        <img src="<?=assets('imgs/eric_results.png')?>" alt="not_found">
+    </a>
+</section>
 
 <article class="pesquisaResult column">
     <?php
@@ -78,35 +100,47 @@ include 'header.php';
 <article class="pesquisaResult column">
     <?php
     if (isset($findUsers)) {?>
-    <h3>Usuários</h3>
+    <h2 class="ttl">Usuários</h2>
     <div class="projects_5">
     <?php
         if (isset($findUsers)) {
-            foreach ($findUsers as $user) {
-                ?>
-                <div class="cardUser">
+            foreach ($findUsers as $user) { ?>
+                <a class="cardUser" href="<?=route('perfil?u='.$user['id'])?>">
                     <div class="infoCardUser">
                         <img src="<?=route($user['foto_perfil'])?>" alt="" class="imguser">
                         <p class="nomeuser"><?=$user['nome']?></p>
-                        <p class="username"><?=$user['usuario']?></p>
-                </div>
-
-                <div class="nav">
-                    <a href="<?=route('perfil?u='.$user['id'])?>">
-                    Ver perfil
-                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.5 17a1 1 0 0 1-.71-1.71L13.1 12 9.92 8.69a1 1 0 1 1 1.42-1.41l3.86 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-.7.32Z"></path>
-                    </svg>
+                        <p class="username">@<?=$user['usuario']?></p>
+                    </div>
                 </a>
-                </div>
-                    
-                </div>
                 <?php
             }
         }
     }
     ?>
+    </div>
 </article>
+
+<div class="posts" id="allPosts">
+        <?php
+        if ($postsByPesquisa !== "") {
+            foreach ($postsByPesquisa as $post) { ?>
+                    <div class="post">
+                        <a href="<?= route("post/?post={$post['id']}") ?>">
+                        <div class="infoByPost">
+                            <p><?=$post['legenda']?></p>
+                        </div>
+                            <img src="<?= route($post['anexo']) ?>" alt="não tem">
+                        </a>
+                    </div>
+                <?php }
+            } else { ?>
+            <div>
+                <h3>Não há nenhuma postagem ainda</h3>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
 
 <?php
 include 'foot.php';

@@ -63,10 +63,7 @@ include 'header.php';
 
                     </div>
                     <span onclick="openModalLado()" id="openModalOptPost" class="btn_post_act">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
-                        </span>
-                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="18px" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>                    </span>
                 </div>
                 <div class="row">
                     <div id="modalSavePost">
@@ -117,6 +114,23 @@ include 'header.php';
                         <h3><?= $send['curtidas'] ?></h3>
                     </a>
                 </div>
+
+                <section class="tagsListInPost">
+                    <a href="" class="eixoBtn">
+                        <h3><?=$send['eixoByPost']['0']['titulo']?></h3>
+                    </a>
+                    <?php
+                    if ($tagsByPost !== ""):
+                    foreach ($tagsByPost as $tag): ?>
+                        <a href="" class="tagBtn">
+                            <h3><?=$tag['titulo']?></h3>
+                        </a>
+                    <?php
+                    endforeach;
+                    endif;
+                    ?>
+
+                </section>
             </div>
         </div>
     </div>
@@ -143,6 +157,17 @@ include 'header.php';
         ?>
     </div>
 </article>
+
+<section class="eixosList">
+    <?php
+    foreach ($allEixo as $eixo): ?>
+        <a href="<?=route('eixo?='.$eixo['id'])?>" class="eixoDivExplore" style="background-image: url(<?=$eixo['banner']?>);">
+            <h3><?=$eixo['titulo']?></h3>
+        </a>
+    <?php 
+    endforeach;
+    ?>
+</section>
 
 <?php
 include 'foot.php';

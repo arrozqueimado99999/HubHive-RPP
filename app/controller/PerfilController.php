@@ -1,12 +1,8 @@
 <?php
 
-use models\Categorias;
 use models\Colecao;
 use models\Eixo;
 use models\Usuario;
-use models\Projeto;
-use models\Midia;
-use models\Orientador;
 use models\Posts;
 
 class PerfilController{
@@ -19,6 +15,7 @@ class PerfilController{
     }
     function index(){
         $send = [];
+        $userid = $_SESSION["user"]['id'];
 
         $user = new Usuario();
         $categ = new Eixo();
@@ -26,9 +23,8 @@ class PerfilController{
         $cole = new Colecao();
 
         $send['colecoesByUser'] = $cole->colecoesByUser();
-        $send['allCategorias'] = $categ->allCateg();
-        //$_SESSION['user'] = $update;
-                
+        $send['allCategorias'] = $categ->allEixo();
+        
         render("perfil", $send); 
     }
 

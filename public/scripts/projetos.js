@@ -2,6 +2,7 @@ const inputEditNome = document.getElementById("EditProfnome");
 const profileEditImg = document.getElementById("profileEditImg");
 const inputEditUsuario = document.getElementById("EditProfuser");
 const inputEditEmail = document.getElementById("EditProfemail");
+
 const inputTitulo = document.getElementById("inputTitulo");
 const inputCategoria = document.getElementById("inputCategoria");
 const inputDesc = document.getElementById("inputDesc");
@@ -80,4 +81,30 @@ if (inputProjetoToPost && postanexo && inputLegenda && submitFormNewPost) {
     inputProjetoToPost.addEventListener("input", checkInputPost);
     postanexo.addEventListener("input", checkInputPost);
     inputLegenda.addEventListener("input", checkInputPost);
+}
+
+window.addEventListener('scroll', function() {
+    var minhaDiv = document.getElementById('divArtigosRecomend');
+
+    // Verifica se a posição do rolar é maior ou igual a 10 pixels
+    if (window.scrollY >= 1) {
+        minhaDiv.style.display = 'grid';
+    } else {
+        minhaDiv.style.display = 'none';
+    }
+});
+
+function toggleScroll() {
+    const diva = document.getElementById("divArtigosRecomend");
+    const btn = document.getElementById("btnShowArtigos");
+
+    // Verifica se a posição atual é -300px e, em seguida, altera para 24px
+    if (diva.style.bottom === "-300px") {
+        diva.style.bottom = "24px";
+        btn.style.bottom = "180px";
+    } else {
+        // Se não for -300px, assume que é 24px e altera para -300px
+        diva.style.bottom = "-300px";
+        btn.style.bottom = "24px";
+    }
 }

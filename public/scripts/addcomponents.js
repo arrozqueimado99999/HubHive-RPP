@@ -105,57 +105,106 @@ function addProjetoInLabel(id, pfechar) {
     modal.style.display = "none"; 
     
     var btntirar = document.getElementById('tirarCole');
-    btntirar.style.display = "flex"; 
-    
+    btntirar.style.display = "flex";    
 }
+
+function addEixoInLabel(id, pfechar) {
+    var btnpr = document.getElementById("btnEixoSelect");
+    var labelpr = document.getElementById("eixoEscolhido");
+    var inputprojetor = document.getElementById("inputeixo");
+    var pr = document.getElementById("eixo" + id);
+    var projetoEscolhidor = document.getElementById(id);
+    var idprojetor = projetoEscolhidor.id;
+    
+    btnpr.className = "btnDivSelected";
+    inputprojetor.value = idprojetor;
+    var projectName = pr.textContent;
+    labelpr.textContent = projectName;
+    var modal = document.getElementById(pfechar);
+    modal.style.display = "none";  
+}
+
+function addTagsInLabel(event) {
+    // Verifica se a tecla pressionada foi "Enter"
+    if (event.key === "Enter") {
+        const digitTag = document.getElementById("inputDigitarTag");
+        const inputTag = document.getElementById("inputTagsToPost");
+        const divTags = document.getElementById("tagsListInPost");
+
+        var tagDigitada = digitTag.value.trim(); // Remove espaços extras no início e no final
+        if (tagDigitada !== "") {
+            inputTag.value += (inputTag.value === "" ? "" : ", ") + tagDigitada; // Adiciona a tag ao conteúdo existente, separado por vírgula
+
+            var newTag = document.createElement("span"); // Corrige o método createElement
+            newTag.className = "tagBtn";
+            newTag.innerHTML = tagDigitada;
+
+            divTags.appendChild(newTag);
+
+            // Limpa o campo de digitação após adicionar a tag
+            digitTag.value = "";
+        }
+    }
+}
+
+// Adiciona um ouvinte de evento para chamar a função quando a tecla Enter for pressionada no campo de digitação
+document.getElementById("inputDigitarTag").addEventListener("keypress", addTagsInLabel);
 
 ////////////////////////////////////////////////////////////////////////////// 
 
-const btnAddQuadro = document.getElementById("btnaddquadro");
-const form = document.getElementById("formNewQuadro");
-
-function toggleModal(event) {
-  const isVisible = form.style.display === "block";
-
-  if (isVisible) {
-    form.style.display = "none";
-  } else {
-    form.style.display = "block";
-    btnAddQuadro.appendChild(form);
-    const input = form.querySelector("input");
-    if (input) {
-      input.focus();
-    }
-  }
-
-  if (isVisible && event.target === form) {
-    event.stopPropagation();
-  }
-}
-
-btnAddQuadro.addEventListener("click", toggleModal);
-
-form.addEventListener("click", function (event) {
-  event.stopPropagation();
-});
-
-const inputQuadro = document.getElementById("inputQuadro");
-
-inputQuadro.addEventListener("input", function() {
-  const inputValue = inputQuadro.value;
-  if (inputValue.length > 0) {
-    inputQuadro.value = inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
-  }
-});
-
-function limpar(){
+function limparColecao(){
   const divr = document.getElementById('btnProjectSelect');
   var value = document.getElementById('inputprojeto');
   var text = document.getElementById("projetoEscolhido");
   divr.className = "btnDivSelect";
   value.value = "";
-  text.innerHTML = "Adicionar na coleção";
+  text.innerHTML = "Salvar na coleção";
 
   const btntirar = document.getElementById("tirarCole");
   btntirar.style.display = "none"; 
+}
+
+function limparEixo(){
+  const divr = document.getElementById('btnEixoSelect');
+  var value = document.getElementById('inputeixo');
+  var text = document.getElementById("eixoEscolhido");
+  divr.className = "btnDivSelect";
+  value.value = "";
+  text.innerHTML = "Adicionar no eixo";
+
+  const btntirar = document.getElementById("tirarEixo");
+  btntirar.style.display = "none"; 
+}
+
+function loadPDF(pdfPath, titulo) {
+    // Caminho para o arquivo PDF
+    var url = pdfPath;
+
+    // Elemento HTML para renderizar o PDF
+    var container = document.getElementById('artigoViewer');
+    const tituloArtigo = document.getElementById('tituloArtigo');
+    tituloArtigo.innerHTML = titulo;
+
+    // Carrega o PDF usando PDF.js
+    pdfjsLib.getDocument(url).promise.then(function(pdfDoc) {
+        // Loop através de todas as páginas do PDF
+        for (var pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+            // Cria um elemento para cada página
+            var pageElement = document.createElement('canvas');
+            container.appendChild(pageElement);
+
+            // Renderiza a página atual
+            pdfDoc.getPage(pageNum).then(function(page) {
+                var viewport = page.getViewport({ scale: 1.5 });
+                pageElement.height = viewport.height;
+                pageElement.width = viewport.width;
+
+                var renderContext = {
+                    canvasContext: pageElement.getContext('2d'),
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        }
+    });
 }

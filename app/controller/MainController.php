@@ -6,7 +6,7 @@ use models\Colecao;
 use models\Eixo;
 
 class MainController{
-    protected $id = $_SESSION['user']['id'];
+    $id = $_SESSION['user']['id'];
 
     function index(){
         $send = [];
@@ -16,9 +16,9 @@ class MainController{
         render("home"); 
     }
 
-    function allCateg(){
+    function allEixo(){
         $categ = new Eixo;
-        $categorias = $categ->allCateg();
+        $categorias = $categ->allEixo();
 
         return $categorias;
     }
